@@ -10,9 +10,9 @@
          <!-- <a href="#" class="list-group-item">Capacitación</a> -->
       </div>
    </div>
-  <!--  <div class="col-md-10">
+   <div class="col-md-10">
       <h3 class="text-center">Opciones de búsqueda</h3>
-      <div class="panel-group" id="accordion">
+<!--       <div class="panel-group" id="accordion">
          <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
@@ -78,10 +78,10 @@
                            <div class="input-group">
                               <select name="ramaartesanal" class="form-control">
                                  <?php
-                                    foreach ($ramas as $opcion) {
-                                       echo "<option value='".$opcion->idRamaArtesanal."'>";
-                                       echo $opcion->nombre."</option>\n";
-                                    }
+                                    #foreach ($ramas as $opcion) {
+                                       #echo "<option value='".$opcion->idRamaArtesanal."'>";
+                                       #echo $opcion->nombre."</option>\n";
+                                    // }
                                  ?>
                               </select>
                               <div class="input-group-btn">
@@ -144,8 +144,8 @@
                </div>
             </div>
          </div> 
-      </div>
-   </div> -->
+      </div> -->
+   </div>
 </div>
 <script>
    //  $(document).ready(function(){

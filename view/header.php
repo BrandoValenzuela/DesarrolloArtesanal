@@ -30,9 +30,9 @@
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="?c=Artesano&a=Crud">Artesano</a></li>
-                      <!--   <li><a href="?c=Taller&a=Crud">Taller de artesano</a></li>
+                        <li><a href="?c=Taller&a=Crud">Taller de artesano</a></li>
                         <li><a href="?c=Exposicion&a=Crud">Exposición</a></li>
-                        <li><a href="?c=Concurso&a=Crud">Concurso</a></li> -->
+                        <li><a href="?c=Concurso&a=Crud">Concurso</a></li>
                         <!-- <li><a href="#">Comodato</a></li> -->
                         <!-- <li><a href="#">Capacitación</a></li> -->
                     </ul>
