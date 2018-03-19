@@ -6,10 +6,8 @@ class Sesion{
 
 	public function __CONSTRUCT(){
 		try{
-			$this->pdo = Conexion::StartUp();     
-		}catch(Exception $e){
-			die($e->getMessage());
-		}
+			$this->pdo = Conexion::StartUp();   
+		}catch(Exception $e){}
 	}
 
 	public function verificarCredenciales($data){
