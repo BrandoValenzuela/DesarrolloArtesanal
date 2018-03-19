@@ -3,9 +3,9 @@
       <h3 class="text-center">Registrar</h3>
       <div class="list-group">
          <a href="?c=Artesano&a=Crud" class="list-group-item">Artesano</a>
-         <!-- <a href="?c=Taller&a=Crud" class="list-group-item">Taller de artesano</a>
-         <a href="?c=Exposicion&a=Crud" class="list-group-item">Exposición</a>
-         <a href="?c=concurso&a=Crud" class="list-group-item">Concurso</a> -->
+         <a href="?c=Taller&a=Crud" class="list-group-item">Taller de artesano</a>
+         <!-- <a href="?c=Exposicion&a=Crud" class="list-group-item">Exposición</a> -->
+         <!-- <a href="?c=concurso&a=Crud" class="list-group-item">Concurso</a> -->
          <!-- <a href="#" class="list-group-item">Comodato</a> -->
          <!-- <a href="#" class="list-group-item">Capacitación</a> -->
       </div>
@@ -93,8 +93,8 @@
                   </div>
                </div>
             </div>
-         </div> 
-         <div class="panel panel-default">
+         </div>  -->
+<!--          <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapse-exposicion"><h4>Buscar exposición</h4></a>
@@ -117,8 +117,8 @@
                   </div>
                </div>
             </div>
-         </div> 
-         <div class="panel panel-default">
+         </div>  -->
+<!--          <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapse-concurso"><h4>Buscar concurso</h4></a>

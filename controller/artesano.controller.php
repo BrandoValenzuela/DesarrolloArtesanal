@@ -58,7 +58,7 @@ class ArtesanoController{
         $resultado = $this->model->Registrar($artesano);
         if ($resultado == 'exito') {
             $mensaje = array(
-                'titulo' => 'Exito',
+                'titulo' => 'Éxito',
                 'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
             );
             $this->mostrarMensaje($mensaje);
@@ -71,7 +71,7 @@ class ArtesanoController{
             }else{
                 $mensaje = array(
                     'titulo' => 'Error',
-                    'cuerpo' => 'No fue posible guradar los datos en el sistema. Intenta más tarde.'
+                    'cuerpo' => 'No fue posible guardar los datos en el sistema. Intenta más tarde.'
                 );
             }
             $this->mostrarMensaje($mensaje);
