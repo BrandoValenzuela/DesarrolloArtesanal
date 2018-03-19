@@ -1,7 +1,7 @@
 <?php
 require_once 'model/artesano.php';
 require_once 'model/ramaartesanal.php';
-// require_once 'model/taller.php';
+require_once 'model/taller.php';
 // require_once 'model/artesanoexpo.php';
 
 class ArtesanoController{
@@ -63,17 +63,10 @@ class ArtesanoController{
             );
             $this->mostrarMensaje($mensaje);
         }else{
-            if ($resultado == 'curp_exitente') {
-                $mensaje = array(
-                    'titulo' => 'Registro existente',
-                    'cuerpo' => 'La CURP que ingresaste ya se encuentra registrada en el sistema.'
-                );
-            }else{
-                $mensaje = array(
-                    'titulo' => 'Error',
-                    'cuerpo' => 'No fue posible guardar los datos en el sistema. Intenta más tarde.'
-                );
-            }
+            $mensaje = array(
+                'titulo' => 'Registro existente',
+                'cuerpo' => 'La CURP que ingresaste ya se encuentra registrada en el sistema.'
+            );
             $this->mostrarMensaje($mensaje);
         }
 
@@ -87,12 +80,17 @@ class ArtesanoController{
             header('Location: index.php');
         }
         $Rama = new RamaArtesanal();
-        // $Taller = new Taller();
+        $Taller = new Taller();
         // $ArtExpo = new Artesanoexpo();
-        $art = $this->model->Obtener($_REQUEST['buscar-artesano-curp']);
+        if (!empty($_REQUEST['buscar-artesano-curp'])) {
+            $_SESSION['buscar-artesano-curp'] = $_REQUEST['buscar-artesano-curp'];
+            $art = $this->model->Obtener($_REQUEST['buscar-artesano-curp']);
+        }else{
+            $art = $this->model->Obtener($_SESSION['buscar-artesano-curp']);
+        }
         if (!empty($art)) { 
             $ram_art = $Rama->Obtener($art->idRamaArtesanal);
-            // $tal = $Taller->ObtenerTallerArtesano($art->curp);
+            $tal = $Taller->ObtenerTallerArtesano($art->curp);
             // $participantes_expo = $ArtExpo->ObtenerExposiciones($art->curp);
             require_once 'view/header.php';
             require_once 'view/artesano/artesano.php';
@@ -110,16 +108,22 @@ class ArtesanoController{
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
-        $artesanos = $this->model->ObtenerPorApellido($_REQUEST['buscar-artesano-ap']);
-        if (!empty($artesanos)) { 
+        if (!empty($_REQUEST['buscar-artesano-ap'])) {
+            $_SESSION['buscar-artesano-ap'] = $_REQUEST['buscar-artesano-ap'];
             $apellido = $_REQUEST['buscar-artesano-ap'];
+            $artesanos = $this->model->ObtenerPorApellido($_REQUEST['buscar-artesano-ap']);
+        }else{
+            $apellido = $_SESSION['buscar-artesano-ap'];
+            $artesanos = $this->model->ObtenerPorApellido($_SESSION['buscar-artesano-ap']);
+        }
+        if (!empty($artesanos)) { 
             require_once 'view/header.php';
             require_once 'view/artesano/artesano-lista.php';
             require_once 'view/footer.php'; 
         }else{
             $mensaje = array(
                 'titulo' => 'Registro inexistente',
-                'cuerpo' => 'No hay artesanos registardos con el apellido '.$_REQUEST['buscar-artesano-ap']
+                'cuerpo' => 'No hay artesanos registardos con el apellido '.$apellido
             );
             $this->mostrarMensaje($mensaje);
         }

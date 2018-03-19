@@ -50,7 +50,7 @@
                </div>
             </div>
          </div>
-<!--          <div class="panel panel-default">
+         <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapse-taller"><h4>Buscar talleres</h4></a>
@@ -71,7 +71,7 @@
                         </div>
                      </form>
                   </div>
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                      <form id="frm-busqueda-taller-rama" action="?c=Taller&a=BuscarTallerPorRamaArtesanal" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                            <label>Por rama artesanal:</label>
@@ -90,10 +90,10 @@
                            </div>
                         </div>
                      </form>
-                  </div>
+                  </div> -->
                </div>
             </div>
-         </div>  -->
+         </div> 
 <!--          <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
@@ -158,11 +158,11 @@
         });
     });
 
-   // $(document).ready(function(){
-   //      $("#frm-busqueda-taller-municipio").submit(function(){
-   //          return $(this).validate();
-   //      });
-   //  });
+   $(document).ready(function(){
+        $("#frm-busqueda-taller-municipio").submit(function(){
+            return $(this).validate();
+        });
+    });
 
    // $(document).ready(function(){
    //      $("#frm-busqueda-expo-mun").submit(function(){

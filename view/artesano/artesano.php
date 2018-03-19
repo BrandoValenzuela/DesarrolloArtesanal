@@ -179,16 +179,16 @@
             </table>
         </div>
     </fieldset>
-    <!-- <fieldset>
+    <fieldset>
         <legend>Talleres donde labora</legend>
         <div class="col-md-10 col-md-offset-1">
-        <?php #foreach ($tal as $ta): ?>
+        <?php foreach ($tal as $ta): ?>
             <div class="col-md-12 text-center">
                 <h4>
                     <?php 
-                        #$rama_artesanal = $Rama->Obtener($ta->idRamaArtesanal);
-                        #$participacion = $ta->tipoParticipacion == '1' ? 'Dueño del taller' : 'Colaborador' ;
-                        #echo $ta->nombre.' - '.'Taller de '.$rama_artesanal->nombre.' - ('.$participacion.')'; 
+                        $rama_artesanal = $Rama->Obtener($ta->idRamaArtesanal);
+                        $participacion = $ta->tipoParticipacion == '1' ? 'Dueño del taller' : 'Colaborador' ;
+                        echo $ta->nombre.' - '.'Taller de '.$rama_artesanal->nombre.' - ('.$participacion.')'; 
                     ?>
                 </h4>
             </div>
@@ -198,16 +198,16 @@
                     <tbody>
                         <tr>
                             <td class="negrita col-md-6">Domicilio:</td>
-                            <td class="col-md-6"><?php #echo $ta->domicilio; ?></td>
+                            <td class="col-md-6"><?php echo $ta->domicilio; ?></td>
                             
                         </tr>
                         <tr>
                             <td class="negrita">Localidad:</td>
-                            <td><?php #echo $ta->localidad; ?></td>
+                            <td><?php echo $ta->localidad; ?></td>
                         </tr>
                         <tr>
                             <td class="negrita">Municipio</td>
-                            <td><?php #echo $ta->municipio; ?></td>
+                            <td><?php echo $ta->municipio; ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -218,25 +218,25 @@
                     <tbody>
                         <tr>
                             <td class="col-md-6 negrita">A tiempo completo</td>
-                            <td class="col-md-6 text-center"><?php #echo $ta->empTiempoCompleto; ?></td>
+                            <td class="col-md-6 text-center"><?php echo $ta->empTiempoCompleto; ?></td>
                             
                         </tr>
                         <tr>
                             <td class="negrita">Por horas</td>
-                            <td class="text-center"><?php #echo $ta->empPorHora; ?></td>
+                            <td class="text-center"><?php echo $ta->empPorHora; ?></td>
                         </tr>
                         <tr>
                             <td class="negrita">Afiliados al IMSS</td>
-                            <td class="text-center"><?php #echo $ta->empIMSS; ?></td>
+                            <td class="text-center"><?php echo $ta->empIMSS; ?></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <hr>
-        <?php #endforeach ?>
+        <?php endforeach ?>
         </div>
     </fieldset>
-    <fieldset>
+<!--     <fieldset>
         <legend>Participación en Exposiciones</legend>
         <div class="col-md-10 col-md-offset-1">
             <table class="table table-striped table-hover">

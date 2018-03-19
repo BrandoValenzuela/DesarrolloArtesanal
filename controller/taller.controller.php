@@ -44,17 +44,17 @@ class TallerController{
             );
             $this->mostrarMensaje($mensaje);
         }else{
-            if ($resultado == 'fail') {
-                $mensaje = array(
-                    'titulo' => 'Error',
-                    'cuerpo' => 'No fue posible guardar los datos en el sistema. Intenta más tarde.'
-                );
-            }else{
+            // if ($resultado == 'fail') {
+            //     $mensaje = array(
+            //         'titulo' => 'Error',
+            //         'cuerpo' => 'No fue posible guardar los datos en el sistema. Intenta más tarde.'
+            //     );
+            // }else{
                 $mensaje = array(
                     'titulo' => 'CURP no encontrada',
                     'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
                 );
-            }
+            // }
             $this->mostrarMensaje($mensaje);
         }
         // $artesano->id > 0 
@@ -62,28 +62,42 @@ class TallerController{
         //     : $this->model->Registrar($artesano);
     }
 
-    // public function BuscarTallerPorMunicipio(){
-    //     if (empty($_SESSION)) {
-    //         header('Location: index.php');
-    //     }
-    //     $Rama = new RamaArtesanal();
-    //     $talleres = $this->model->ObtenerTalleresMunicipio($_REQUEST['buscar-taller-mun']);
-    //     $municipio = $_REQUEST['buscar-taller-mun'];
-    //     if (!empty($talleres)) { 
-    //         require_once 'view/header.php';
-    //         require_once 'view/taller/taller-municipio.php';
-    //         require_once 'view/footer.php'; 
-    //     }else{
-    //         $mensaje = array(
-    //             'titulo' => 'No hay talleres.',
-    //             'cuerpo' => 'No se encontraron talleres en el municipio que ingresaste.'
-    //         );
-    //         require_once 'view/header.php';
-    //         require_once 'view/principal.php';
-    //         require_once 'view/modal-mensajes.php';
-    //         require_once 'view/footer.php';
-    //     }
-    // }
+    public function BuscarTallerPorMunicipio(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        $Rama = new RamaArtesanal();
+        if (empty($_REQUEST)) {
+            $_SESSION['buscar-taller-mun'] = $_REQUEST['buscar-taller-mun'];
+        }
+        if (!empty($_REQUEST['buscar-taller-mun'])) {
+            $_SESSION['buscar-taller-mun'] = $_REQUEST['buscar-taller-mun'];
+            $municipio = $_REQUEST['buscar-taller-mun'];
+            $talleres = $this->model->ObtenerTalleresMunicipio($_REQUEST['buscar-taller-mun']);
+        }else{
+            $municipio = $_SESSION['buscar-taller-mun'];
+            $talleres = $this->model->ObtenerTalleresMunicipio($_SESSION['buscar-taller-mun']);
+        }
+        if (!empty($talleres)) { 
+            // if ($talleres == 'fail') {
+            //     $mensaje = array(
+            //         'titulo' => 'Error',
+            //         'cuerpo' => 'No fue posible conectar con la base de datos. Intenta más tarde.'
+            //     );
+            //     $this->mostrarMensaje($mensaje);
+            // }else{
+                require_once 'view/header.php';
+                require_once 'view/taller/taller-municipio.php';
+                require_once 'view/footer.php'; 
+            // }
+        }else{
+            $mensaje = array(
+                'titulo' => 'No hay talleres.',
+                'cuerpo' => 'No se encontraron talleres en '.$municipio.'.'
+            );
+            $this->mostrarMensaje($mensaje);
+        }
+    }
 
  // public function BuscarTallerPorRamaArtesanal(){
  //        if (empty($_SESSION)) {

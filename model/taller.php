@@ -48,31 +48,33 @@ class Taller{
 				return 'no_existe';
 			}
 		}catch (Exception $e) {
-			return 'fail';
+			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 
-	// public function ObtenerTallerArtesano($curp){
-	// 	try {
-	// 		$result = array();
-	// 		$stm = $this->pdo->prepare("SELECT * FROM taller WHERE curp = ?");
-	// 		$stm->execute(array($curp));
-	// 		return $stm->fetchAll(PDO::FETCH_OBJ);
-	// 	} catch (Exception $e) {
-	// 		die($e->getMessage());
-	// 	}
-	// }
+	public function ObtenerTalleresMunicipio($municipio){
+		try {
+			$result = array();
+			$stm = $this->pdo->prepare("SELECT * FROM taller WHERE municipio = ?");
+			$stm->execute(array($municipio));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}
 
-	// public function ObtenerTalleresMunicipio($municipio){
-	// 	try {
-	// 		$result = array();
-	// 		$stm = $this->pdo->prepare("SELECT * FROM taller WHERE municipio = ?");
-	// 		$stm->execute(array($municipio));
-	// 		return $stm->fetchAll(PDO::FETCH_OBJ);
-	// 	} catch (Exception $e) {
-	// 		die($e->getMessage());
-	// 	}
-	// }
+	public function ObtenerTallerArtesano($curp){
+		try {
+			$result = array();
+			$stm = $this->pdo->prepare("SELECT * FROM taller WHERE curp = ?");
+			$stm->execute(array($curp));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}
+
+
 
 	// public function ObtenerTalleresRamaArtesanal($idRama){
 	// 	try {

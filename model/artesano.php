@@ -75,6 +75,8 @@ class Artesano{
 			$mensaje = $e->getMessage();
 			if (strpos($mensaje, 'SQLSTATE[23000]') !== false) {
 				return 'curp_exitente';
+			}else{
+				header('Location: index.php?c=Principal&a=ErrorConexion');
 			}
 		}
 	}
@@ -86,7 +88,7 @@ class Artesano{
 			$stm->execute(array($id));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			die($e->getMessage());
+			header('Location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 
@@ -97,7 +99,7 @@ class Artesano{
 			$stm->execute(array($Apellido,$Apellido));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			die($e->getMessage());
+			header('Location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 
