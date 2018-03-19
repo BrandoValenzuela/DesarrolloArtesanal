@@ -76,16 +76,16 @@ class Taller{
 
 
 
-	// public function ObtenerTalleresRamaArtesanal($idRama){
-	// 	try {
-	// 		$result = array();
-	// 		$stm = $this->pdo->prepare("SELECT * FROM taller WHERE idRamaArtesanal = ?");
-	// 		$stm->execute(array($idRama));
-	// 		return $stm->fetchAll(PDO::FETCH_OBJ);
-	// 	} catch (Exception $e) {
-	// 		die($e->getMessage());
-	// 	}
-	// }
+	public function ObtenerTalleresRamaArtesanal($idRama){
+		try {
+			$result = array();
+			$stm = $this->pdo->prepare("SELECT * FROM taller WHERE idRamaArtesanal = ?");
+			$stm->execute(array($idRama));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('location: index.php?c=Principal&a=ErrorConexion');	
+		}
+	}
 
 	// public function Eliminar($id){
 	// 	try {

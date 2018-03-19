@@ -71,17 +71,17 @@
                         </div>
                      </form>
                   </div>
-                  <!-- <div class="col-md-6">
+                  <div class="col-md-6">
                      <form id="frm-busqueda-taller-rama" action="?c=Taller&a=BuscarTallerPorRamaArtesanal" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                            <label>Por rama artesanal:</label>
                            <div class="input-group">
                               <select name="ramaartesanal" class="form-control">
                                  <?php
-                                    #foreach ($ramas as $opcion) {
-                                       #echo "<option value='".$opcion->idRamaArtesanal."'>";
-                                       #echo $opcion->nombre."</option>\n";
-                                    // }
+                                    foreach ($ramas as $opcion) {
+                                       echo "<option value='".$opcion->idRamaArtesanal."'>";
+                                       echo $opcion->nombre."</option>\n";
+                                    }
                                  ?>
                               </select>
                               <div class="input-group-btn">
@@ -90,7 +90,7 @@
                            </div>
                         </div>
                      </form>
-                  </div> -->
+                  </div>
                </div>
             </div>
          </div> 
