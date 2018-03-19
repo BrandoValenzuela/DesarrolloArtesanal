@@ -23,16 +23,16 @@ class RamaArtesanal{
 		}
 	}
 
-	// public function Obtener($id){
-	// 	try {
-	// 		$stm = $this->pdo
-	// 		          ->prepare("SELECT * FROM ramaartesanal WHERE idRamaArtesanal = ?");
-	// 		$stm->execute(array($id));
-	// 		return $stm->fetch(PDO::FETCH_OBJ);
-	// 	}catch (Exception $e) {
-	// 		die($e->getMessage());
-	// 	}
-	// }
+	public function Obtener($id){
+		try {
+			$stm = $this->pdo
+			          ->prepare("SELECT * FROM ramaartesanal WHERE idRamaArtesanal = ?");
+			$stm->execute(array($id));
+			return $stm->fetch(PDO::FETCH_OBJ);
+		}catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
 
 	// public function Eliminar($id){
 	// 	try {

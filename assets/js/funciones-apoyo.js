@@ -63,6 +63,3 @@ $(document).ready(function(){
         $(this).val(text.toUpperCase());
     });
 });
-
-
-// pevb930116hzsrlr07

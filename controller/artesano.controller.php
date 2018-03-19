@@ -82,32 +82,29 @@ class ArtesanoController{
         //     : $this->model->Registrar($artesano);
     }
 
-    // public function Buscar(){
-    //     if (empty($_SESSION)) {
-    //         header('Location: index.php');
-    //     }
-    //     $Rama = new RamaArtesanal();
-    //     $Taller = new Taller();
-    //     $ArtExpo = new Artesanoexpo();
-    //     $art = $this->model->Obtener($_REQUEST['buscar-artesano-curp']);
-    //     if (!empty($art)) { 
-    //         $ram_art = $Rama->Obtener($art->idRamaArtesanal);
-    //         $tal = $Taller->ObtenerTallerArtesano($art->curp);
-    //         $participantes_expo = $ArtExpo->ObtenerExposiciones($art->curp);
-    //         require_once 'view/header.php';
-    //         require_once 'view/artesano/artesano.php';
-    //         require_once 'view/footer.php'; 
-    //     }else{
-    //         $mensaje = array(
-    //             'titulo' => 'Registro inexistente',
-    //             'cuerpo' => 'La CURP que ingresaste no se encuentra registrada en el sistema.'
-    //         );
-    //         require_once 'view/header.php';
-    //         require_once 'view/principal.php';
-    //         require_once 'view/modal-mensajes.php';
-    //         require_once 'view/footer.php';
-    //     }
-    // }
+    public function Buscar(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        $Rama = new RamaArtesanal();
+        // $Taller = new Taller();
+        // $ArtExpo = new Artesanoexpo();
+        $art = $this->model->Obtener($_REQUEST['buscar-artesano-curp']);
+        if (!empty($art)) { 
+            $ram_art = $Rama->Obtener($art->idRamaArtesanal);
+            // $tal = $Taller->ObtenerTallerArtesano($art->curp);
+            // $participantes_expo = $ArtExpo->ObtenerExposiciones($art->curp);
+            require_once 'view/header.php';
+            require_once 'view/artesano/artesano.php';
+            require_once 'view/footer.php'; 
+        }else{
+            $mensaje = array(
+                'titulo' => 'Registro inexistente',
+                'cuerpo' => 'La CURP que ingresaste no se encuentra registrada en el sistema.'
+            );
+            $this->mostrarMensaje($mensaje);
+        }
+    }
 
     // public function BuscarPorApellido(){
     //     if (empty($_SESSION)) {

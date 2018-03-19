@@ -12,7 +12,7 @@
    </div>
    <div class="col-md-10">
       <h3 class="text-center">Opciones de búsqueda</h3>
-<!--       <div class="panel-group" id="accordion">
+      <div class="panel-group" id="accordion">
          <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
@@ -34,7 +34,7 @@
                         </div>
                      </form>
                   </div>
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                      <form id="frm-busqueda-artesano-ap" action="?c=Artesano&a=BuscarPorApellido" method="post" enctype="multipart/   form-data">
                         <div class="form-group">
                            <label>Por apellido paterno:</label>
@@ -46,11 +46,11 @@
                            </div>
                         </div>
                      </form>
-                  </div>
+                  </div> -->
                </div>
             </div>
          </div>
-         <div class="panel panel-default">
+<!--          <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapse-taller"><h4>Buscar talleres</h4></a>
@@ -94,7 +94,6 @@
                </div>
             </div>
          </div> 
-
          <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
@@ -119,7 +118,6 @@
                </div>
             </div>
          </div> 
-
          <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
@@ -143,16 +141,16 @@
                   </div>
                </div>
             </div>
-         </div> 
-      </div> -->
+         </div>  -->
+      </div>
    </div>
 </div>
 <script>
-   //  $(document).ready(function(){
-   //      $("#frm-busqueda-artesano-curp").submit(function(){
-   //          return $(this).validate();
-   //      });
-   //  });
+    $(document).ready(function(){
+      $("#frm-busqueda-artesano-curp").submit(function(){
+        return $(this).validate();
+      });
+   });
 
    //  $(document).ready(function(){
    //      $("#frm-busqueda-artesano-ap").submit(function(){
