@@ -106,27 +106,24 @@ class ArtesanoController{
         }
     }
 
-    // public function BuscarPorApellido(){
-    //     if (empty($_SESSION)) {
-    //         header('Location: index.php');
-    //     }
-    //     $artesanos = $this->model->ObtenerPorApellido($_REQUEST['buscar-artesano-ap']);
-    //     if (!empty($artesanos)) { 
-    //         $apellido = $_REQUEST['buscar-artesano-ap'];
-    //         require_once 'view/header.php';
-    //         require_once 'view/artesano/artesano-lista.php';
-    //         require_once 'view/footer.php'; 
-    //     }else{
-    //         $mensaje = array(
-    //             'titulo' => 'Registro inexistente',
-    //             'cuerpo' => 'No hay artesanos registardos con el apellido '.$_REQUEST['buscar-artesano-ap']
-    //         );
-    //         require_once 'view/header.php';
-    //         require_once 'view/principal.php';
-    //         require_once 'view/modal-mensajes.php';
-    //         require_once 'view/footer.php';
-    //     }
-    // }
+    public function BuscarPorApellido(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        $artesanos = $this->model->ObtenerPorApellido($_REQUEST['buscar-artesano-ap']);
+        if (!empty($artesanos)) { 
+            $apellido = $_REQUEST['buscar-artesano-ap'];
+            require_once 'view/header.php';
+            require_once 'view/artesano/artesano-lista.php';
+            require_once 'view/footer.php'; 
+        }else{
+            $mensaje = array(
+                'titulo' => 'Registro inexistente',
+                'cuerpo' => 'No hay artesanos registardos con el apellido '.$_REQUEST['buscar-artesano-ap']
+            );
+            $this->mostrarMensaje($mensaje);
+        }
+    }
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
@@ -135,6 +132,7 @@ class ArtesanoController{
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }
+    
     // public function Eliminar(){
     //     $this->model->Eliminar($_REQUEST['id']);
     //     header('Location: index.php?c=Alumno');

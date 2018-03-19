@@ -90,16 +90,16 @@ class Artesano{
 		}
 	}
 
-	// public function ObtenerPorApellido($Apellido){
-	// 	try {
-	// 		$stm = $this->pdo
-	// 		          ->prepare("SELECT * FROM artesano WHERE aPaterno = ? OR aMaterno = ?");
-	// 		$stm->execute(array($Apellido,$Apellido));
-	// 		return $stm->fetchAll(PDO::FETCH_OBJ);
-	// 	} catch (Exception $e) {
-	// 		die($e->getMessage());
-	// 	}
-	// }
+	public function ObtenerPorApellido($Apellido){
+		try {
+			$stm = $this->pdo
+			          ->prepare("SELECT * FROM artesano WHERE aPaterno = ? OR aMaterno = ?");
+			$stm->execute(array($Apellido,$Apellido));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
 
 	// public function Listar(){
 	// 	try

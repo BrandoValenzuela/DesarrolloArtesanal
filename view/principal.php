@@ -34,7 +34,7 @@
                         </div>
                      </form>
                   </div>
-                  <!-- <div class="col-md-6">
+                  <div class="col-md-6">
                      <form id="frm-busqueda-artesano-ap" action="?c=Artesano&a=BuscarPorApellido" method="post" enctype="multipart/   form-data">
                         <div class="form-group">
                            <label>Por apellido paterno:</label>
@@ -46,7 +46,7 @@
                            </div>
                         </div>
                      </form>
-                  </div> -->
+                  </div>
                </div>
             </div>
          </div>
@@ -152,11 +152,11 @@
       });
    });
 
-   //  $(document).ready(function(){
-   //      $("#frm-busqueda-artesano-ap").submit(function(){
-   //          return $(this).validate();
-   //      });
-   //  });
+    $(document).ready(function(){
+        $("#frm-busqueda-artesano-ap").submit(function(){
+            return $(this).validate();
+        });
+    });
 
    // $(document).ready(function(){
    //      $("#frm-busqueda-taller-municipio").submit(function(){

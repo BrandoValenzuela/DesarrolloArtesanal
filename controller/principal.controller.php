@@ -14,8 +14,8 @@ class PrincipalController{
 
     public function ErrorConexion(){
         $mensaje = array(
-            'titulo' => 'Error de conexion',
-            'cuerpo' => 'Se presento un error de conexion a la base de datos.</br>Intenta más tarde.'
+            'titulo' => 'Error de conexión',
+            'cuerpo' => 'Se presentó un error de conexión a la base de datos.</br>Intenta más tarde.'
         );
         require_once 'view/header.php';
         require_once 'view/principal.php';
