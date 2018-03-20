@@ -94,7 +94,7 @@
                </div>
             </div>
          </div> 
-<!--          <div class="panel panel-default">
+         <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapse-exposicion"><h4>Buscar exposición</h4></a>
@@ -117,7 +117,7 @@
                   </div>
                </div>
             </div>
-         </div>  -->
+         </div> 
 <!--          <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
@@ -164,11 +164,11 @@
         });
     });
 
-   // $(document).ready(function(){
-   //      $("#frm-busqueda-expo-mun").submit(function(){
-   //          return $(this).validate();
-   //      });
-   //  });
+   $(document).ready(function(){
+        $("#frm-busqueda-expo-mun").submit(function(){
+            return $(this).validate();
+        });
+    });
 
    // $(document).ready(function(){
    //      $("#frm-busqueda-concurso-nument").submit(function(){

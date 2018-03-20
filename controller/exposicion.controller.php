@@ -53,59 +53,61 @@ class ExposicionController{
         //     : $this->model->Registrar($artesano);
     }
 
-    // public function Buscar(){
-    //     if (empty($_SESSION)) {
-    //         header('Location: index.php');
-    //     }
-    //     if (!isset($_REQUEST['buscar-expo'])) {
-    //         header('location: index.php?c=Principal');
-    //     }
-    //     $expo = $this->model->Obtener($_REQUEST['buscar-id-expo']);
-    //     $nombre = $_REQUEST['buscar-nombre-expo'];
-    //     if (!empty($expo)) {
-    //         $artesano_expo = new ArtesanoExpo();
-    //         $participantes = $artesano_expo->ObtenerParticipantes($expo->idExposicion);
-    //         require_once 'view/header.php';
-    //         require_once 'view/exposicion/exposicion.php';
-    //         require_once 'view/footer.php'; 
-    //     }else{
-    //         $mensaje = array(
-    //             'titulo' => 'No hay exposiciones.',
-    //             'cuerpo' => 'No se encontraron exposiciones con el nombre "'.$nombre.'"'
-    //         );
-    //         require_once 'view/header.php';
-    //         require_once 'view/principal.php';
-    //         require_once 'view/modal-mensajes.php';
-    //         require_once 'view/footer.php';
-    //     }
-    // }
+    public function Buscar(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
 
-    // public function BuscarPorMunEnt(){
-    //     if (empty($_SESSION)) {
-    //         header('Location: index.php');
-    //     }
-    //     if (isset($_REQUEST['buscar-expo-munent'])) {
-    //         $_SESSION['buscar-expo-munent'] = $_REQUEST['buscar-expo-munent'];
-    //     }else{
-    //         $_REQUEST['buscar-expo-munent'] = $_SESSION['buscar-expo-munent'];
-    //     }
-    //     $exposiciones = $this->model->ObtenerPorMunEnt($_REQUEST['buscar-expo-munent']);
-    //     if (!empty($exposiciones)) { 
-    //         $municipio = $_REQUEST['buscar-expo-munent'];
-    //         require_once 'view/header.php';
-    //         require_once 'view/exposicion/exposicion-lista.php';
-    //         require_once 'view/footer.php'; 
-    //     }else{
-    //         $mensaje = array(
-    //             'titulo' => 'No hay exposiciones.',
-    //             'cuerpo' => 'No se encontraron exposiciones en el municipio o entidad que ingresaste.'
-    //         );
-    //         require_once 'view/header.php';
-    //         require_once 'view/principal.php';
-    //         require_once 'view/modal-mensajes.php';
-    //         require_once 'view/footer.php';
-    //     }
-    // }
+        if (!empty($_REQUEST['buscar-id-expo'])) {
+            $_SESSION['buscar-id-expo'] = $_REQUEST['buscar-id-expo'];
+            $expo = $this->model->Obtener($_REQUEST['buscar-id-expo']);
+            $nombre = $_REQUEST['buscar-nombre-expo'];
+        }else{
+            $municipio = $_SESSION['buscar-id-expo'];
+            $expo = $this->model->Obtener($_SESSION['buscar-id-expo']);
+            $nombre = $_SESSION['buscar-nombre-expo'];
+        }
+        // $expo = $this->model->Obtener($_REQUEST['buscar-id-expo']);
+        // $nombre = $_REQUEST['buscar-nombre-expo'];
+        if (!empty($expo)) {
+            // $artesano_expo = new ArtesanoExpo();
+            // $participantes = $artesano_expo->ObtenerParticipantes($expo->idExposicion);
+            require_once 'view/header.php';
+            require_once 'view/exposicion/exposicion.php';
+            require_once 'view/footer.php'; 
+        }else{
+            $mensaje = array(
+                'titulo' => 'No hay exposiciones.',
+                'cuerpo' => 'No se encontraron exposiciones con el nombre "'.$nombre.'"'
+            );
+            $this->mostrarMensaje($mensaje);
+        }
+    }
+
+    public function BuscarPorMunEnt(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['buscar-expo-munent'])) {
+            $_SESSION['buscar-expo-munent'] = $_REQUEST['buscar-expo-munent'];
+            $municipio = $_REQUEST['buscar-expo-munent'];
+            $exposiciones = $this->model->ObtenerPorMunEnt($_REQUEST['buscar-expo-munent']);
+        }else{
+            $municipio = $_SESSION['buscar-expo-munent'];
+            $exposiciones = $this->model->ObtenerPorMunEnt($_SESSION['buscar-expo-munent']);
+        }
+        if (!empty($exposiciones)) { 
+            require_once 'view/header.php';
+            require_once 'view/exposicion/exposicion-lista.php';
+            require_once 'view/footer.php'; 
+        }else{
+            $mensaje = array(
+                'titulo' => 'No hay exposiciones.',
+                'cuerpo' => 'No se encontraron exposiciones en el municipio o entidad que ingresaste.'
+            );
+            $this->mostrarMensaje($mensaje);
+        }
+    }
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
