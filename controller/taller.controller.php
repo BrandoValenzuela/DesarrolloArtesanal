@@ -89,10 +89,6 @@ class TallerController{
             header('Location: index.php');
         }
         $Rama = new RamaArtesanal();
-
-        // $rama = $Rama->Obtener($_REQUEST['ramaartesanal']);
-        // $talleres = $this->model->ObtenerTalleresRamaArtesanal($_REQUEST['ramaartesanal']);
-        
         if (!empty($_REQUEST['ramaartesanal'])) {
             $_SESSION['ramaartesanal'] = $_REQUEST['ramaartesanal'];
             $talleres = $this->model->ObtenerTalleresRamaArtesanal($_REQUEST['ramaartesanal']);

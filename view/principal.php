@@ -4,7 +4,7 @@
       <div class="list-group">
          <a href="?c=Artesano&a=Crud" class="list-group-item">Artesano</a>
          <a href="?c=Taller&a=Crud" class="list-group-item">Taller de artesano</a>
-         <!-- <a href="?c=Exposicion&a=Crud" class="list-group-item">Exposición</a> -->
+         <a href="?c=Exposicion&a=Crud" class="list-group-item">Exposición</a>
          <!-- <a href="?c=concurso&a=Crud" class="list-group-item">Concurso</a> -->
          <!-- <a href="#" class="list-group-item">Comodato</a> -->
          <!-- <a href="#" class="list-group-item">Capacitación</a> -->
