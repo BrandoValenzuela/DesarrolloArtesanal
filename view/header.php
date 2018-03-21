@@ -3,7 +3,8 @@
 	<head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Subsecretaría de Desarrollo Artesanal - Acceso</title>   
-        <meta charset="utf-8" />
+        <!-- <meta charset="utf-8" /> -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="assets/css/bootstrap.css" />
         <link rel="stylesheet" href="assets/js/jquery-ui/jquery-ui.min.css" />
         <link rel="stylesheet" href="assets/css/style.css" />
