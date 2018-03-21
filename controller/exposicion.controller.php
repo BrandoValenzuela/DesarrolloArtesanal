@@ -1,6 +1,6 @@
 <?php
 require_once 'model/exposicion.php';
-// require_once 'model/artesanoexpo.php';
+require_once 'model/artesanoexpo.php';
 
 class ExposicionController{
     private $model;
@@ -57,9 +57,9 @@ class ExposicionController{
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
-
         if (!empty($_REQUEST['buscar-id-expo'])) {
             $_SESSION['buscar-id-expo'] = $_REQUEST['buscar-id-expo'];
+            $_SESSION['buscar-nombre-expo'] = $_REQUEST['buscar-id-expo'];
             $expo = $this->model->Obtener($_REQUEST['buscar-id-expo']);
             $nombre = $_REQUEST['buscar-nombre-expo'];
         }else{
@@ -67,11 +67,9 @@ class ExposicionController{
             $expo = $this->model->Obtener($_SESSION['buscar-id-expo']);
             $nombre = $_SESSION['buscar-nombre-expo'];
         }
-        // $expo = $this->model->Obtener($_REQUEST['buscar-id-expo']);
-        // $nombre = $_REQUEST['buscar-nombre-expo'];
         if (!empty($expo)) {
-            // $artesano_expo = new ArtesanoExpo();
-            // $participantes = $artesano_expo->ObtenerParticipantes($expo->idExposicion);
+            $artesano_expo = new ArtesanoExpo();
+            $participantes = $artesano_expo->ObtenerParticipantes($expo->idExposicion);
             require_once 'view/header.php';
             require_once 'view/exposicion/exposicion.php';
             require_once 'view/footer.php'; 
