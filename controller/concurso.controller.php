@@ -51,59 +51,61 @@ class ConcursoController{
         //     : $this->model->Registrar($artesano);
     }
 
-    // public function Buscar(){
-    //     if (empty($_SESSION)) {
-    //         header('Location: index.php');
-    //     }
-    //     if (!isset($_REQUEST['buscar-expo'])) {
-    //         header('location: index.php?c=Principal');
-    //     }
-    //     $expo = $this->model->Obtener($_REQUEST['buscar-expo']);
-    //     $nombre = $_REQUEST['buscar-expo'];
-    //     if (!empty($expo)) {
-    //         $artesano_expo = new ArtesanoExpo();
-    //         $participantes = $artesano_expo->ObtenerParticipantes($expo->idExposicion);
-    //         require_once 'view/header.php';
-    //         require_once 'view/exposicion/exposicion.php';
-    //         require_once 'view/footer.php'; 
-    //     }else{
-    //         $mensaje = array(
-    //             'titulo' => 'No hay exposiciones.',
-    //             'cuerpo' => 'No se encontraron exposiciones con el nombre "'.$nombre.'"'
-    //         );
-    //         require_once 'view/header.php';
-    //         require_once 'view/principal.php';
-    //         require_once 'view/modal-mensajes.php';
-    //         require_once 'view/footer.php';
-    //     }
-    // }
+    public function Buscar(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['buscar-id-concurso'])) {
+            $_SESSION['buscar-id-concurso'] = $_REQUEST['buscar-id-concurso'];
+            $_SESSION['buscar-nombre-concurso'] = $_REQUEST['buscar-id-concurso'];
+            $nombre = $_REQUEST['buscar-nombre-concurso'];
+            $concurso = $this->model->Obtener($_REQUEST['buscar-id-concurso']);
+        }else{
+            $nombre = $_SESSION['buscar-nombre-concurso'];
+            $concurso = $this->model->Obtener($_SESSION['buscar-id-concurso']);
+        }
+        if (!empty($concurso)) {
+            // $artesano_expo = new ArtesanoExpo();
+            // $participantes = $artesano_expo->ObtenerParticipantes($expo->idExposicion);
+            require_once 'view/header.php';
+            require_once 'view/concurso/concurso.php';
+            require_once 'view/footer.php'; 
+        }else{
+            $mensaje = array(
+                'titulo' => 'No hay exposiciones.',
+                'cuerpo' => 'No se encontraron concursos con el nombre "'.$nombre.'"'
+            );
+            require_once 'view/header.php';
+            require_once 'view/principal.php';
+            require_once 'view/modal-mensajes.php';
+            require_once 'view/footer.php';
+        }
+    }
 
-    // public function BuscarPorMunEnt(){
-    //     if (empty($_SESSION)) {
-    //         header('Location: index.php');
-    //     }
-    //     if (isset($_REQUEST['buscar-expo-munent'])) {
-    //         $_SESSION['buscar-expo-munent'] = $_REQUEST['buscar-expo-munent'];
-    //     }else{
-    //         $_REQUEST['buscar-expo-munent'] = $_SESSION['buscar-expo-munent'];
-    //     }
-    //     $exposiciones = $this->model->ObtenerPorMunEnt($_REQUEST['buscar-expo-munent']);
-    //     if (!empty($exposiciones)) { 
-    //         $municipio = $_REQUEST['buscar-expo-munent'];
-    //         require_once 'view/header.php';
-    //         require_once 'view/exposicion/exposicion-lista.php';
-    //         require_once 'view/footer.php'; 
-    //     }else{
-    //         $mensaje = array(
-    //             'titulo' => 'No hay exposiciones.',
-    //             'cuerpo' => 'No se encontraron exposiciones en el municipio o entidad que ingresaste.'
-    //         );
-    //         require_once 'view/header.php';
-    //         require_once 'view/principal.php';
-    //         require_once 'view/modal-mensajes.php';
-    //         require_once 'view/footer.php';
-    //     }
-    // }
+    public function BuscarPorConcepto(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['buscar-concurso-concepto'])) {
+            $_SESSION['buscar-concurso-concepto'] = $_REQUEST['buscar-concurso-concepto'];
+            $palabra_clave = $_REQUEST['buscar-concurso-concepto'];
+            $concursos = $this->model->ObtenerPorNombre($_REQUEST['buscar-concurso-concepto']);
+        }else{
+            $palabra_clave = $_SESSION['buscar-concurso-concepto'];
+            $concursos = $this->model->ObtenerPorNombre($_SESSION['buscar-concurso-concepto']);
+        }
+        if (!empty($concursos)) { 
+            require_once 'view/header.php';
+            require_once 'view/concurso/concurso-lista.php';
+            require_once 'view/footer.php'; 
+        }else{
+            $mensaje = array(
+                'titulo' => 'No hay concursos.',
+                'cuerpo' => 'No se encontraron concursos que hagan referencia a la busqueda:<br>"'.$palabra_clave.'".'
+            );
+            $this->mostrarMensaje($mensaje);
+        }
+    }
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;

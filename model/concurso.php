@@ -45,30 +45,35 @@ class Concurso{
 		}
 	}
 
-	// public function Obtener($nombre){
-	// 	try {
-	// 		$result = array();
-	// 		$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE nombre = ?");
-	// 		$stm->execute(array($nombre));
-	// 		return $stm->fetch(PDO::FETCH_OBJ);
-	// 	} catch (Exception $e) {
-	// 		die($e->getMessage());
-	// 	}
-	// }
+	public function Obtener($idConcurso){
+		try {
+			$result = array();
+			$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE idConcurso = ?");
+			$stm->execute(array($idConcurso));
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
 
-	// public function ObtenerPorMunEnt($munent){
-	// 	try {
-	// 		$pattern = '%'.$munent.'%';
-	// 		$result = array();
-	// 		$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE municipio Like ? OR entidad Like ?");
-	// 		$stm->execute(array($pattern,$pattern));
-	// 		return $stm->fetchAll(PDO::FETCH_OBJ);
-	// 	} catch (Exception $e) {
-	// 		die($e->getMessage());
-	// 		// return $e->getMessage();
-
-	// 	}
-	// }
+	public function ObtenerPorNombre($frase){
+		try {
+			$palabras = explode(" ",$frase); 
+   			$numero = count($palabras); 
+			$result = array();
+			if ($numero == 1) { 
+				$pattern = '%'.$frase.'%';
+				$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE nombre Like ?");
+				$stm->execute(array($pattern));
+  			}elseif ($numero > 1) {
+  				$stm = $this->pdo->prepare("SELECT *, MATCH(nombre) AGAINST(?) AS Score FROM concurso WHERE MATCH(nombre) AGAINST(?) ORDER BY Score DESC LIMIT 50");
+				$stm->execute(array($frase,$frase));
+  			}
+  			return $stm->fetchAll(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}
 
 	// public function Eliminar($id){
 	// 	try {

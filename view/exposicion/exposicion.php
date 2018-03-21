@@ -7,16 +7,16 @@
     <h3 class="page-header text-center"><?php echo $expo->nombre;?></h3>
     <div class="col-md-10 col-md-offset-1">
         <div class="col-md-8 col-md-offset-2">
-            <div class="col-md-3">
+            <div class="col-md-3 text-right">
                 <label>Fecha de inicio:</label>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 text-left">
                 <label><?php echo $expo->fechaInicio; ?></label>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 text-right">
                 <label>Fecha de finalización:</label>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 text-left">
                 <label><?php echo $expo->fechaFin; ?></label>
             </div>
             <hr>
@@ -72,10 +72,12 @@
             </tbody>
         </table>
         </div>
-    </div> 
+    </div>
     <div class="col-md-10 col-md-offset-1">
+        <br>
         <fieldset>
             <legend>Participantes</legend>
+            <?php if (!empty($participantes)): ?>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -106,8 +108,12 @@
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
-            </table> 
+            </table>
+            <?php else: ?>
+                <h4 class="text-center">No hay participantes registrados en esta exposición.</h4>
+            <?php endif ?>                
         </fieldset>
+        <br>
         <form action="?c=Artesanoexpo&a=Crud" method="post" enctype="multipart/form-data">      
             <input type="hidden" name="nombre-exposicion" value="<?php echo $expo->nombre; ?>" />
             <input type="hidden" name="id-exposicion" value="<?php echo $expo->idExposicion; ?>" />

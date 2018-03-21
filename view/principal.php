@@ -107,7 +107,7 @@
                         <div class="form-group">
                            <label>Por municipio o entidad:</label>
                            <div class="input-group">
-                              <input type="text" class="form-control " placeholder="Ejemplo: Zacatecas" id="buscar-expo-mun-ent" name="buscar-expo-munent" data-validacion-tipo="requerido">
+                              <input type="text" class="form-control " placeholder="Ejemplo: Zacatecas" id="buscar-expo-munent" name="buscar-expo-munent" data-validacion-tipo="requerido">
                               <div class="input-group-btn">
                                  <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                               </div>
@@ -118,7 +118,7 @@
                </div>
             </div>
          </div> 
-<!--          <div class="panel panel-default">
+         <div class="panel panel-default">
             <div class="panel-heading">
                <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapse-concurso"><h4>Buscar concurso</h4></a>
@@ -127,11 +127,11 @@
             <div id="collapse-concurso" class="panel-collapse collapse">
                <div class="panel-body">
                   <div class="col-md-6">
-                     <form id="frm-busqueda-concurso-nument" action="?c=concurso&a=BuscarPorMunEnt" method="post" enctype="multipart/form-data">
+                     <form id="frm-busqueda-concurso-concepto" action="?c=Concurso&a=BuscarPorConcepto" method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                           <label>Por municipio o entidad:</label>
+                           <label>Por concepto:</label>
                            <div class="input-group">
-                              <input type="text" class="form-control " placeholder="Ejemplo: Zacatecas" id="buscar-concurso-mun-ent" name="buscar-concurso-munent" data-validacion-tipo="requerido">
+                              <input type="text" class="form-control " placeholder="Ejemplo: artesanias; concurso nacional" id="buscar-concurso-concepto" name="buscar-concurso-concepto" data-validacion-tipo="requerido">
                               <div class="input-group-btn">
                                  <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                               </div>
@@ -141,7 +141,7 @@
                   </div>
                </div>
             </div>
-         </div>  -->
+         </div> 
       </div>
    </div>
 </div>
@@ -170,9 +170,9 @@
         });
     });
 
-   // $(document).ready(function(){
-   //      $("#frm-busqueda-concurso-nument").submit(function(){
-   //          return $(this).validate();
-   //      });
-   //  });
+   $(document).ready(function(){
+        $("#frm-busqueda-concurso-concepto").submit(function(){
+            return $(this).validate();
+        });
+    });
 </script>

@@ -182,6 +182,7 @@
     <fieldset>
         <legend>Talleres donde labora</legend>
         <div class="col-md-10 col-md-offset-1">
+            <?php if (!empty($tal)): ?>
         <?php foreach ($tal as $ta): ?>
             <div class="col-md-12 text-center">
                 <h4>
@@ -234,6 +235,10 @@
             </div>
             <hr>
         <?php endforeach ?>
+        <?php else: ?>
+            <h4 class="text-center">No se ha agregado información sobre el taller donde labora el artesano.</h4>
+            <br>
+        <?php endif ?>
         </div>
     </fieldset>
     <fieldset>
@@ -300,6 +305,7 @@
             </table> 
             <?php else: ?>
                 <h4 class="text-center">No ha participado en concursos.</h4>
+                <br>
             <?php endif ?>
         </div>
     </fieldset>
