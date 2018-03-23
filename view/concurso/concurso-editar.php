@@ -13,31 +13,25 @@
                 <legend>Datos del concurso</legend>
                 <div class="col-md-6">
                   <div class="form-group">
-                      <label>Nombre del concurso:</label>
+                      <span class="obligatorio">* </span><label>Nombre del concurso:</label>
                       <input type="text" name="nombre-concurso" value="<?php #echo $alm->Nombre; ?>" class="form-control" placeholder="Ingrese el nombre." data-validacion-tipo="requerido" />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                        <label>Dirección del evento:</label>
+                        <span class="obligatorio">* </span><label>Dirección del evento:</label>
                         <input type="text" name="direccion-concurso" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese calle, número y colonia." data-validacion-tipo="requerido" />
                     </div>     
                 </div>
-                <!-- <div class="col-md-3">
-                  <div class="form-group">
-                        <label>Localidad:</label>
-                        <input type="text" name="localidad-expo" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese la localidad." data-validacion-tipo="" />
-                    </div>
-                </div> -->
                 <div class="col-md-3">   
                     <div class="form-group">
-                        <label>Municipio:</label>
+                        <span class="obligatorio">* </span><label>Municipio:</label>
                         <input type="text" name="municipio-concurso" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese el municipio." data-validacion-tipo="requerido" />
                     </div> 
                 </div>
                 <div class="col-md-3">   
                     <div class="form-group">
-                        <label>Entidad:</label>
+                        <span class="obligatorio">* </span><label>Entidad:</label>
                         <input type="text" name="entidad-concurso" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese la entidad." data-validacion-tipo="requerido" />
                     </div>
                 </div>
@@ -46,13 +40,13 @@
             <fieldset>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label>Fecha del evento:</label>
+                    <span class="obligatorio">* </span><label>Fecha del evento:</label>
                     <input type="text" readonly id="fecha-concurso" name="fecha-concurso" value="<?php #echo $alm->FechaNacimiento; ?>" class="form-control" placeholder="Selecciona la fecha" data-validacion-tipo="requerido" />
                   </div>
                 </div>              
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label>Alcance del concurso:</label>
+                    <span class="obligatorio">* </span><label>Alcance del concurso:</label>
                     <select name="alcance-concurso" class="form-control">
                     <option <?php #echo $alm->Sexo == 1 ? 'selected' : ''; ?> value="1">Estatal</option>
                     <option <?php #echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="2">Federal</option>
@@ -61,13 +55,13 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                      <label>Monto total estatal:</label>
+                      <span class="obligatorio">* </span><label>Monto total estatal:</label>
                       <input type="text" id="mte-concurso" name="mte-concurso" value="<?php #echo $alm->FechaNacimiento; ?>" class="form-control" placeholder="Ejemplo: 10000" data-validacion-tipo="requerido|numero" />
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                      <label>Monto total federal:</label>
+                      <span class="obligatorio">* </span><label>Monto total federal:</label>
                       <input type="text" id="mtf-concurso" name="mtf-concurso" value="<?php #echo $alm->FechaNacimiento; ?>" class="form-control" placeholder="Ejemplo: 10000" data-validacion-tipo="requerido|numero" />
                     </div>
                 </div>

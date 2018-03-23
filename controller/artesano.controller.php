@@ -3,6 +3,7 @@ require_once 'model/artesano.php';
 require_once 'model/ramaartesanal.php';
 require_once 'model/taller.php';
 require_once 'model/artesanoexpo.php';
+require_once 'model/artesanoconcurso.php';
 
 class ArtesanoController{
     private $model;
@@ -29,7 +30,6 @@ class ArtesanoController{
     
     public function Guardar(){
         $artesano = new Artesano();
-        
         $artesano->CURP = $_REQUEST['curp'];
         $artesano->Nombre = $_REQUEST['Nombre'];
         $artesano->Apaterno = $_REQUEST['aPaterno'];
@@ -82,6 +82,7 @@ class ArtesanoController{
         $Rama = new RamaArtesanal();
         $Taller = new Taller();
         $ArtExpo = new Artesanoexpo();
+        $ArtCon = new Artesanoconcurso();
         if (!empty($_REQUEST['buscar-artesano-curp'])) {
             $_SESSION['buscar-artesano-curp'] = $_REQUEST['buscar-artesano-curp'];
             $art = $this->model->Obtener($_REQUEST['buscar-artesano-curp']);
@@ -92,6 +93,7 @@ class ArtesanoController{
             $ram_art = $Rama->Obtener($art->idRamaArtesanal);
             $tal = $Taller->ObtenerTallerArtesano($art->curp);
             $participantes_expo = $ArtExpo->ObtenerExposiciones($art->curp);
+            $participantes_concurso = $ArtCon->ObtenerConcursos($art->curp);
             require_once 'view/header.php';
             require_once 'view/artesano/artesano.php';
             require_once 'view/footer.php'; 

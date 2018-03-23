@@ -7,6 +7,16 @@ function habilitarCampoAsociacion(){
 
   }
 }
+
+function habilitarCampoPremio(){
+  if ($("#lugar-concurso option:selected").val() == 1) {
+    $("#monto-premio-concurso").prop("disabled", true);
+    $("#monto-premio-concurso").val('');
+  }else{
+    $("#monto-premio-concurso").prop("disabled", false);
+  }
+}
+
 $(function() {
     formato = "yy-mm-dd";
     $("#fecha-registro-rfc").datepicker({
@@ -59,6 +69,13 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $("#curp-artesano-expo").blur(function(){
+        text = $(this).val();
+        $(this).val(text.toUpperCase());
+    });
+});
+
+$(document).ready(function(){
+    $("#curp-artesano-concurso").blur(function(){
         text = $(this).val();
         $(this).val(text.toUpperCase());
     });

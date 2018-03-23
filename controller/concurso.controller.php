@@ -1,6 +1,6 @@
 <?php
 require_once 'model/concurso.php';
-// require_once 'model/artesanoexpo.php';
+require_once 'model/artesanoconcurso.php';
 
 class ConcursoController{
     private $model;
@@ -65,8 +65,8 @@ class ConcursoController{
             $concurso = $this->model->Obtener($_SESSION['buscar-id-concurso']);
         }
         if (!empty($concurso)) {
-            // $artesano_expo = new ArtesanoExpo();
-            // $participantes = $artesano_expo->ObtenerParticipantes($expo->idExposicion);
+            $artesano_concurso = new ArtesanoConcurso();
+            $participantes = $artesano_concurso->ObtenerParticipantes($concurso->idConcurso);
             require_once 'view/header.php';
             require_once 'view/concurso/concurso.php';
             require_once 'view/footer.php'; 

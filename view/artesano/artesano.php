@@ -1,4 +1,4 @@
-<?php $i=1; ?>
+<?php $i=$j=1;?>
 <div class="container">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
@@ -250,10 +250,10 @@
                     <tr>
                         <th class="text-center">#</th>
                         <th class="col-md-4 text-center">Nombre de la exposición</th>
-                        <th class="col-md-3 text-center">Municpio</th>
-                        <th class="col-md-1 text-center">Entidad</th>
+                        <th class="col-md-2 text-center">Municpio</th>
+                        <th class="col-md-2 text-center">Entidad</th>
                         <th class="col-md-2 text-center">Apoyo</th>
-                        <th class="col-md-3 text-center">Ingresos</th>
+                        <th class="col-md-2 text-center">Ingresos</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -277,30 +277,43 @@
     <fieldset>
         <legend>Participación en Concursos</legend>
         <div class="col-md-10 col-md-offset-1">
-            <!-- <?php #if (!empty($participantes_expo)): ?> -->
-            <?php if (false): ?>
+            <?php if (!empty($participantes_concurso)): ?>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th class="text-center">#</th>
                         <th class="col-md-4 text-center">Nombre de la exposición</th>
-                        <th class="col-md-3 text-center">Municpio</th>
-                        <th class="col-md-1 text-center">Entidad</th>
-                        <th class="col-md-2 text-center">Apoyo</th>
-                        <th class="col-md-3 text-center">Ingresos</th>
+                        <th class="col-md-2 text-center">Municpio</th>
+                        <th class="col-md-2 text-center">Entidad</th>
+                        <th class="col-md-2 text-center">Lugar</th>
+                        <th class="col-md-2 text-center">Ingresos</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <?php #foreach($participantes_expo as $participate_expo): ?> -->
+                    <?php foreach($participantes_concurso as $participate_concurso): ?>
                         <tr>
-                            <td class="text-center negrita"><?php #echo $i; $i++; ?></td>
-                            <td><?php #echo $participate_expo->nombre; ?></td>
-                            <td class="text-center"><?php #echo $participate_expo->municipio; ?></td>
-                            <td class="text-center"><?php #echo $participate_expo->entidad; ?></td>                
-                            <td class="text-center"><?php #echo '$ '.number_format($participate_expo->montoAsignado,2); ?></td>
-                            <td class="text-center"><?php #echo '$ '.number_format($participate_expo->ingresoObtenido,2); ?></td>
+                            <td class="text-center negrita"><?php echo $j; $j++; ?></td>
+                            <td><?php echo $participate_concurso->nombre; ?></td>
+                            <td class="text-center"><?php echo $participate_concurso->municipio; ?></td>
+                            <td class="text-center"><?php echo $participate_concurso->entidad; ?></td>                
+                            <td class="text-center">
+                                <?php
+                                    if ($participate_concurso->posicion == '1') {
+                                        echo 'Participante';
+                                    }elseif ($participate_concurso->posicion == '2') {
+                                        echo 'Mención honorífica';
+                                    }elseif ($participate_concurso->posicion == '3') {
+                                        echo '3ro';
+                                    }elseif ($participate_concurso->posicion == '4') {
+                                        echo '2do';
+                                    }else{
+                                        echo '1ro';
+                                    }
+                                ?>    
+                            </td>
+                            <td class="text-center"><?php echo '$ '.number_format($participate_concurso->montoGanado,2); ?></td>
                         </tr>
-                    <!-- <?php #endforeach; ?> -->
+                    <?php endforeach; ?>
                 </tbody>
             </table> 
             <?php else: ?>

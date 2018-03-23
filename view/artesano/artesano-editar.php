@@ -14,32 +14,32 @@
                 <legend>Datos personales</legend>
                   <div class="col-md-3">
                     <div class="form-group">
-                        <label>CURP:</label>
+                        <span class="obligatorio">* </span><label>CURP:</label>
                         <input type="text" id="curp" name="curp" value="<?php #echo $artesano->CURP; ?>" class="form-control" placeholder="Ingrese la CURP" data-validacion-tipo="requerido|curp" />
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
-                        <label>Nombre(s):</label>
-                        <input type="text" name="Nombre" value="<?php #echo $alm->Nombre; ?>" class="form-control" placeholder="Ingrese nombre(s)" data-validacion-tipo="requerido|nombre" />
+                        <span class="obligatorio">* </span><label>Nombre(s):</label>
+                        <input type="text" name="Nombre" value="<?php #echo $alm->Nombre; ?>" class="form-control" placeholder="Ingrese nombre(s)" data-validacion-tipo="requerido" />
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
-                        <label>Apellido Paterno:</label>
-                        <input type="text" name="aPaterno" value="<?php #echo $alm->Apellido; ?>" class="form-control" placeholder="ingrese el apellido paterno" data-validacion-tipo="requerido|nombre" />
+                        <span class="obligatorio">* </span><label>Apellido paterno</label>
+                        <input type="text" name="aPaterno" value="<?php #echo $alm->Apellido; ?>" class="form-control" placeholder="Ingrese el apellido paterno" data-validacion-tipo="requerido" />
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                         <label>Apellido Materno:</label>
-                        <input type="text" name="aMaterno" value="<?php #echo $alm->Apellido; ?>" class="form-control" placeholder="Ingrese el apellido materno (opcional)" data-validacion-tipo="" />
+                        <input type="text" name="aMaterno" value="<?php #echo $alm->Apellido; ?>" class="form-control" placeholder="Ingrese el apellido materno" data-validacion-tipo="" />
                     </div>
                   </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                        <label>Direccion:</label>
+                        <span class="obligatorio">* </span><label>Direccion:</label>
                         <input type="text" name="direccion" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese calle, número y colonia" data-validacion-tipo="requerido" />
                     </div>     
                 </div>
@@ -50,11 +50,9 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    
-                    
                     <div class="form-group">
-                        <label>Municipio:</label>
-                        <input type="text" name="municipio" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese el municipio." data-validacion-tipo="requerido|nombre" />
+                        <span class="obligatorio">* </span><label>Municipio:</label>
+                        <input type="text" name="municipio" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese el municipio." data-validacion-tipo="requerido" />
                     </div>
                 </div>
             </fieldset>
@@ -74,21 +72,21 @@
                     </select>
                   </div>
                     <div class="form-group">
-                        <label>Año de inicio en el oficio: </label>
-                        <input type="text" id="inicio-oficio" name="inicio-oficio" value="<?php #echo $alm->FechaNacimiento; ?>" class="form-control" placeholder="Ejemplo: 2000 (Obligatorio)" data-validacion-tipo="requerido|numero|min:4:max:4" />
+                        <span class="obligatorio">* </span><label>Año de inicio en el oficio: </label>
+                        <input type="text" id="inicio-oficio" name="inicio-oficio" value="<?php #echo $alm->FechaNacimiento; ?>" class="form-control" placeholder="Ejemplo: 2000" data-validacion-tipo="requerido|numero|min:4:max:4" />
                     </div>
                     <div class="form-group">
-                      <label>Año de registro en la Subsecretaria:</label>
-                      <input type="text" id="fecha-registro-da" name="fecha-registro-da" value="<?php #echo $alm->FechaNacimiento; ?>" class="form-control" placeholder="Ejemplo: 2000 (Obligatorio)" data-validacion-tipo="requerido|numero|min:4:max:4" />
+                      <span class="obligatorio">* </span><label>Año de registro en la Subsecretaria:</label>
+                      <input type="text" id="fecha-registro-da" name="fecha-registro-da" value="<?php #echo $alm->FechaNacimiento; ?>" class="form-control" placeholder="Ejemplo: 2000" data-validacion-tipo="requerido|numero|min:4:max:4" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Gasto mensual:</label>
+                        <span class="obligatorio">* </span><label>Gasto mensual:</label>
                         <input type="text" name="gasto-mensual" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese el monto." data-validacion-tipo="requerido|numero" />
                     </div>
                     <div class="form-group">
-                        <label>Ingreso mensual:</label>
+                        <span class="obligatorio">* </span><label>Ingreso mensual:</label>
                         <input type="text" name="ingreso-mensual" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese el monto" data-validacion-tipo="requerido|numero" />
                     </div>
                     <div class="form-group">
@@ -132,7 +130,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                         <label>¿Cuenta con RFC?</label>
-                        <input type="text" name="cadena-rfc" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese el RFC (Opcional)" data-validacion-tipo="" />
+                        <input type="text" name="cadena-rfc" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese el RFC" data-validacion-tipo="" />
                     </div>
                     <div class="form-group">
                       <label>Fecha de obtención del RFC:</label>
@@ -142,7 +140,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                         <label>¿Cuenta con QUIS?</label>
-                        <input type="text" name="cadena-cuis" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese el QUIS (Opcional)" data-validacion-tipo="" />
+                        <input type="text" name="cadena-cuis" value="<?php #echo $alm->Correo; ?>" class="form-control" placeholder="Ingrese el QUIS" data-validacion-tipo="" />
                     </div>
                 </div>
             </fieldset>
@@ -152,19 +150,19 @@
                 <div class="col-md-4">
                   <div class="form-group">
                   <label>¿Ha participado en una asociación en el pasado?</label>
-                    <select name="asociacion-pasada" class="form-control">
-                      <option <?php #echo $alm->Sexo == 1 ? 'selected' : ''; ?> value="1">No</option>
-                      <option <?php #echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="2">Si</option>
-                    </select>
+                  <select name="asociacion-pasada" class="form-control">
+                    <option <?php #echo $alm->Sexo == 1 ? 'selected' : ''; ?> value="1">No</option>
+                    <option <?php #echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="2">Si</option>
+                  </select>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                   <label>¿Actualmente pertenece a una asociación?</label>
-                    <select id="asociacion-actual" name="asociacion-actual" class="form-control" onclick="habilitarCampoAsociacion()">
-                      <option <?php #echo $alm->Sexo == 1 ? 'selected' : ''; ?> value="1">No</option>
-                      <option <?php #echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="2">Si</option>
-                    </select>
+                  <select id="asociacion-actual" name="asociacion-actual" class="form-control" onclick="habilitarCampoAsociacion()">
+                    <option <?php #echo $alm->Sexo == 1 ? 'selected' : ''; ?> value="1">No</option>
+                    <option <?php #echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="2">Si</option>
+                  </select>
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -187,7 +185,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                  <label>Satisfaccion con ser artesano:</label>
+                  <span class="obligatorio">* </span><label>Satisfaccion con ser artesano:</label>
                   <select name="satisfaccion" class="form-control">
                     <option <?php #echo $alm->Sexo == 1 ? 'selected' : ''; ?> value="1">Muy baja</option>
                     <option <?php #echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="2">Baja</option>
@@ -199,7 +197,7 @@
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                  <label>¿Cuáles son sus necesidades prioritarias?(Describa):</label>
+                  <span class="obligatorio">* </span><label>¿Cuáles son sus necesidades prioritarias?(Describa):</label>
                   <textarea name="necesidades" id="necesidades" cols="30" rows="2" data-validacion-tipo="requerido" value="<?php #echo $alm->Correo; ?>" placeholder="Ingrese una descripción" class="form-control"></textarea>
                 </div>
                 </div> 

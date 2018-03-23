@@ -1,12 +1,12 @@
 <?php
 require_once 'artesano.php';
 
-class ArtesanoExpo{
+class ArtesanoConcurso{
 	private $pdo;
-	public $IdExpo;
+	public $IdConcurso;
     public $CURP;
-    public $IngresoArtesanoExpo;
-    public $InversionArtesanoExpo;
+    public $Posicion;
+    public $MontoPremio;
 
 	public function __CONSTRUCT(){
 		try{
@@ -16,21 +16,21 @@ class ArtesanoExpo{
 		}
 	}
 
-	public function Registrar(ArtesanoExpo $data){
+	public function Registrar(ArtesanoConcurso $data){
 		try {
 			$artesano = new Artesano();
 			$registro = $artesano->Obtener($data->CURP);
 			if (!empty($registro)) {
-				$participacion = $this->VerificarParticipanteExpo($data->CURP,$data->IdExpo);
+				$participacion = $this->VerificarParticipanteConcurso($data->CURP,$data->IdConcurso);
 				if (empty($participacion)) {
-					$sql = "INSERT INTO participanteexpo (curp,idExposicion,montoAsignado,ingresoObtenido) 
+					$sql = "INSERT INTO participantecon (curp,idConcurso,posicion,montoGanado) 
 				        VALUES (?, ?, ?, ?)";
 					$this->pdo->prepare($sql)->execute(
 						array(
 		                    $data->CURP, 
-		                    $data->IdExpo, 
-		                    $data->InversionArtesanoExpo,
-		                    $data->IngresoArtesanoExpo
+		                    $data->IdConcurso, 
+		                    $data->Posicion,
+		                    $data->MontoPremio
 		                )
 					);
 					return 'exito';	
@@ -57,10 +57,10 @@ class ArtesanoExpo{
 		}
 	}
 
-	public function ObtenerExposiciones($curp){
+	public function ObtenerConcursos($curp){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT nombre,municipio,entidad,montoAsignado,ingresoObtenido FROM exposicion INNER JOIN participanteexpo ON exposicion.idExposicion = participanteexpo.idExposicion WHERE participanteexpo.curp = ?");
+			$stm = $this->pdo->prepare("SELECT nombre,municipio,entidad,posicion,montoGanado FROM concurso INNER JOIN participantecon ON concurso.idConcurso = participantecon.idConcurso WHERE participantecon.curp = ?");
 			$stm->execute(array($curp));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
@@ -68,22 +68,22 @@ class ArtesanoExpo{
 		}
 	}
 
-	public function ObtenerParticipantes($idExposicion){
+	public function ObtenerParticipantes($idConcurso){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT artesano.curp,nombre,aPaterno,aMaterno FROM artesano INNER JOIN participanteexpo ON artesano.curp = participanteexpo.curp WHERE idExposicion = ?");
-			$stm->execute(array($idExposicion));
+			$stm = $this->pdo->prepare("SELECT artesano.curp,nombre,aPaterno,aMaterno FROM artesano INNER JOIN participantecon ON artesano.curp = participantecon.curp WHERE idConcurso = ?");
+			$stm->execute(array($idConcurso));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 
-	public function VerificarParticipanteExpo($curp,$idExpo){
+	public function VerificarParticipanteConcurso($curp,$idConcurso){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT * FROM participanteexpo WHERE curp = ? and idExposicion = ?");
-			$stm->execute(array($curp,$idExpo));
+			$stm = $this->pdo->prepare("SELECT * FROM participantecon WHERE curp = ? and idConcurso = ?");
+			$stm->execute(array($curp,$idConcurso));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
 			header('location: index.php?c=Principal&a=ErrorConexion');
@@ -132,5 +132,5 @@ class ArtesanoExpo{
 
 
 }
-
 ?>
+

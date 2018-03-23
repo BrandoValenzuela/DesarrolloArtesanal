@@ -1,39 +1,38 @@
 <?php
-require_once 'model/artesanoexpo.php';
-// require_once 'model/exposicion.php';
+require_once 'model/artesanoconcurso.php';
 
-class ArtesanoexpoController{
+class ArtesanoconcursoController{
     private $model;
     
     public function __CONSTRUCT(){
-        $this->model = new ArtesanoExpo();
+        $this->model = new ArtesanoConcurso();
     }
     
     public function Crud(){
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
-        if (!empty($_REQUEST['nombre-exposicion']) && !empty($_REQUEST['id-exposicion'])) {
-            $_SESSION['nombre-exposicion'] = $_REQUEST['nombre-exposicion'];
-            $_SESSION['id-exposicion'] = $_REQUEST['id-exposicion'];
-            $nombre_expo = $_REQUEST['nombre-exposicion'];
-            $id_expo = $_REQUEST['id-exposicion'];
+        if (!empty($_REQUEST['nombre-concurso']) && !empty($_REQUEST['id-concurso'])) {
+            $_SESSION['nombre-concurso'] = $_REQUEST['nombre-concurso'];
+            $_SESSION['id-concurso'] = $_REQUEST['id-concurso'];
+            $nombre_concurso = $_REQUEST['nombre-concurso'];
+            $id_concurso = $_REQUEST['id-concurso'];
         }else{
-            $nombre_expo = $_SESSION['nombre-exposicion'];
-            $id_expo = $_SESSION['id-exposicion'];
+            $nombre_concurso = $_SESSION['nombre-concurso'];
+            $id_concurso = $_SESSION['id-concurso'];
         }
         require_once 'view/header.php';
-        require_once 'view/exposicion/artesano-expo-editar.php';
+        require_once 'view/concurso/artesano-concurso-editar.php';
         require_once 'view/footer.php';
     }
      
     public function Guardar(){
-        $artesano_expo = new ArtesanoExpo();    
-        $artesano_expo->IdExpo = $_REQUEST['id-expo'];
-        $artesano_expo->CURP = $_REQUEST['curp-artesano-expo'];
-        $artesano_expo->IngresoArtesanoExpo = $_REQUEST['ingreso-artesano-expo'];
-        $artesano_expo->InversionArtesanoExpo = $_REQUEST['inversion-artesano-expo'];
-        $resultado = $this->model->Registrar($artesano_expo);
+        $artesano_concurso = new ArtesanoConcurso();    
+        $artesano_concurso->IdConcurso = $_REQUEST['id-concurso'];
+        $artesano_concurso->CURP = $_REQUEST['curp-artesano-concurso'];
+        $artesano_concurso->Posicion = $_REQUEST['lugar-concurso'];
+        $artesano_concurso->MontoPremio = $_REQUEST['monto-premio-concurso'];
+        $resultado = $this->model->Registrar($artesano_concurso);
         if ($resultado == 'exito') {
             $mensaje = array(
                 'titulo' => 'Exito',
@@ -44,7 +43,7 @@ class ArtesanoexpoController{
             if ($resultado == 'nombre_existente') {
                 $mensaje = array(
                     'titulo' => 'Artesano ya inscrito',
-                    'cuerpo' => 'El artesano ya se encuentra registrado en la exposición:<br>'.$_SESSION['nombre-exposicion']
+                    'cuerpo' => 'El artesano ya se encuentra registrado en el concurso:<br>'.$_SESSION['nombre-concurso']
                 );
             }elseif ($resultado == 'registro_inexistente'){
                 $mensaje = array(

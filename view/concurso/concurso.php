@@ -60,7 +60,7 @@
         <br>
         <fieldset>
             <legend>Participantes</legend>
-            <?php if (false): ?>
+            <?php if (!empty($participantes)): ?>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -73,23 +73,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php #foreach($participantes as $participante): ?>
+                <?php foreach($participantes as $participante): ?>
                     <tr>
-                        <td class="text-center"><?php #echo $i; $i++; ?></td>
-                        <td><?php #echo $participante->curp; ?></td>
-                        <td><?php #echo $participante->aPaterno; ?></td>
-                        <td><?php #echo $participante->aMaterno; ?></td>
-                        <td><?php #echo $participante->nombre; ?></td>
+                        <td class="text-center"><?php echo $i; $i++; ?></td>
+                        <td><?php echo $participante->curp; ?></td>
+                        <td><?php echo $participante->aPaterno; ?></td>
+                        <td><?php echo $participante->aMaterno; ?></td>
+                        <td><?php echo $participante->nombre; ?></td>
                         <td>
                             <form action="?c=Artesano&a=Buscar" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="buscar-artesano-curp" value="<?php #echo $participante->curp; ?>" />
+                                <input type="hidden" name="buscar-artesano-curp" value="<?php echo $participante->curp; ?>" />
                                 <div class="text-right">
                                     <button id="btn-submit" class="btn btn-success">Ver información</button>
                                 </div>
                             </form>
                         </td>
                     </tr>
-                <?php #endforeach; ?>
+                <?php endforeach; ?>
                 </tbody>
             </table>
             <?php else: ?>
@@ -98,8 +98,8 @@
         </fieldset>
         <br>
         <form action="?c=Artesanoconcurso&a=Crud" method="post" enctype="multipart/form-data">      
-            <input type="hidden" name="nombre-exposicion" value="<?php #echo $concurso->nombre; ?>" />
-            <input type="hidden" name="id-exposicion" value="<?php #echo $concurso->idConcurso; ?>" />
+            <input type="hidden" name="nombre-concurso" value="<?php echo $concurso->nombre; ?>" />
+            <input type="hidden" name="id-concurso" value="<?php echo $concurso->idConcurso; ?>" />
             <div class="text-right">   
                 <button id="btn-submit" class="btn btn-primary">Registrar participante</button>
             </div>
