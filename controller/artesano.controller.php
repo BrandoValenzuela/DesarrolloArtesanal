@@ -16,10 +16,13 @@ class ArtesanoController{
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
-//     $artesano = new Artesano();
-//     if(isset($_REQUEST['id'])){
-//         $artesano = $this->model->Obtener($_REQUEST['id']);
-//     }
+        $artesano = new Artesano();
+        if(isset($_REQUEST['CURP'])){
+            $artesano = $this->model->Obtener($_REQUEST['CURP']);
+            $operacion = $_REQUEST['operacion'];
+        }else{
+            $operacion = '0';
+        }
         $Rama = new RamaArtesanal();
         $ramas = $Rama->Listar();
         require_once 'view/header.php';
@@ -30,32 +33,37 @@ class ArtesanoController{
     
     public function Guardar(){
         $artesano = new Artesano();
-        $artesano->CURP = $_REQUEST['curp'];
-        $artesano->Nombre = $_REQUEST['Nombre'];
-        $artesano->Apaterno = $_REQUEST['aPaterno'];
-        $artesano->Amaterno = $_REQUEST['aMaterno'];
-        $artesano->Direccion = $_REQUEST['direccion'];
-        $artesano->Localidad = $_REQUEST['localidad'];
-        $artesano->Municipio = $_REQUEST['municipio'];
+        $artesano->curp = $_REQUEST['curp'];
+        $artesano->nombre = $_REQUEST['Nombre'];
+        $artesano->aPaterno = $_REQUEST['aPaterno'];
+        $artesano->aMaterno = $_REQUEST['aMaterno'];
+        $artesano->domicilio = $_REQUEST['direccion'];
+        $artesano->localidad = $_REQUEST['localidad'];
+        $artesano->municipio = $_REQUEST['municipio'];
         $artesano->idRamaArtesanal = $_REQUEST['ramaartesanal'];
-        $artesano->FechaInicioOficio = $_REQUEST['inicio-oficio'];
-        $artesano->FechaRegistroSDA = $_REQUEST['fecha-registro-da'];
-        $artesano->GastoMensual = $_REQUEST['gasto-mensual'];
-        $artesano->IngresoMensual = $_REQUEST['ingreso-mensual'];
-        $artesano->TipoVenta = $_REQUEST['tipo-venta'];
-        $artesano->TrabajoDomicilio = $_REQUEST['lugar-trabajo'];
-        $artesano->PropTaller = $_REQUEST['prop-taller'];
-        $artesano->TipoActividad = $_REQUEST['tipo-actividad'];
-        $artesano->RFC = $_REQUEST['cadena-rfc'];
-        $artesano->FechaAltaRFC = $_REQUEST['fecha-registro-rfc'];
-        $artesano->CUIS = $_REQUEST['cadena-cuis'];
-        $artesano->AsocPasada = $_REQUEST['asociacion-pasada'];
-        $artesano->AsocActual = $_REQUEST['asociacion-actual'];
-        $artesano->NombreAsocActual = $_REQUEST['nombre-asoc-actual'];
-        $artesano->Fidelidad = $_REQUEST['fidelidad'];
-        $artesano->Satisfaccion = $_REQUEST['satisfaccion'];
-        $artesano->Necesidades = $_REQUEST['necesidades'];
-        $resultado = $this->model->Registrar($artesano);
+        $artesano->anioInicioOficio = $_REQUEST['inicio-oficio'];
+        $artesano->anioInicioSDA = $_REQUEST['fecha-registro-da'];
+        $artesano->gastoMensual = $_REQUEST['gasto-mensual'];
+        $artesano->ingresoMensual = $_REQUEST['ingreso-mensual'];
+        $artesano->tipoVenta = $_REQUEST['tipo-venta'];
+        $artesano->trabajoDomicilio = $_REQUEST['lugar-trabajo'];
+        $artesano->propiedadTaller = $_REQUEST['prop-taller'];
+        $artesano->tipoActividad = $_REQUEST['tipo-actividad'];
+        $artesano->rfc = $_REQUEST['cadena-rfc'];
+        $artesano->fechaAltaRFC = $_REQUEST['fecha-registro-rfc'];
+        $artesano->quiz = $_REQUEST['cadena-cuis'];
+        $artesano->participacionAsocPasada = $_REQUEST['asociacion-pasada'];
+        $artesano->participacionAsocActual = $_REQUEST['asociacion-actual'];
+        $artesano->nombreAsocActual = $_REQUEST['nombre-asoc-actual'];
+        $artesano->fidelidadRamaArtesanal = $_REQUEST['fidelidad'];
+        $artesano->satisfaccion = $_REQUEST['satisfaccion'];
+        $artesano->necesidadesPrioritarias = $_REQUEST['necesidades'];
+        $operacion = $_REQUEST['operacion'];
+        if ($operacion == 0) {
+            $resultado =  $this->model->Registrar($artesano);
+        }elseif ($operacion == 1) {
+            $resultado =  $this->model->Actualizar($artesano);
+        }
         if ($resultado == 'exito') {
             $mensaje = array(
                 'titulo' => 'Éxito',
@@ -69,10 +77,6 @@ class ArtesanoController{
             );
             $this->mostrarMensaje($mensaje);
         }
-
-        // $artesano->id > 0 
-        //     ? $this->model->Actualizar($artesano)
-        //     : $this->model->Registrar($artesano);
     }
 
     public function Buscar(){
@@ -138,10 +142,5 @@ class ArtesanoController{
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }
-    
-    // public function Eliminar(){
-    //     $this->model->Eliminar($_REQUEST['id']);
-    //     header('Location: index.php?c=Alumno');
-    // }
 }
 ?>

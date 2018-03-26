@@ -1,32 +1,31 @@
 <?php
 class Artesano{
 	private $pdo;
-    public $id;
-    public $CURP;
-    public $Nombre;
-    public $Apaterno;
-    public $Amaterno;
-    public $Direccion;
-    public $Localidad;
-    public $Municipio;
+    public $curp;
+    public $nombre;
+    public $aPaterno;
+    public $aMaterno;
+    public $domicilio;
+    public $localidad;
+    public $municipio;
     public $idRamaArtesanal;
-    public $FechaInicioOficio;
-    public $FechaRegistroSDA;
-    public $GastoMensual;
-    public $IngresoMensual;
-    public $TipoVenta;
-    public $TrabajoDomicilio;
-    public $PropTaller;
-    public $TipoActividad;
-    public $RFC;
-    public $FechaAltaRFC;
-    public $CUIS;
-    public $AsocPasada;
-    public $AsocActual;
-    public $NombreAsocActual;
-    public $Fidelidad;
-    public $Satisfaccion;
-    public $Necesidades;
+    public $anioInicioOficio;
+    public $anioInicioSDA;
+    public $gastoMensual;
+    public $ingresoMensual;
+    public $tipoVenta;
+    public $trabajoDomicilio;
+    public $propiedadTaller;
+    public $tipoActividad;
+    public $rfc;
+    public $fechaAltaRFC;
+    public $quiz;
+    public $participacionAsocPasada;
+    public $participacionAsocActual;
+    public $nombreAsocActual;
+    public $fidelidadRamaArtesanal;
+    public $satisfaccion;
+    public $necesidadesPrioritarias;
 
 	public function __CONSTRUCT(){
 		try{
@@ -43,31 +42,31 @@ class Artesano{
 		$this->pdo->prepare($sql)
 		     ->execute(
 				array(
-                    $data->CURP,
+                    $data->curp,
                     $data->idRamaArtesanal, 
-                    $data->Nombre, 
-                    $data->Apaterno, 
-                    $data->Amaterno,
-                    $data->Direccion,
-                    $data->Localidad,
-                    $data->Municipio, 
-                    $data->FechaInicioOficio,
-  					$data->FechaRegistroSDA,
-                    $data->IngresoMensual,
-                    $data->GastoMensual,
-                    $data->TrabajoDomicilio,
-                    $data->PropTaller,
-                    $data->TipoVenta,
-                    $data->TipoActividad,
-                    $data->RFC,
-  					$data->FechaAltaRFC,
-                    $data->CUIS,
-                    $data->AsocPasada,
-                    $data->AsocActual,
-                    $data->NombreAsocActual, 
-                    $data->Fidelidad, 
-                    $data->Satisfaccion,
-                    $data->Necesidades
+                    $data->nombre, 
+                    $data->aPaterno, 
+                    $data->aMaterno,
+                    $data->domicilio,
+                    $data->localidad,
+                    $data->municipio, 
+                    $data->anioInicioOficio,
+  					$data->anioInicioSDA,
+                    $data->ingresoMensual,
+                    $data->gastoMensual,
+                    $data->trabajoDomicilio,
+                    $data->propiedadTaller,
+                    $data->tipoVenta,
+                    $data->tipoActividad,
+                    $data->rfc,
+  					$data->fechaAltaRFC,
+                    $data->quiz,
+                    $data->participacionAsocPasada,
+                    $data->participacionAsocActual,
+                    $data->nombreAsocActual, 
+                    $data->fidelidadRamaArtesanal, 
+                    $data->satisfaccion,
+                    $data->necesidadesPrioritarias
                 )
 			);
 		     return 'exito';
@@ -81,11 +80,11 @@ class Artesano{
 		}
 	}
 
-	public function Obtener($id){
+	public function Obtener($curp){
 		try {
 			$stm = $this->pdo
 			          ->prepare("SELECT * FROM artesano WHERE curp = ?");
-			$stm->execute(array($id));
+			$stm->execute(array($curp));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
 			header('Location: index.php?c=Principal&a=ErrorConexion');
@@ -103,64 +102,67 @@ class Artesano{
 		}
 	}
 
-	// public function Listar(){
-	// 	try
-	// 	{
-	// 		$result = array();
 
-	// 		$stm = $this->pdo->prepare("SELECT * FROM alumnos");
-	// 		$stm->execute();
-
-	// 		return $stm->fetchAll(PDO::FETCH_OBJ);
-	// 	}
-	// 	catch(Exception $e)
-	// 	{
-	// 		die($e->getMessage());
-	// 	}
-	// }
-
-
-	// public function Eliminar($id){
-	// 	try {
-	// 		$stm = $this->pdo
-	// 		            ->prepare("DELETE FROM alumnos WHERE id = ?");			          
-
-	// 		$stm->execute(array($id));
-	// 	}catch (Exception $e){
-	// 		die($e->getMessage());
-	// 	}
-	// }
-
-	// public function Actualizar($data)
-	// {
-	// 	try 
-	// 	{
-	// 		$sql = "UPDATE alumnos SET 
-	// 					Nombre          = ?, 
-	// 					Apellido        = ?,
- //                        Correo        = ?,
-	// 					Sexo            = ?, 
-	// 					FechaNacimiento = ?
-	// 			    WHERE id = ?";
-
-	// 		$this->pdo->prepare($sql)
-	// 		     ->execute(
-	// 			    array(
- //                        $data->Nombre, 
- //                        $data->Correo,
- //                        $data->Apellido,
- //                        $data->Sexo,
- //                        $data->FechaNacimiento,
- //                        $data->id
-	// 				)
-	// 			);
-	// 	} catch (Exception $e) 
-	// 	{
-	// 		die($e->getMessage());
-	// 	}
-	// }
-
-
+	public function Actualizar($data){
+		try {
+			$sql = "UPDATE artesano SET 
+						idRamaArtesanal = ?,
+						nombre = ?,
+						aPaterno = ?,
+						aMaterno = ?,
+						domicilio = ?,
+						localidad = ?,
+						municipio = ?,
+						anioInicioOficio = ?,
+						anioInicioSDA = ?,
+						ingresoMensual = ?,
+						gastoMensual = ?,
+						trabajoDomicilio = ?,
+						propiedadTaller = ?,
+						tipoVenta = ?,
+						tipoActividad = ?,
+						rfc = ?,fechaAltaRFC = ?,
+						quiz = ?,participacionAsocPasada = ?,
+						participacionAsocActual = ?,
+						nombreAsocActual = ?,
+						fidelidadRamaArtesanal = ?,
+						satisfaccion = ?,
+						necesidadesPrioritarias = ?
+				    WHERE curp = ?";
+			$this->pdo->prepare($sql)
+			     ->execute(
+				    array(
+                    $data->idRamaArtesanal, 
+                    $data->nombre, 
+                    $data->aPaterno, 
+                    $data->aMaterno,
+                    $data->domicilio,
+                    $data->localidad,
+                    $data->municipio, 
+                    $data->anioInicioOficio,
+  					$data->anioInicioSDA,
+                    $data->ingresoMensual,
+                    $data->gastoMensual,
+                    $data->trabajoDomicilio,
+                    $data->propiedadTaller,
+                    $data->tipoVenta,
+                    $data->tipoActividad,
+                    $data->rfc,
+  					$data->fechaAltaRFC,
+                    $data->quiz,
+                    $data->participacionAsocPasada,
+                    $data->participacionAsocActual,
+                    $data->nombreAsocActual, 
+                    $data->fidelidadRamaArtesanal, 
+                    $data->satisfaccion,
+                    $data->necesidadesPrioritarias,
+                    $data->curp
+                )
+			);
+			return 'exito';
+		} catch (Exception $e){
+			die($e->getMessage());
+		}
+	}
 }
-
 ?>

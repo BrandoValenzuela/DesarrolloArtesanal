@@ -9,7 +9,7 @@
         <p><?php echo $mensaje['cuerpo']; ?></p>
       </div>
       <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-success" >Aceptar</button>
+        <a href="index.php?c=Principal"><button type="button" class="btn btn-success" >Aceptar</button></a>
       </div>
     </div>
 

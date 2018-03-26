@@ -73,7 +73,7 @@
                             <?php 
                             if($art->propiedadTaller == '1'){
                                 echo 'Propio';
-                            }elseif ($art->propiedadDelTaller == '2') {
+                            }elseif ($art->propiedadTaller == '2') {
                                 echo 'Prestado';
                             }else{
                                 echo 'Rentado'; 
@@ -178,6 +178,13 @@
                 </tbody>
             </table>
         </div>
+        <form action="?c=Artesano&a=Crud" method="post" enctype="multipart/form-data">      
+            <input type="hidden" name="operacion" value="1" />
+            <input type="hidden" name="CURP" value="<?php echo $art->curp;?>" />
+            <div class="text-right">   
+                <button id="btn-submit" class="btn btn-primary">Actualizar datos generales</button>
+            </div>
+        </form>
     </fieldset>
     <fieldset>
         <legend>Talleres donde labora</legend>

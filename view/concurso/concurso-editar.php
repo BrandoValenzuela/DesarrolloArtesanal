@@ -4,7 +4,7 @@
       <li><a href="?c=Principal">Página principal</a></li>
       <li class="active"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?> Nuevo registro</li>
     </ol>
-    <h1 class="text-center"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?>Nuevo registro</h1>
+    <h1 class="text-center"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?>Nuevo registro de concurso</h1>
   </div>
     <div class="row">
         <form id="frm-concurso" action="?c=Concurso&a=Guardar" method="post" enctype="multipart/form-data">
