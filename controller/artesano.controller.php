@@ -34,7 +34,7 @@ class ArtesanoController{
     public function Guardar(){
         $artesano = new Artesano();
         $artesano->curp = $_REQUEST['curp'];
-        $artesano->nombre = $_REQUEST['Nombre'];
+        $artesano->nombre = $_REQUEST['nombre'];
         $artesano->aPaterno = $_REQUEST['aPaterno'];
         $artesano->aMaterno = $_REQUEST['aMaterno'];
         $artesano->domicilio = $_REQUEST['direccion'];
@@ -60,7 +60,7 @@ class ArtesanoController{
         $artesano->necesidadesPrioritarias = $_REQUEST['necesidades'];
         $operacion = $_REQUEST['operacion'];
         if ($operacion == 0) {
-            $resultado =  $this->model->Registrar($artesano);
+            $resultado =  $this->model->Registrar($artesano);          
         }elseif ($operacion == 1) {
             $resultado =  $this->model->Actualizar($artesano);
         }

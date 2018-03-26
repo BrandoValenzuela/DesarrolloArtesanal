@@ -14,13 +14,13 @@
                   <div class="col-md-3">
                     <div class="form-group">
                         <span class="obligatorio">* </span><label>CURP:</label>
-                        <input type="text" id="curp" name="curp" value="<?php echo $artesano->curp; ?>" class="form-control" placeholder="Ingrese la CURP" data-validacion-tipo="requerido|curp" />
+                        <input type="text" <?php echo $operacion == 1 ? 'disabled' : '';?> id="curp" name="curp" value="<?php echo $artesano->curp; ?>" class="form-control" placeholder="Ingrese la CURP" data-validacion-tipo="requerido|curp" />
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                         <span class="obligatorio">* </span><label>Nombre(s):</label>
-                        <input type="text" name="Nombre" value="<?php echo $artesano->nombre; ?>" class="form-control" placeholder="Ingrese nombre(s)" data-validacion-tipo="requerido" />
+                        <input type="text" name="nombre" value="<?php echo $artesano->nombre; ?>" class="form-control" placeholder="Ingrese nombre(s)" data-validacion-tipo="requerido" />
                     </div>
                   </div>
                   <div class="col-md-3">
@@ -219,6 +219,11 @@
     $(document).ready(function(){
         $("#btn-submit").click(function(){
             $("#nombre-asoc-actual").prop("disabled",false);
+        });
+    });
+    $(document).ready(function(){
+        $("#btn-submit").click(function(){
+            $("#curp").prop("disabled",false);
         });
     });
 </script>
