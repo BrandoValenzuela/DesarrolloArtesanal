@@ -8,24 +8,38 @@ class Artesano{
     public $domicilio;
     public $localidad;
     public $municipio;
+	public $grupoEtnico;
+    public $sexo;
+    public $edad;
+    public $telefonoFijo;
+    public $telefonoCel;
+    public $email;
+    public $facebook;
+    public $twitter;
+    public $instagram;
     public $idRamaArtesanal;
     public $anioInicioOficio;
-    public $anioInicioSDA;
-    public $gastoMensual;
-    public $ingresoMensual;
-    public $tipoVenta;
-    public $trabajoDomicilio;
-    public $propiedadTaller;
     public $tipoActividad;
+    public $actividadPrincipal;
+    public $aprendizajeOficio;
+    public $perioricidad;
+    public $ingresoMensual;
+    public $gastoMensual;
+    public $perteneceTaller;
+    public $trabajoDomicilio;
+    public $propiedadLugarTrabajo;
+    public $tipoVenta;    
+    public $anioInicioSDA;
+    public $quiz;
     public $rfc;
     public $fechaAltaRFC;
-    public $quiz;
     public $participacionAsocPasada;
     public $participacionAsocActual;
     public $nombreAsocActual;
     public $fidelidadRamaArtesanal;
     public $satisfaccion;
     public $necesidadesPrioritarias;
+    public $folio;
 
 	public function __CONSTRUCT(){
 		try{
@@ -37,39 +51,54 @@ class Artesano{
 
 	public function Registrar(Artesano $data){
 		try {
-		$sql = "INSERT INTO artesano (curp,idRamaArtesanal,nombre,aPaterno,aMaterno,domicilio,localidad,municipio,anioInicioOficio,anioInicioSDA,ingresoMensual,gastoMensual,trabajoDomicilio,propiedadTaller,tipoVenta,tipoActividad,rfc,fechaAltaRFC,quiz,participacionAsocPasada,participacionAsocActual,nombreAsocActual,fidelidadRamaArtesanal,satisfaccion,necesidadesPrioritarias) 
-		        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		$this->pdo->prepare($sql)
+			$folio = $this->GenerarFolioArtesano();
+			$sql = "INSERT INTO artesano (curp,nombre,aPaterno,aMaterno,domicilio,localidad,municipio,grupoEtnico,sexo,edad,telefonoFijo,telefonoCel,email,facebook,twitter,instagram,idRamaArtesanal,anioInicioOficio,tipoActividad,actividadPrincipal,aprendizajeOficio,perioricidad,ingresoMensual,gastoMensual,perteneceTaller,trabajoDomicilio,propiedadLugarTrabajo,tipoVenta,anioInicioSDA,quiz,rfc,fechaAltaRFC,participacionAsocPasada,participacionAsocActual,nombreAsocActual,fidelidadRamaArtesanal,satisfaccion,necesidadesPrioritarias,folio) 
+		        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			$this->pdo->prepare($sql)
 		     ->execute(
 				array(
-                    $data->curp,
-                    $data->idRamaArtesanal, 
-                    $data->nombre, 
-                    $data->aPaterno, 
-                    $data->aMaterno,
-                    $data->domicilio,
-                    $data->localidad,
-                    $data->municipio, 
-                    $data->anioInicioOficio,
-  					$data->anioInicioSDA,
-                    $data->ingresoMensual,
-                    $data->gastoMensual,
-                    $data->trabajoDomicilio,
-                    $data->propiedadTaller,
-                    $data->tipoVenta,
-                    $data->tipoActividad,
-                    $data->rfc,
-  					$data->fechaAltaRFC,
-                    $data->quiz,
-                    $data->participacionAsocPasada,
-                    $data->participacionAsocActual,
-                    $data->nombreAsocActual, 
-                    $data->fidelidadRamaArtesanal, 
-                    $data->satisfaccion,
-                    $data->necesidadesPrioritarias
+				    $data->curp,
+				    $data->nombre,
+				    $data->aPaterno,
+				    $data->aMaterno,
+				    $data->domicilio,
+				    $data->localidad,
+				    $data->municipio,
+					$data->grupoEtnico,
+				    $data->sexo,
+				    $data->edad,
+				    $data->telefonoFijo,
+				    $data->telefonoCel,
+				    $data->email,
+				    $data->facebook,
+				    $data->twitter,
+				    $data->instagram,
+				    $data->idRamaArtesanal,
+				    $data->anioInicioOficio,
+				    $data->tipoActividad,
+				    $data->actividadPrincipal,
+				    $data->aprendizajeOficio,
+				    $data->perioricidad,
+				    $data->ingresoMensual,
+				    $data->gastoMensual,
+				    $data->perteneceTaller,
+				    $data->trabajoDomicilio,
+				    $data->propiedadLugarTrabajo,
+				    $data->tipoVenta,
+				    $data->anioInicioSDA,
+				    $data->quiz,
+				    $data->rfc,
+				    $data->fechaAltaRFC,
+				    $data->participacionAsocPasada,
+				    $data->participacionAsocActual,
+				    $data->nombreAsocActual,
+				    $data->fidelidadRamaArtesanal,
+				    $data->satisfaccion,
+				    $data->necesidadesPrioritarias,
+				    $folio
                 )
 			);
-		     return 'exito';
+		    return 'exito';
 		}catch (Exception $e) {
 			$mensaje = $e->getMessage();
 			if (strpos($mensaje, 'SQLSTATE[23000]') !== false) {
@@ -102,65 +131,108 @@ class Artesano{
 		}
 	}
 
+	public function GenerarFolioArtesano(){
+		try {
+			$stm = $this->pdo
+			          ->prepare("SELECT contador+1 AS cont, LPAD(contador+1,4,'0') AS semi_folio FROM folio WHERE idFolio = 0");
+			$stm->execute();
+			$num_artesano = $stm->fetch(PDO::FETCH_OBJ);
+			$folio = $num_artesano->semi_folio.date('Y');
+			$stm = $this->pdo
+			          ->prepare("UPDATE folio SET contador = ? WHERE idFolio = 0");
+			$stm->execute(array($num_artesano->cont));
+			return $folio;
+		} catch (Exception $e) {
+			header('Location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}
 
 	public function Actualizar($data){
 		try {
 			$sql = "UPDATE artesano SET 
-						idRamaArtesanal = ?,
-						nombre = ?,
-						aPaterno = ?,
-						aMaterno = ?,
-						domicilio = ?,
-						localidad = ?,
-						municipio = ?,
-						anioInicioOficio = ?,
-						anioInicioSDA = ?,
-						ingresoMensual = ?,
-						gastoMensual = ?,
-						trabajoDomicilio = ?,
-						propiedadTaller = ?,
-						tipoVenta = ?,
-						tipoActividad = ?,
-						rfc = ?,
-						fechaAltaRFC = ?,
-						quiz = ?,
-						participacionAsocPasada = ?,
-						participacionAsocActual = ?,
-						nombreAsocActual = ?,
-						fidelidadRamaArtesanal = ?,
-						satisfaccion = ?,
-						necesidadesPrioritarias = ?
+					idRamaArtesanal = ?,
+				    nombre = ?,
+				    aPaterno = ?,
+				    aMaterno = ?,
+				    domicilio = ?,
+				    localidad = ?,
+				    municipio = ?,
+					grupoEtnico = ?,
+				    sexo = ?,
+				    edad = ?,
+				    telefonoFijo = ?,
+				    telefonoCel = ?,
+				    email = ?,
+				    facebook = ?,
+				    twitter = ?,
+				    instagram = ?,
+				    anioInicioOficio = ?,
+				    tipoActividad = ?,
+				    actividadPrincipal = ?,
+				    aprendizajeOficio = ?,
+				    perioricidad = ?,
+				    ingresoMensual = ?,
+				    gastoMensual = ?,
+				    perteneceTaller = ?,
+				    trabajoDomicilio = ?,
+				    propiedadLugarTrabajo = ?,
+				    tipoVenta = ?,
+				    anioInicioSDA = ?,
+				    quiz = ?,
+				    rfc = ?,
+				    fechaAltaRFC = ?,
+				    participacionAsocPasada = ?,
+				    participacionAsocActual = ?,
+				    nombreAsocActual = ?,
+				    fidelidadRamaArtesanal = ?,
+				    satisfaccion = ?,
+				    necesidadesPrioritarias = ?,
+				    folio = ?
 				    WHERE curp = ?";
 			$this->pdo->prepare($sql)
 			     ->execute(
-				    array(
-                    $data->idRamaArtesanal, 
-                    $data->nombre, 
-                    $data->aPaterno, 
-                    $data->aMaterno,
-                    $data->domicilio,
-                    $data->localidad,
-                    $data->municipio, 
-                    $data->anioInicioOficio,
-  					$data->anioInicioSDA,
-                    $data->ingresoMensual,
-                    $data->gastoMensual,
-                    $data->trabajoDomicilio,
-                    $data->propiedadTaller,
-                    $data->tipoVenta,
-                    $data->tipoActividad,
-                    $data->rfc,
-  					$data->fechaAltaRFC,
-                    $data->quiz,
-                    $data->participacionAsocPasada,
-                    $data->participacionAsocActual,
-                    $data->nombreAsocActual, 
-                    $data->fidelidadRamaArtesanal, 
-                    $data->satisfaccion,
-                    $data->necesidadesPrioritarias,
-                    $data->curp
-                )
-			);
+				    array(				
+						$data->idRamaArtesanal,
+					    $data->nombre,
+					    $data->aPaterno,
+					    $data->aMaterno,
+					    $data->domicilio,
+					    $data->localidad,
+					    $data->municipio,
+						$data->grupoEtnico,
+					    $data->sexo,
+					    $data->edad,
+					    $data->telefonoFijo,
+					    $data->telefonoCel,
+					    $data->email,
+					    $data->facebook,
+					    $data->twitter,
+					    $data->instagram,
+					    $data->anioInicioOficio,
+					    $data->tipoActividad,
+					    $data->actividadPrincipal,
+					    $data->aprendizajeOficio,
+					    $data->perioricidad,
+					    $data->ingresoMensual,
+					    $data->gastoMensual,
+					    $data->perteneceTaller,
+					    $data->trabajoDomicilio,
+					    $data->propiedadLugarTrabajo,
+					    $data->tipoVenta,
+					    $data->anioInicioSDA,
+					    $data->quiz,
+					    $data->rfc,
+					    $data->fechaAltaRFC,
+					    $data->participacionAsocPasada,
+					    $data->participacionAsocActual,
+					    $data->nombreAsocActual,
+					    $data->fidelidadRamaArtesanal,
+					    $data->satisfaccion,
+					    $data->necesidadesPrioritarias,
+					    $data->folio,
+					    $data->curp
+                	)
+				);
 			return 'exito';
 		} catch (Exception $e){
 			die($e->getMessage());

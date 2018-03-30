@@ -25,7 +25,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right collapse navbar-collapse">
                 <li>
-                    <li><a href="?c=Principal"><span class="glyphicon glyphicon-home"></span> Página Principal</a></li>
+                    <li><a href="?c=Principal"><span class="glyphicon glyphicon-home"></span> Página principal</a></li>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">

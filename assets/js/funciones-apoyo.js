@@ -17,6 +17,45 @@ function habilitarCampoPremio(){
   }
 }
 
+function habilitarCampoActividadPrimaria(){
+  if ($("#tipo-actividad option:selected").val() == 2) {
+    $("#actividad-primaria").prop("disabled", false);
+    $("#actividad-primaria").val('');
+  }else{
+    $("#actividad-primaria").prop("disabled", true);
+  }
+}
+
+function muestraFormularioTaller(){
+  if($("#pertenencia-taller option:selected").val() == 2) {
+    $("#no-pertenece-taller").addClass("oculto");
+    $("#si-pertenece-taller").removeClass("oculto");
+    $("#lugar-trabajo").val('0');
+    $("#prop-taller").val('0');
+    $("#tipo-venta").val('0');
+  }else{
+    $("#no-pertenece-taller").removeClass("oculto");
+    $("#si-pertenece-taller").addClass("oculto");
+  }
+}
+
+function muestrarCamposTaller(){
+  if ($("#participacion-taller option:selected").val() == 2) {
+    $("#dueño-taller").addClass("oculto");
+    $("#sueldo-mensual").addClass("oculto");
+    $("#taller-donde-labora").removeClass("oculto");
+  }else if ($("#participacion-taller option:selected").val() == 3){
+    $("#taller-donde-labora").addClass("oculto");
+    $("#sueldo-mensual").addClass("oculto");
+    $("#dueño-taller").removeClass("oculto");
+  }else{
+    $("#dueño-taller").addClass("oculto");
+    $("#sueldo-mensual").removeClass("oculto");
+    $("#taller-donde-labora").removeClass("oculto");
+  }
+  $("#curp-artesano").val($("#curp").val());
+}
+
 $(function() {
     formato = "yy-mm-dd";
     $("#fecha-registro-rfc").datepicker({
