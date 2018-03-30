@@ -15,3 +15,5 @@ body{
 .negrita{font-weight:bold; }
 
 .obligatorio{color:red;}
+
+.oculto{display: none;}

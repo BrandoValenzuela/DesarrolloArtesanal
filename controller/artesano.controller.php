@@ -40,36 +40,57 @@ class ArtesanoController{
         $artesano->domicilio = $_REQUEST['direccion'];
         $artesano->localidad = $_REQUEST['localidad'];
         $artesano->municipio = $_REQUEST['municipio'];
+        $artesano->grupoEtnico = $_REQUEST['grupo-etnico'];
+        $artesano->sexo = $_REQUEST['sexo'];
+        $artesano->edad = $_REQUEST['edad'];
+        $artesano->telefonoFijo = $_REQUEST['telefono-fijo'];
+        $artesano->telefonoCel = $_REQUEST['telefono-cel'];
+        $artesano->email = $_REQUEST['email'];
+        $artesano->facebook = $_REQUEST['facebook'];
+        $artesano->twitter = $_REQUEST['twitter'];
+        $artesano->instagram = $_REQUEST['instagram'];
         $artesano->idRamaArtesanal = $_REQUEST['ramaartesanal'];
         $artesano->anioInicioOficio = $_REQUEST['inicio-oficio'];
-        $artesano->anioInicioSDA = $_REQUEST['fecha-registro-da'];
-        $artesano->gastoMensual = $_REQUEST['gasto-mensual'];
-        $artesano->ingresoMensual = $_REQUEST['ingreso-mensual'];
-        $artesano->tipoVenta = $_REQUEST['tipo-venta'];
-        $artesano->trabajoDomicilio = $_REQUEST['lugar-trabajo'];
-        $artesano->propiedadTaller = $_REQUEST['prop-taller'];
         $artesano->tipoActividad = $_REQUEST['tipo-actividad'];
+        $artesano->actividadPrincipal = $_REQUEST['actividad-primaria'];
+        $artesano->aprendizajeOficio = $_REQUEST['aprendizaje-oficio'];
+        $artesano->perioricidad = $_REQUEST['perioricidad'];
+        $artesano->ingresoMensual = $_REQUEST['ingreso-mensual'];
+        $artesano->gastoMensual = $_REQUEST['gasto-mensual'];
+        $artesano->perteneceTaller = $_REQUEST['pertenencia-taller'];
+        $artesano->trabajoDomicilio = $_REQUEST['lugar-trabajo'];
+        $artesano->propiedadLugarTrabajo = $_REQUEST['prop-lugar-trabajo'];
+        $artesano->tipoVenta = $_REQUEST['tipo-venta'];
+        $artesano->anioInicioSDA = $_REQUEST['fecha-registro-da'];
+        $artesano->quiz = $_REQUEST['cadena-cuis'];
         $artesano->rfc = $_REQUEST['cadena-rfc'];
         $artesano->fechaAltaRFC = $_REQUEST['fecha-registro-rfc'];
-        $artesano->quiz = $_REQUEST['cadena-cuis'];
         $artesano->participacionAsocPasada = $_REQUEST['asociacion-pasada'];
         $artesano->participacionAsocActual = $_REQUEST['asociacion-actual'];
         $artesano->nombreAsocActual = $_REQUEST['nombre-asoc-actual'];
         $artesano->fidelidadRamaArtesanal = $_REQUEST['fidelidad'];
         $artesano->satisfaccion = $_REQUEST['satisfaccion'];
         $artesano->necesidadesPrioritarias = $_REQUEST['necesidades'];
+        $artesano->folio = $_REQUEST['folio'];
+        $trabajoTaller = $_REQUEST['pertenencia-taller'];
+        $_SESSION['curp'] = $_REQUEST['curp'];
         $operacion = $_REQUEST['operacion'];
         if ($operacion == 0) {
             $resultado =  $this->model->Registrar($artesano);          
         }elseif ($operacion == 1) {
             $resultado =  $this->model->Actualizar($artesano);
         }
+        // print_r($resultado);
         if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Éxito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
-            $this->mostrarMensaje($mensaje);
+            if ($trabajoTaller == '2') {
+                header('Location: index.php?c=Taller&a=Crud');
+            }else{
+                $mensaje = array(
+                    'titulo' => 'Éxito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+                $this->mostrarMensaje($mensaje);
+            }
         }else{
             $mensaje = array(
                 'titulo' => 'Registro existente',
