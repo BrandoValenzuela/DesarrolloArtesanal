@@ -4,6 +4,7 @@ require_once 'model/ramaartesanal.php';
 require_once 'model/taller.php';
 require_once 'model/artesanoexpo.php';
 require_once 'model/artesanoconcurso.php';
+require_once 'model/empleadocolaborador.php';
 
 class ArtesanoController{
     private $model;
@@ -17,11 +18,11 @@ class ArtesanoController{
             header('Location: index.php');
         }
         $artesano = new Artesano();
-        if(isset($_REQUEST['CURP'])){
-            $artesano = $this->model->Obtener($_REQUEST['CURP']);
-            $operacion = $_REQUEST['operacion'];
+        if(isset($_REQUEST['curp-artesano-actualizar'])){
+            $artesano = $this->model->Obtener($_REQUEST['curp-artesano-actualizar']);
+            $registrar_actualizar = $_REQUEST['registrar-actualizar'];
         }else{
-            $operacion = '0';
+            $registrar_actualizar = '0';
         }
         $Rama = new RamaArtesanal();
         $ramas = $Rama->Listar();
@@ -33,30 +34,30 @@ class ArtesanoController{
     
     public function Guardar(){
         $artesano = new Artesano();
-        $artesano->curp = $_REQUEST['curp'];
-        $artesano->nombre = $_REQUEST['nombre'];
-        $artesano->aPaterno = $_REQUEST['aPaterno'];
-        $artesano->aMaterno = $_REQUEST['aMaterno'];
-        $artesano->domicilio = $_REQUEST['direccion'];
-        $artesano->localidad = $_REQUEST['localidad'];
-        $artesano->municipio = $_REQUEST['municipio'];
-        $artesano->grupoEtnico = $_REQUEST['grupo-etnico'];
-        $artesano->sexo = $_REQUEST['sexo'];
-        $artesano->edad = $_REQUEST['edad'];
-        $artesano->telefonoFijo = $_REQUEST['telefono-fijo'];
-        $artesano->telefonoCel = $_REQUEST['telefono-cel'];
-        $artesano->email = $_REQUEST['email'];
-        $artesano->facebook = $_REQUEST['facebook'];
-        $artesano->twitter = $_REQUEST['twitter'];
-        $artesano->instagram = $_REQUEST['instagram'];
-        $artesano->idRamaArtesanal = $_REQUEST['ramaartesanal'];
+        $artesano->curp = $_REQUEST['curp-artesano'];
+        $artesano->nombre = $_REQUEST['nombre-artesano'];
+        $artesano->aPaterno = $_REQUEST['aPaterno-artesano'];
+        $artesano->aMaterno = $_REQUEST['aMaterno-artesano'];
+        $artesano->domicilio = $_REQUEST['direccion-artesano'];
+        $artesano->localidad = $_REQUEST['localidad-artesano'];
+        $artesano->municipio = $_REQUEST['municipio-artesano'];
+        $artesano->grupoEtnico = $_REQUEST['grupo-etnico-artesano'];
+        $artesano->sexo = $_REQUEST['sexo-artesano'];
+        $artesano->edad = $_REQUEST['edad-artesano'];
+        $artesano->telefonoFijo = $_REQUEST['telefono-fijo-artesano'];
+        $artesano->telefonoCel = $_REQUEST['telefono-cel-artesano'];
+        $artesano->email = $_REQUEST['email-artesano'];
+        $artesano->facebook = $_REQUEST['facebook-artesano'];
+        $artesano->twitter = $_REQUEST['twitter-artesano'];
+        $artesano->instagram = $_REQUEST['instagram-artesano'];
+        $artesano->idRamaArtesanal = $_REQUEST['rama-artesanal-artesano'];
         $artesano->anioInicioOficio = $_REQUEST['inicio-oficio'];
         $artesano->tipoActividad = $_REQUEST['tipo-actividad'];
         $artesano->actividadPrincipal = $_REQUEST['actividad-primaria'];
         $artesano->aprendizajeOficio = $_REQUEST['aprendizaje-oficio'];
         $artesano->perioricidad = $_REQUEST['perioricidad'];
-        $artesano->ingresoMensual = $_REQUEST['ingreso-mensual'];
-        $artesano->gastoMensual = $_REQUEST['gasto-mensual'];
+        $artesano->ingresoMensual = $_REQUEST['ingreso-mensual-artesano'];
+        $artesano->gastoMensual = $_REQUEST['gasto-mensual-artesano'];
         $artesano->perteneceTaller = $_REQUEST['pertenencia-taller'];
         $artesano->trabajoDomicilio = $_REQUEST['lugar-trabajo'];
         $artesano->propiedadLugarTrabajo = $_REQUEST['prop-lugar-trabajo'];
@@ -71,16 +72,15 @@ class ArtesanoController{
         $artesano->fidelidadRamaArtesanal = $_REQUEST['fidelidad'];
         $artesano->satisfaccion = $_REQUEST['satisfaccion'];
         $artesano->necesidadesPrioritarias = $_REQUEST['necesidades'];
-        $artesano->folio = $_REQUEST['folio'];
+        $artesano->folio = $_REQUEST['folio-artesano'];
         $trabajoTaller = $_REQUEST['pertenencia-taller'];
-        $_SESSION['curp'] = $_REQUEST['curp'];
-        $operacion = $_REQUEST['operacion'];
-        if ($operacion == 0) {
+        $_SESSION['curp-artesano'] = $_REQUEST['curp-artesano'];
+        $registrar_actualizar = $_REQUEST['registrar-actualizar'];
+        if ($registrar_actualizar == 0) {
             $resultado =  $this->model->Registrar($artesano);          
-        }elseif ($operacion == 1) {
+        }elseif ($registrar_actualizar == 1) {
             $resultado =  $this->model->Actualizar($artesano);
         }
-        // print_r($resultado);
         if ($resultado == 'exito') {
             if ($trabajoTaller == '2') {
                 header('Location: index.php?c=Taller&a=Crud');
@@ -108,6 +108,7 @@ class ArtesanoController{
         $Taller = new Taller();
         $ArtExpo = new Artesanoexpo();
         $ArtCon = new Artesanoconcurso();
+        $EmpCol = new EmpleadoColaborador();
         if (!empty($_REQUEST['buscar-artesano-curp'])) {
             $_SESSION['buscar-artesano-curp'] = $_REQUEST['buscar-artesano-curp'];
             $art = $this->model->Obtener($_REQUEST['buscar-artesano-curp']);
@@ -116,7 +117,9 @@ class ArtesanoController{
         }
         if (!empty($art)) { 
             $ram_art = $Rama->Obtener($art->idRamaArtesanal);
-            $tal = $Taller->ObtenerTallerArtesano($art->curp);
+            $datos_taller = $Taller->ObtenerTallerArtesano($art->curp);
+            $datos_colaborador = $EmpCol->ObtenerTalleresColaborador($art->curp);
+            $datos_empleado = $EmpCol->ObtenerTalleresEmpleado($art->curp);
             $participantes_expo = $ArtExpo->ObtenerExposiciones($art->curp);
             $participantes_concurso = $ArtCon->ObtenerConcursos($art->curp);
             require_once 'view/header.php';

@@ -28,7 +28,7 @@
                            <div class="input-group">
                               <input type="text" class="form-control " placeholder="Ingresa la CURP" id="buscar-artesano" name="buscar-artesano-curp" data-validacion-tipo="requerido|curp">
                               <div class="input-group-btn">
-                                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                 <button id="btn-submit-busqueda-curp" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                               </div>
                            </div>
                         </div>
@@ -145,34 +145,3 @@
       </div>
    </div>
 </div>
-<script>
-    $(document).ready(function(){
-      $("#frm-busqueda-artesano-curp").submit(function(){
-        return $(this).validate();
-      });
-   });
-
-    $(document).ready(function(){
-        $("#frm-busqueda-artesano-ap").submit(function(){
-            return $(this).validate();
-        });
-    });
-
-   $(document).ready(function(){
-        $("#frm-busqueda-taller-municipio").submit(function(){
-            return $(this).validate();
-        });
-    });
-
-   $(document).ready(function(){
-        $("#frm-busqueda-expo-mun").submit(function(){
-            return $(this).validate();
-        });
-    });
-
-   $(document).ready(function(){
-        $("#frm-busqueda-concurso-concepto").submit(function(){
-            return $(this).validate();
-        });
-    });
-</script>

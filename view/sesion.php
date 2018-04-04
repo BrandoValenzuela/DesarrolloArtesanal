@@ -31,7 +31,7 @@
 					<div class="form-group">
 						<div class="row">
 							<div class="col-sm-6 col-sm-offset-3">
-								<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Iniciar sesión">
+								<input type="submit" name="login-submit" id="login-submit" class="form-control btn btn-success" value="Iniciar sesión">
 							</div>
 						</div>
 					</div>
@@ -39,36 +39,11 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	    $(document).ready(function(){
-	        $("#login-form").submit(function(){
-	            return $(this).validate();
-	        });
-	    });
-	    $("#login-submit").click(function(){
-		    var datos = {
-	        	usuario: $("#usuario").val(), 
-	        	contraseña: sha256($("#contraseña").val())
-		    };
-    		$.post("?c=Sesion&a=IniciarSesion",datos,function(data, status){
-        		if (data == "success") {
-        			location.href = "?c=Principal";        			
-        		}else{
-        			if (datos.usuario != '' && datos.contraseña != '') {
-        				if (data == 'fail' ) {
-        					alert("El usuario o contraseña están equivocados. Vuelve a intentar");
-        				}else{
-        					location.href = "?c=Sesion&a=ErrorConexion";        					
-        				}
-        			}
-        		}
-    		});
-		});
-	</script>
 	<script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery-ui/jquery-ui.min.js"></script>
     <script src="assets/js/ini.js"></script>
     <script src="assets/js/sha256.min.js"></script>
     <script src="assets/js/jquery.anexsoft-validator.js"></script>
+    <script src="assets/js/funciones-apoyo.js"></script>
 </body>
 </html>

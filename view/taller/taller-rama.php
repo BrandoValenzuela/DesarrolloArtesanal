@@ -26,16 +26,14 @@
                 <td><?php echo $taller->localidad; ?></td>
                 <td><?php echo $taller->municipio; ?></td>
                 <td>
-                    <form action="?c=Artesano&a=Buscar" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="buscar-artesano-curp" value="<?php echo $taller->curp; ?>" />
+                    <form action="?c=Taller&a=Buscar" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="buscar-id-taller" value="<?php echo $taller->idTaller; ?>" />
+                        <input type="hidden" name="buscar-nombre-taller" value="<?php echo $taller->nombre; ?>" />
                         <div class="text-right">
                             <button id="btn-submit" class="btn btn-success">Ver detalle</button>
-                        </di>
+                        </div>
                     </form>
                 </td>
-<!--                 <td>
-                    <a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="?c=Alumno&a=Eliminar&id=<?php #echo $r->id; ?>">Eliminar</a>
-                </td> -->
             </tr>
         <?php endforeach; ?>
         </tbody>
