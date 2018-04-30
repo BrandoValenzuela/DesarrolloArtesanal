@@ -30,7 +30,7 @@
                 <td><?php echo $taller->domicilio; ?></td>
                 <td><?php echo $taller->localidad; ?></td>
                 <td>
-                    <form action="?c=Artesano&a=Buscar" method="post" enctype="multipart/form-data">
+                    <form action="?c=Taller&a=Buscar" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="buscar-artesano-curp" value="<?php echo $taller->curp; ?>" />
                         <div class="text-right">
                             <button id="btn-submit" class="btn btn-success">Ver detalle</button>

@@ -1,64 +1,54 @@
 <?php $i = 1;?>
-<div class="container-fluid">
+<div class="container">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
       <li class="active">Exposición</li>
     </ol>
     <h3 class="page-header text-center"><?php echo $expo->nombre;?></h3>
-    <div class="col-md-10 col-md-offset-1">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="col-md-3 text-right">
+    <div class="col-md-12">
+        <div class="col-xs-12">
+            <div class="col-xs-6 text-right">
                 <label>Fecha de inicio:</label>
             </div>
-            <div class="col-md-3 text-left">
+            <div class="col-xs-6 text-left">
                 <label><?php echo $expo->fechaInicio; ?></label>
             </div>
-            <div class="col-md-3 text-right">
+        </div>
+        <div class="col-xs-12">
+            <div class="col-xs-6 text-right">
                 <label>Fecha de finalización:</label>
             </div>
-            <div class="col-md-3 text-left">
+            <div class="col-xs-6 text-left">
                 <label><?php echo $expo->fechaFin; ?></label>
             </div>
-            <hr>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 table-responsive">
             <table class="table table-striped table-hover">
-            <caption class="text-center negrita" >Ubicación</caption>
-            <tbody>
-                <tr>
-                    <td class="negrita">Domicilio del evento</td>
-                    <td><?php echo $expo->domicilio; ?></td>
-                </tr>
-                <tr>
-                    <td class="negrita">Municipio</td>
-                    <td><?php echo $expo->municipio; ?></td>
-                </tr>
-                <tr>
-                    <td class="negrita">Entidad</td>
-                    <td><?php echo $expo->entidad; ?></td>
-                </tr>
-            </tbody>
-        </table>
+                <caption class="text-center negrita" >Ubicación</caption>
+                <tbody>
+                    <tr>
+                        <td class="negrita">Domicilio del evento</td>
+                        <td><?php echo $expo->domicilio; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="negrita">Municipio</td>
+                        <td><?php echo $expo->municipio; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="negrita">Entidad</td>
+                        <td><?php echo $expo->entidad; ?></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 table-responsive">
             <table class="table table-striped table-hover">
                 <caption class="text-center negrita">Apoyo</caption>
             <tbody>
                 <tr>
                     <td class="negrita">Tipo de apoyo</td>
                     <td>
-                        <?php 
-                            if ($expo->tipoApoyo == '1') {
-                                echo 'Piso';
-                            }elseif ($expo->tipoApoyo == '2'){
-                                echo 'Alimentos';
-                            }elseif ($expo->tipoApoyo == '3') {
-                                echo 'Hospedaje';
-                            }else{
-                                echo 'Transporte';
-                            }
-                            
-                        ?>    
+                        <?php echo $expo->tipoApoyo;?>    
                     </td>
                 </tr>
                 <tr>
@@ -73,7 +63,7 @@
         </table>
         </div>
     </div>
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12 table-responsive">
         <br>
         <fieldset>
             <legend>Participantes</legend>
@@ -98,11 +88,11 @@
                         <td><?php echo $participante->aMaterno; ?></td>
                         <td><?php echo $participante->nombre; ?></td>
                         <td>
-                            <form action="?c=Artesano&a=Buscar" method="post" enctype="multipart/form-data">
+                            <form action="?c=Artesano&a=BuscarPorCurp" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="buscar-artesano-curp" value="<?php echo $participante->curp; ?>" />
                                 <div class="text-right">
                                     <button id="btn-submit" class="btn btn-success">Ver información</button>
-                                </di>
+                                </div>
                             </form>
                         </td>
                     </tr>
@@ -113,13 +103,12 @@
                 <h4 class="text-center">No hay participantes registrados en esta exposición.</h4>
             <?php endif ?>                
         </fieldset>
-        <br>
-        <form action="?c=Artesanoexpo&a=Crud" method="post" enctype="multipart/form-data">      
-            <input type="hidden" name="nombre-exposicion" value="<?php echo $expo->nombre; ?>" />
-            <input type="hidden" name="id-exposicion" value="<?php echo $expo->idExposicion; ?>" />
-            <div class="text-right">   
-                <button id="btn-submit" class="btn btn-primary">Registrar participante</button>
-            </div>
-        </form>
     </div>
+    <form action="?c=Participanteexpo&a=Crud" method="post" enctype="multipart/form-data">      
+        <input type="hidden" name="nombre-exposicion" value="<?php echo $expo->nombre; ?>" />
+        <input type="hidden" name="id-exposicion" value="<?php echo $expo->idExposicion; ?>" />
+        <div class="text-right">   
+            <button id="btn-submit" class="btn btn-primary">Registrar participante</button>
+        </div>
+    </form>
 </div>

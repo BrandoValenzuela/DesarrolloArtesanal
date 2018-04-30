@@ -1,15 +1,9 @@
 <?php
-class Concurso{
+class ProductoArtesano{
 	private $pdo;
-    public $Nombre;
-    public $Direccion;
-    public $Municipio;
-    public $Entidad;
-    public $Alcance;
-    public $Fecha;
-    public $MontoTotalEstatal;
-    public $MontoTotalFederal;
-
+    public $curp;
+    public $idProducto;
+   
 	public function __CONSTRUCT(){
 		try{
 			$this->pdo = Conexion::obtenerConexion();     
@@ -18,7 +12,7 @@ class Concurso{
 		}
 	}
 
-	public function Registrar(Concurso $data){
+	public function Registrar(ProductoArtesano $data){
 		try {
 			$sql = "INSERT INTO concurso (nombre,domicilio,municipio,entidad,alcance,fecha,montoTotalEstatal,montoTotalFederal) 
 		        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -45,7 +39,7 @@ class Concurso{
 		}
 	}
 
-	public function ObtenerPorId($idConcurso){
+	public function Obtener($idConcurso){
 		try {
 			$result = array();
 			$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE idConcurso = ?");
@@ -56,23 +50,66 @@ class Concurso{
 		}
 	}
 
-	public function ObtenerPorConcepto($concepto){
+	public function ObtenerPorNombre($frase){
 		try {
-			$palabras = explode(" ",$concepto); 
+			$palabras = explode(" ",$frase); 
    			$numero = count($palabras); 
 			$result = array();
 			if ($numero == 1) { 
-				$pattern = '%'.$concepto.'%';
+				$pattern = '%'.$frase.'%';
 				$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE nombre Like ?");
 				$stm->execute(array($pattern));
   			}elseif ($numero > 1) {
   				$stm = $this->pdo->prepare("SELECT *, MATCH(nombre) AGAINST(?) AS Score FROM concurso WHERE MATCH(nombre) AGAINST(?) ORDER BY Score DESC LIMIT 50");
-				$stm->execute(array($concepto,$concepto));
+				$stm->execute(array($frase,$frase));
   			}
   			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
+
+	// public function Eliminar($id){
+	// 	try {
+	// 		$stm = $this->pdo
+	// 		            ->prepare("DELETE FROM alumnos WHERE id = ?");			          
+
+	// 		$stm->execute(array($id));
+	// 	}catch (Exception $e){
+	// 		die($e->getMessage());
+	// 	}
+	// }
+
+	// public function Actualizar($data)
+	// {
+	// 	try 
+	// 	{
+	// 		$sql = "UPDATE alumnos SET 
+	// 					Nombre          = ?, 
+	// 					Apellido        = ?,
+ //                        Correo        = ?,
+	// 					Sexo            = ?, 
+	// 					FechaNacimiento = ?
+	// 			    WHERE id = ?";
+
+	// 		$this->pdo->prepare($sql)
+	// 		     ->execute(
+	// 			    array(
+ //                        $data->Nombre, 
+ //                        $data->Correo,
+ //                        $data->Apellido,
+ //                        $data->Sexo,
+ //                        $data->FechaNacimiento,
+ //                        $data->id
+	// 				)
+	// 			);
+	// 	} catch (Exception $e) 
+	// 	{
+	// 		die($e->getMessage());
+	// 	}
+	// }
+
+
 }
+
 ?>

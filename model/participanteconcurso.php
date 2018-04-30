@@ -1,7 +1,7 @@
 <?php
 require_once 'artesano.php';
 
-class ArtesanoConcurso{
+class ParticipanteConcurso{
 	private $pdo;
 	public $IdConcurso;
     public $CURP;
@@ -10,16 +10,16 @@ class ArtesanoConcurso{
 
 	public function __CONSTRUCT(){
 		try{
-			$this->pdo = Conexion::StartUp();     
+			$this->pdo = Conexion::obtenerConexion();     
 		}catch(Exception $e){
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 
-	public function Registrar(ArtesanoConcurso $data){
+	public function Registrar(ParticipanteConcurso $data){
 		try {
 			$artesano = new Artesano();
-			$registro = $artesano->Obtener($data->CURP);
+			$registro = $artesano->ObtenerPorCURP($data->CURP);
 			if (!empty($registro)) {
 				$participacion = $this->VerificarParticipanteConcurso($data->CURP,$data->IdConcurso);
 				if (empty($participacion)) {
@@ -89,48 +89,6 @@ class ArtesanoConcurso{
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
-
-	// public function Eliminar($id){
-	// 	try {
-	// 		$stm = $this->pdo
-	// 		            ->prepare("DELETE FROM alumnos WHERE id = ?");			          
-
-	// 		$stm->execute(array($id));
-	// 	}catch (Exception $e){
-	// 		die($e->getMessage());
-	// 	}
-	// }
-
-	// public function Actualizar($data)
-	// {
-	// 	try 
-	// 	{
-	// 		$sql = "UPDATE alumnos SET 
-	// 					Nombre          = ?, 
-	// 					Apellido        = ?,
- //                        Correo        = ?,
-	// 					Sexo            = ?, 
-	// 					FechaNacimiento = ?
-	// 			    WHERE id = ?";
-
-	// 		$this->pdo->prepare($sql)
-	// 		     ->execute(
-	// 			    array(
- //                        $data->Nombre, 
- //                        $data->Correo,
- //                        $data->Apellido,
- //                        $data->Sexo,
- //                        $data->FechaNacimiento,
- //                        $data->id
-	// 				)
-	// 			);
-	// 	} catch (Exception $e) 
-	// 	{
-	// 		die($e->getMessage());
-	// 	}
-	// }
-
-
 }
 ?>
 

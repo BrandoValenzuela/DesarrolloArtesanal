@@ -1,38 +1,38 @@
 <?php
-require_once 'model/artesanoconcurso.php';
+require_once 'model/beneficiario.php';
+// require_once 'model/exposicion.php';
 
-class ArtesanoconcursoController{
+class BeneficiarioController{
     private $model;
     
     public function __CONSTRUCT(){
-        $this->model = new ArtesanoConcurso();
+        $this->model = new Beneficiario();
     }
     
     public function Crud(){
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
-        if (!empty($_REQUEST['nombre-concurso']) && !empty($_REQUEST['id-concurso'])) {
-            $_SESSION['nombre-concurso'] = $_REQUEST['nombre-concurso'];
-            $_SESSION['id-concurso'] = $_REQUEST['id-concurso'];
-            $nombre_concurso = $_REQUEST['nombre-concurso'];
-            $id_concurso = $_REQUEST['id-concurso'];
+        if (!empty($_REQUEST['nombre-apoyo']) && !empty($_REQUEST['id-apoyo'])) {
+            $_SESSION['nombre-apoyo'] = $_REQUEST['nombre-apoyo'];
+            $_SESSION['id-apoyo'] = $_REQUEST['id-apoyo'];
+            $nombre_apoyo = $_REQUEST['nombre-apoyo'];
+            $id_apoyo = $_REQUEST['id-apoyo'];
         }else{
-            $nombre_concurso = $_SESSION['nombre-concurso'];
-            $id_concurso = $_SESSION['id-concurso'];
+            $nombre_apoyo = $_SESSION['nombre-apoyo'];
+            $id_apoyo = $_SESSION['id-apoyo'];
         }
         require_once 'view/header.php';
-        require_once 'view/concurso/artesano-concurso-editar.php';
+        require_once 'view/apoyo/beneficiario-editar.php';
         require_once 'view/footer.php';
     }
      
     public function Guardar(){
-        $artesano_concurso = new ArtesanoConcurso();    
-        $artesano_concurso->IdConcurso = $_REQUEST['id-concurso'];
-        $artesano_concurso->CURP = $_REQUEST['curp-artesano-concurso'];
-        $artesano_concurso->Posicion = $_REQUEST['lugar-concurso'];
-        $artesano_concurso->MontoPremio = $_REQUEST['monto-premio-concurso'];
-        $resultado = $this->model->Registrar($artesano_concurso);
+        $beneficiario = new Beneficiario();    
+        $beneficiario->idApoyo = $_REQUEST['id-apoyo'];
+        $beneficiario->curp = $_REQUEST['curp-artesano-apoyo'];
+        $beneficiario->monto = $_REQUEST['monto-apoyo-otorgado'];
+        $resultado = $this->model->Registrar($beneficiario);
         if ($resultado == 'exito') {
             $mensaje = array(
                 'titulo' => 'Exito',
@@ -43,7 +43,7 @@ class ArtesanoconcursoController{
             if ($resultado == 'nombre_existente') {
                 $mensaje = array(
                     'titulo' => 'Artesano ya inscrito',
-                    'cuerpo' => 'El artesano ya se encuentra registrado en el concurso:<br>'.$_SESSION['nombre-concurso']
+                    'cuerpo' => 'El artesano ya se encuentra registrado en el apoyo:<br>'.$_SESSION['nombre-apoyo']
                 );
             }elseif ($resultado == 'registro_inexistente'){
                 $mensaje = array(

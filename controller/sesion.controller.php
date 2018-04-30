@@ -19,11 +19,13 @@ class SesionController{
         $sesion->usuario = $_REQUEST['usuario'];
         $sesion->contraseña = $_REQUEST['contraseña'];
         $resultado = $this->model->verificarCredenciales($sesion);
-        if (!empty($resultado)) {
+        if ($resultado == 'acceso_concedido') {
             $_SESSION['usuario'] = $_REQUEST['usuario'];
-            echo "success";
-        }else{
-            echo "fail";
+            echo "acceso_concedido";
+        }else if ($resultado == 'acceso_denegado') {
+            echo "acceso_denegado";
+        }else if ($resultado = 'conexion_nula') {
+            echo "conexion_nula";
         }
     }
     

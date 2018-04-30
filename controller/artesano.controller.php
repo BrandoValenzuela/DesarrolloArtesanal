@@ -2,9 +2,10 @@
 require_once 'model/artesano.php';
 require_once 'model/ramaartesanal.php';
 require_once 'model/taller.php';
-require_once 'model/artesanoexpo.php';
-require_once 'model/artesanoconcurso.php';
+require_once 'model/participanteexpo.php';
+require_once 'model/participanteconcurso.php';
 require_once 'model/empleadocolaborador.php';
+require_once 'model/apoyo.php';
 
 class ArtesanoController{
     private $model;
@@ -100,28 +101,30 @@ class ArtesanoController{
         }
     }
 
-    public function Buscar(){
+    public function BuscarPorCURP(){
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
         $Rama = new RamaArtesanal();
         $Taller = new Taller();
-        $ArtExpo = new Artesanoexpo();
-        $ArtCon = new Artesanoconcurso();
+        $Participante_expo = new ParticipanteExpo();
+        $Participante_concurso = new ParticipanteConcurso();
         $EmpCol = new EmpleadoColaborador();
+        $Apoyo = new Apoyo();
         if (!empty($_REQUEST['buscar-artesano-curp'])) {
             $_SESSION['buscar-artesano-curp'] = $_REQUEST['buscar-artesano-curp'];
-            $art = $this->model->Obtener($_REQUEST['buscar-artesano-curp']);
+            $artesano = $this->model->ObtenerPorCURP($_REQUEST['buscar-artesano-curp']);
         }else{
-            $art = $this->model->Obtener($_SESSION['buscar-artesano-curp']);
+            $artesano = $this->model->ObtenerPorCURP($_SESSION['buscar-artesano-curp']);
         }
-        if (!empty($art)) { 
-            $ram_art = $Rama->Obtener($art->idRamaArtesanal);
-            $datos_taller = $Taller->ObtenerTallerArtesano($art->curp);
-            $datos_colaborador = $EmpCol->ObtenerTalleresColaborador($art->curp);
-            $datos_empleado = $EmpCol->ObtenerTalleresEmpleado($art->curp);
-            $participantes_expo = $ArtExpo->ObtenerExposiciones($art->curp);
-            $participantes_concurso = $ArtCon->ObtenerConcursos($art->curp);
+        if (!empty($artesano)) { 
+            $ram_art = $Rama->Obtener($artesano->idRamaArtesanal);
+            $datos_taller = $Taller->ObtenerTallerArtesano($artesano->curp);
+            $datos_colaborador = $EmpCol->ObtenerTalleresColaborador($artesano->curp);
+            $datos_empleado = $EmpCol->ObtenerTalleresEmpleado($artesano->curp);
+            $participaciones_expo = $Participante_expo->ObtenerExposiciones($artesano->curp);
+            $participaciones_concurso = $Participante_concurso->ObtenerConcursos($artesano->curp);
+            $apoyos = $Apoyo->ObtenerApoyos($artesano->curp);
             require_once 'view/header.php';
             require_once 'view/artesano/artesano.php';
             require_once 'view/footer.php'; 

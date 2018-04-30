@@ -1,34 +1,34 @@
 <?php $i = 1;?>
-<div class="container-fluid">
+<div class="container">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
       <li class="active">Concurso</li>
     </ol>
     <h3 class="page-header text-center"><?php echo $concurso->nombre;?></h3>
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <div class="col-md-8 col-md-offset-2">
-            <div class="col-md-6 text-right">
+            <div class="col-xs-6 text-right">
                 <label>Fecha de realización:</label>
             </div>
-            <div class="col-md-6 text-left">
+            <div class="col-xs-6 text-left">
                 <label><?php echo $concurso->fecha; ?></label>
             </div>
             <hr>
         </div>
         <div class="col-md-6">
             <table class="table table-striped table-hover">
-            <caption class="text-center negrita" >Ubicación</caption>
+            <caption class="text-center bold" >Ubicación</caption>
             <tbody>
                 <tr>
-                    <td class="negrita">Domicilio del evento</td>
+                    <td class="bold">Domicilio del evento</td>
                     <td><?php echo $concurso->domicilio; ?></td>
                 </tr>
                 <tr>
-                    <td class="negrita">Municipio</td>
+                    <td class="bold">Municipio</td>
                     <td><?php echo $concurso->municipio; ?></td>
                 </tr>
                 <tr>
-                    <td class="negrita">Entidad</td>
+                    <td class="bold">Entidad</td>
                     <td><?php echo $concurso->entidad; ?></td>
                 </tr>
             </tbody>
@@ -36,27 +36,27 @@
         </div>
         <div class="col-md-6">
             <table class="table table-striped table-hover">
-                <caption class="text-center negrita">Apoyo</caption>
-            <tbody>
-                <tr>
-                    <td class="negrita">Alcance</td>
-                    <td>
-                        <?php echo $alcance = $concurso->alcance == '1'? 'Estatal' : 'Federal';?>    
-                    </td>
-                </tr>
-                <tr>
-                    <td class="negrita">Monto total estatal</td>
-                    <td><?php echo '$ '.number_format($concurso->montoTotalEstatal,2);?></td>
-                </tr>
-                <tr>
-                    <td class="negrita">Monto invertido</td>
-                    <td><?php echo '$ '.number_format($concurso->montoTotalFederal,2); ?></td>
-                </tr>
-            </tbody>
-        </table>
+                <caption class="text-center bold">Apoyo</caption>
+                <tbody>
+                    <tr>
+                        <td class="bold">Alcance</td>
+                        <td>
+                            <?php echo $alcance = $concurso->alcance == '1'? 'Estatal' : 'Federal';?>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Monto total estatal</td>
+                        <td><?php echo '$ '.number_format($concurso->montoTotalEstatal,2);?></td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Monto invertido</td>
+                        <td><?php echo '$ '.number_format($concurso->montoTotalFederal,2); ?></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div> 
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12 table-responsive">
         <br>
         <fieldset>
             <legend>Participantes</legend>
@@ -81,7 +81,7 @@
                         <td><?php echo $participante->aMaterno; ?></td>
                         <td><?php echo $participante->nombre; ?></td>
                         <td>
-                            <form action="?c=Artesano&a=Buscar" method="post" enctype="multipart/form-data">
+                            <form action="?c=Artesano&a=BuscarPorCURP" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="buscar-artesano-curp" value="<?php echo $participante->curp; ?>" />
                                 <div class="text-right">
                                     <button id="btn-submit" class="btn btn-success">Ver información</button>
@@ -96,13 +96,12 @@
                 <h4 class="text-center">No hay participantes registrados en este concurso.</h4>
             <?php endif ?>
         </fieldset>
-        <br>
-        <form action="?c=Artesanoconcurso&a=Crud" method="post" enctype="multipart/form-data">      
-            <input type="hidden" name="nombre-concurso" value="<?php echo $concurso->nombre; ?>" />
-            <input type="hidden" name="id-concurso" value="<?php echo $concurso->idConcurso; ?>" />
-            <div class="text-right">   
-                <button id="btn-submit" class="btn btn-primary">Registrar participante</button>
-            </div>
-        </form>
     </div>  
+    <form action="?c=Participanteconcurso&a=Crud" method="post" enctype="multipart/form-data">      
+        <input type="hidden" name="nombre-concurso" value="<?php echo $concurso->nombre; ?>" />
+        <input type="hidden" name="id-concurso" value="<?php echo $concurso->idConcurso; ?>" />
+        <div class="text-right">   
+            <button id="btn-submit" class="btn btn-primary">Registrar participante</button>
+        </div>
+    </form>
 </div>

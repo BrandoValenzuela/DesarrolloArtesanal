@@ -43,7 +43,7 @@ class Artesano{
 
 	public function __CONSTRUCT(){
 		try{
-			$this->pdo = Conexion::StartUp();     
+			$this->pdo = Conexion::obtenerConexion();     
 		}catch(Exception $e){
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
@@ -109,7 +109,7 @@ class Artesano{
 		}
 	}
 
-	public function Obtener($curp){
+	public function ObtenerPorCURP($curp){
 		try {
 			$stm = $this->pdo
 			          ->prepare("SELECT * FROM artesano WHERE curp = ?");

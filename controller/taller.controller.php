@@ -162,7 +162,5 @@ class TallerController{
         require_once 'view/principal.php';
         require_once 'view/footer.php';
     }
-
-    // public function Eliminar(){}
 }
 ?>

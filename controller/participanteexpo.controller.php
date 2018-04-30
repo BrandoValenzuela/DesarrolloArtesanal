@@ -1,12 +1,11 @@
 <?php
-require_once 'model/artesanoexpo.php';
-// require_once 'model/exposicion.php';
+require_once 'model/participanteexpo.php';
 
-class ArtesanoexpoController{
+class ParticipanteexpoController{
     private $model;
     
     public function __CONSTRUCT(){
-        $this->model = new ArtesanoExpo();
+        $this->model = new ParticipanteExpo();
     }
     
     public function Crud(){
@@ -23,12 +22,12 @@ class ArtesanoexpoController{
             $id_expo = $_SESSION['id-exposicion'];
         }
         require_once 'view/header.php';
-        require_once 'view/exposicion/artesano-expo-editar.php';
+        require_once 'view/exposicion/participante-expo-editar.php';
         require_once 'view/footer.php';
     }
      
     public function Guardar(){
-        $artesano_expo = new ArtesanoExpo();    
+        $artesano_expo = new ParticipanteExpo();    
         $artesano_expo->IdExpo = $_REQUEST['id-expo'];
         $artesano_expo->CURP = $_REQUEST['curp-artesano-expo'];
         $artesano_expo->IngresoArtesanoExpo = $_REQUEST['ingreso-artesano-expo'];
@@ -54,9 +53,6 @@ class ArtesanoexpoController{
             }
             $this->mostrarMensaje($mensaje);
         }
-        // $artesano->id > 0 
-        //     ? $this->model->Actualizar($artesano)
-        //     : $this->model->Registrar($artesano);
     }
 
     public function mostrarMensaje($msj){
@@ -66,10 +62,5 @@ class ArtesanoexpoController{
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }
-
-    // public function Eliminar(){
-    //     $this->model->Eliminar($_REQUEST['id']);
-    //     header('Location: index.php?c=Alumno');
-    // }
 }
 ?>

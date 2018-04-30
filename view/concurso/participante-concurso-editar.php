@@ -9,7 +9,7 @@
   </div>
   <br>
   <div class="row">
-      <form id="frm-artesano-concurso" action="?c=Artesanoconcurso&a=Guardar" method="post" enctype="multipart/form-data">
+      <form id="frm-artesano-concurso" action="?c=Participanteconcurso&a=Guardar" method="post" enctype="multipart/form-data">
           <input type="hidden" name="id-concurso" value="<?php echo $id_concurso; ?>" />
           <fieldset>
               <legend>Artesano participante:</legend>

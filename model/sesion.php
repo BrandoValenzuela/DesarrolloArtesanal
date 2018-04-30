@@ -6,7 +6,7 @@ class Sesion{
 
 	public function __CONSTRUCT(){
 		try{
-			$this->pdo = Conexion::StartUp();   
+			$this->pdo = Conexion::obtenerConexion();   
 		}catch(Exception $e){}
 	}
 
@@ -20,7 +20,8 @@ class Sesion{
                     $data->contraseña
 				)
 			);
-			return $stm->fetchAll(PDO::FETCH_OBJ);
+			$stm->fetchAll(PDO::FETCH_OBJ);
+			return $resultado = !empty($stm) ? "acceso_concedido" : "acceso_denegado";
 		}
 		catch(Exception $e){
 			die($e->getMessage());
@@ -30,7 +31,7 @@ class Sesion{
 	public function cerrarSesion(){
 		session_start();
 		session_unset();
-		header('Location: index.php');
+		header('Location: index.php?c=Sesion&a=Index');
 	}
 }
 ?>

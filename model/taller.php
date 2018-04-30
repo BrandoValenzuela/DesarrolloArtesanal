@@ -19,7 +19,7 @@ class Taller{
 
 	public function __CONSTRUCT(){
 		try{
-			$this->pdo = Conexion::StartUp();     
+			$this->pdo = Conexion::obtenerConexion();     
 		}catch(Exception $e){
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}

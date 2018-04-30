@@ -25,7 +25,7 @@
                 <td><?php echo $artesano->nombre; ?></td>
                 <td><?php echo $artesano->curp; ?></td>
                 <td>
-                    <form action="?c=Artesano&a=Buscar" method="post" enctype="multipart/form-data">
+                    <form action="?c=Artesano&a=BuscarPorCurp" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="buscar-artesano-curp" value="<?php echo $artesano->curp; ?>" />
                         <div class="text-right">
                             <button id="btn-submit" class="btn btn-success">Ver detalle</button>

@@ -1,6 +1,6 @@
 <?php
 require_once 'model/concurso.php';
-require_once 'model/artesanoconcurso.php';
+require_once 'model/participanteconcurso.php';
 
 class ConcursoController{
     private $model;
@@ -13,10 +13,6 @@ class ConcursoController{
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
-//     $artesano = new Artesano();
-//     if(isset($_REQUEST['id'])){
-//         $artesano = $this->model->Obtener($_REQUEST['id']);
-//     }
         require_once 'view/header.php';
         require_once 'view/concurso/concurso-editar.php';
         require_once 'view/footer.php';
@@ -46,12 +42,9 @@ class ConcursoController{
             );
             $this->mostrarMensaje($mensaje);
         }
-        // $artesano->id > 0 
-        //     ? $this->model->Actualizar($artesano)
-        //     : $this->model->Registrar($artesano);
     }
 
-    public function Buscar(){
+    public function BuscarPorId(){
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
@@ -59,13 +52,13 @@ class ConcursoController{
             $_SESSION['buscar-id-concurso'] = $_REQUEST['buscar-id-concurso'];
             $_SESSION['buscar-nombre-concurso'] = $_REQUEST['buscar-id-concurso'];
             $nombre = $_REQUEST['buscar-nombre-concurso'];
-            $concurso = $this->model->Obtener($_REQUEST['buscar-id-concurso']);
+            $concurso = $this->model->ObtenerPorId($_REQUEST['buscar-id-concurso']);
         }else{
             $nombre = $_SESSION['buscar-nombre-concurso'];
-            $concurso = $this->model->Obtener($_SESSION['buscar-id-concurso']);
+            $concurso = $this->model->ObtenerPorId($_SESSION['buscar-id-concurso']);
         }
         if (!empty($concurso)) {
-            $artesano_concurso = new ArtesanoConcurso();
+            $artesano_concurso = new ParticipanteConcurso();
             $participantes = $artesano_concurso->ObtenerParticipantes($concurso->idConcurso);
             require_once 'view/header.php';
             require_once 'view/concurso/concurso.php';
@@ -88,11 +81,11 @@ class ConcursoController{
         }
         if (!empty($_REQUEST['buscar-concurso-concepto'])) {
             $_SESSION['buscar-concurso-concepto'] = $_REQUEST['buscar-concurso-concepto'];
-            $palabra_clave = $_REQUEST['buscar-concurso-concepto'];
-            $concursos = $this->model->ObtenerPorNombre($_REQUEST['buscar-concurso-concepto']);
+            $concepto = $_REQUEST['buscar-concurso-concepto'];
+            $concursos = $this->model->ObtenerPorConcepto($_REQUEST['buscar-concurso-concepto']);
         }else{
-            $palabra_clave = $_SESSION['buscar-concurso-concepto'];
-            $concursos = $this->model->ObtenerPorNombre($_SESSION['buscar-concurso-concepto']);
+            $concepto = $_SESSION['buscar-concurso-concepto'];
+            $concursos = $this->model->ObtenerPorConcepto($_SESSION['buscar-concurso-concepto']);
         }
         if (!empty($concursos)) { 
             require_once 'view/header.php';
@@ -101,7 +94,7 @@ class ConcursoController{
         }else{
             $mensaje = array(
                 'titulo' => 'No hay concursos.',
-                'cuerpo' => 'No se encontraron concursos que hagan referencia a la busqueda:<br>"'.$palabra_clave.'".'
+                'cuerpo' => 'No se encontraron concursos que hagan referencia a la busqueda:<br>"'.$concepto.'".'
             );
             $this->mostrarMensaje($mensaje);
         }
@@ -114,10 +107,5 @@ class ConcursoController{
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }
-
-    // public function Eliminar(){
-    //     $this->model->Eliminar($_REQUEST['id']);
-    //     header('Location: index.php?c=Alumno');
-    // }
 }
 ?>

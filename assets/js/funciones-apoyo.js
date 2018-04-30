@@ -5,23 +5,25 @@ $(document).ready(function(){
    });
 });
 $("#login-submit").click(function(){
-   var datos = {
-      usuario: $("#usuario").val(), 
-      contraseña: sha256($("#contraseña").val())
-   };
-   $.post("?c=Sesion&a=IniciarSesion",datos,function(data, status){
-      if (data == "success") {
-         location.href = "?c=Principal";             
-      }else{
-         if (datos.usuario != '' && datos.contraseña != '') {
-            if (data == 'fail' ) {
-               alert("El usuario o contraseña están equivocados. Vuelve a intentar");
-            }else{
-               location.href = "?c=Sesion&a=ErrorConexion";                  
-            }
-         }
-      }
-   });
+   if ($("#usuario").val()!= '' && $("#contraseña").val() != ''){
+     var datos = {
+        usuario: $("#usuario").val(), 
+        contraseña: sha256($("#contraseña").val())
+     };
+     $.post("?c=Sesion&a=IniciarSesion",datos,function(data, status){
+        if (data == "acceso_concedido") {
+           location.href = "?c=Principal";             
+        }else{
+           if (datos.usuario != '' && datos.contraseña != '') {
+              if (data == 'accesso_denegado' ) {
+                 alert("El usuario o contraseña están equivocados. Vuelve a intentar");
+              }else{
+                 location.href = "?c=Sesion&a=ErrorConexion";                  
+              }
+           }
+        }
+     });
+   }
 });
 //-------------------------------------------------------------------------//
 // -------------------- Funciones "Form" Artesano -------------------------//
@@ -194,39 +196,73 @@ $(document).ready(function(){
 
 //-------------------------------------------------------------------------//
 //-------------------- Funciones pagina principal -------------------------//
-    $(document).ready(function(){
-      $("#frm-busqueda-artesano-curp").submit(function(){
-        return $(this).validate();
-      });
-   });
+$(document).ready(function(){
+  $("#frm-busqueda-artesano-curp").submit(function(){
+    return $(this).validate();
+  });
+});
 
-    $(document).ready(function(){
-        $("#frm-busqueda-artesano-ap").submit(function(){
-            return $(this).validate();
-        });
+$(document).ready(function(){
+  $("#frm-busqueda-artesano-ap").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(document).ready(function(){
+  $("#frm-busqueda-taller-municipio").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(document).ready(function(){
+  $("#frm-busqueda-expo-mun").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(document).ready(function(){
+  $("#frm-busqueda-concurso-concepto").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(document).ready(function(){
+  $("#frm-busqueda-apoyo-fecha").submit(function(){
+    return $(this).validate();
+  });
+});
+
+
+
+//-------------------------------------------------------------------------//
+//----------------------- Funciones Form apoyo ----------------------------//
+$(function() {
+  formato = "yy-mm-dd";
+  $("#fecha-otorgamiento-apoyo").datepicker({
+    changeMonth: true,
+    changeYear: true
+  });
+  $("#fecha-otorgamiento-apoyo").datepicker( "option", "dateFormat", formato );
+})
+
+$(document).ready(function(){
+  $("#frm-apoyo").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(document).ready(function(){
+  $("#frm-artesano-apoyo").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(document).ready(function(){
+    $("#curp-artesano-apoyo").blur(function(){
+        text = $(this).val();
+        $(this).val(text.toUpperCase());
     });
-
-   $(document).ready(function(){
-        $("#frm-busqueda-taller-municipio").submit(function(){
-            return $(this).validate();
-        });
-    });
-
-   $(document).ready(function(){
-        $("#frm-busqueda-expo-mun").submit(function(){
-            return $(this).validate();
-        });
-    });
-
-   $(document).ready(function(){
-        $("#frm-busqueda-concurso-concepto").submit(function(){
-            return $(this).validate();
-        });
-    });
-
-
-
-
+});
 //-------------------------------------------------------------------------//
 
 
@@ -282,6 +318,7 @@ $(document).ready(function(){
     });
 });
 
+//-------------------- Concurso -------------------------
 
 function habilitarCampoPremio(){
   if ($("#lugar-concurso option:selected").val() == 1) {
@@ -291,3 +328,10 @@ function habilitarCampoPremio(){
     $("#monto-premio-concurso").prop("disabled", false);
   }
 }
+
+$(document).ready(function(){
+  $("#frm-concurso").submit(function(){
+    return $(this).validate();
+  });
+});
+//-------------------------------------------------------

@@ -2,14 +2,14 @@
   <div class="row">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?> Nuevo registro</li>
+      <li class="active">Nuevo registro</li>
     </ol>
-    <h1 class="text-center"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?>Nuevo registro de participante</h1>
+    <h1 class="text-center">Nuevo registro de participante</h1>
     <h3 class="text-center"><?php echo $nombre_expo; ?></h3>
   </div>
   <br>
   <div class="row">
-      <form id="frm-artesano-expo" action="?c=Artesanoexpo&a=Guardar" method="post" enctype="multipart/form-data">
+      <form id="frm-artesano-expo" action="?c=Participanteexpo&a=Guardar" method="post" enctype="multipart/form-data">
           <input type="hidden" name="id-expo" value="<?php echo $id_expo; ?>" />
           <fieldset>
               <legend>Artesano participante:</legend>

@@ -1,6 +1,6 @@
 <?php
 require_once 'model/exposicion.php';
-require_once 'model/artesanoexpo.php';
+require_once 'model/participanteexpo.php';
 
 class ExposicionController{
     private $model;
@@ -13,10 +13,6 @@ class ExposicionController{
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
-//     $artesano = new Artesano();
-//     if(isset($_REQUEST['id'])){
-//         $artesano = $this->model->Obtener($_REQUEST['id']);
-//     }
         require_once 'view/header.php';
         require_once 'view/exposicion/exposicion-editar.php';
         require_once 'view/footer.php';
@@ -48,27 +44,24 @@ class ExposicionController{
             );
             $this->mostrarMensaje($mensaje);
         }
-        // $artesano->id > 0 
-        //     ? $this->model->Actualizar($artesano)
-        //     : $this->model->Registrar($artesano);
     }
 
-    public function Buscar(){
+    public function BuscarPorId(){
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
         if (!empty($_REQUEST['buscar-id-expo'])) {
             $_SESSION['buscar-id-expo'] = $_REQUEST['buscar-id-expo'];
             $_SESSION['buscar-nombre-expo'] = $_REQUEST['buscar-id-expo'];
-            $expo = $this->model->Obtener($_REQUEST['buscar-id-expo']);
+            $expo = $this->model->ObtenerPorId($_REQUEST['buscar-id-expo']);
             $nombre = $_REQUEST['buscar-nombre-expo'];
         }else{
             $municipio = $_SESSION['buscar-id-expo'];
-            $expo = $this->model->Obtener($_SESSION['buscar-id-expo']);
+            $expo = $this->model->ObtenerPorId($_SESSION['buscar-id-expo']);
             $nombre = $_SESSION['buscar-nombre-expo'];
         }
         if (!empty($expo)) {
-            $artesano_expo = new ArtesanoExpo();
+            $artesano_expo = new ParticipanteExpo();
             $participantes = $artesano_expo->ObtenerParticipantes($expo->idExposicion);
             require_once 'view/header.php';
             require_once 'view/exposicion/exposicion.php';
@@ -82,17 +75,17 @@ class ExposicionController{
         }
     }
 
-    public function BuscarPorMunEnt(){
+    public function BuscarPorMunicipioEntidad(){
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
         if (!empty($_REQUEST['buscar-expo-munent'])) {
             $_SESSION['buscar-expo-munent'] = $_REQUEST['buscar-expo-munent'];
             $municipio = $_REQUEST['buscar-expo-munent'];
-            $exposiciones = $this->model->ObtenerPorMunEnt($_REQUEST['buscar-expo-munent']);
+            $exposiciones = $this->model->ObtenerPorMunicipioEntidad($_REQUEST['buscar-expo-munent']);
         }else{
             $municipio = $_SESSION['buscar-expo-munent'];
-            $exposiciones = $this->model->ObtenerPorMunEnt($_SESSION['buscar-expo-munent']);
+            $exposiciones = $this->model->ObtenerPorMunicipioEntidad($_SESSION['buscar-expo-munent']);
         }
         if (!empty($exposiciones)) { 
             require_once 'view/header.php';
@@ -114,10 +107,5 @@ class ExposicionController{
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }
-
-    // public function Eliminar(){
-    //     $this->model->Eliminar($_REQUEST['id']);
-    //     header('Location: index.php?c=Alumno');
-    // }
 }
 ?>

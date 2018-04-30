@@ -14,7 +14,7 @@ class Exposicion{
 
 	public function __CONSTRUCT(){
 		try{
-			$this->pdo = Conexion::StartUp();     
+			$this->pdo = Conexion::obtenerConexion();     
 		}catch(Exception $e){
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
@@ -22,6 +22,11 @@ class Exposicion{
 
 	public function Registrar(Exposicion $data){
 		try {
+			$apoyos = '';
+		    foreach ($data->TipoApoyo as $apoyo) {
+		        $apoyos = $apoyos.', '.$apoyo;
+		    }
+		    $apoyos = substr($apoyos,1);
 			$sql = "INSERT INTO exposicion (nombre,fechaInicio,fechaFin,domicilio,localidad,municipio,entidad,tipoApoyo,ingresoTotal,montoInvertido) 
 		        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			$this->pdo->prepare($sql)->execute(
@@ -33,7 +38,7 @@ class Exposicion{
                     $data->Localidad,
                     $data->Municipio, 
   					$data->Entidad,
-                    $data->TipoApoyo,
+                    $apoyos,
                     $data->IngresosExpo,
                     $data->InversionExpo
                 )
@@ -49,7 +54,7 @@ class Exposicion{
 		}
 	}
 
-	public function Obtener($idExposicion){
+	public function ObtenerPorId($idExposicion){
 		try {
 			$result = array();
 			$stm = $this->pdo->prepare("SELECT * FROM exposicion WHERE idExposicion = ?");
@@ -60,7 +65,7 @@ class Exposicion{
 		}
 	}
 
-	public function ObtenerPorMunEnt($munent){
+	public function ObtenerPorMunicipioEntidad($munent){
 		try {
 			$pattern = '%'.$munent.'%';
 			$result = array();
@@ -71,48 +76,6 @@ class Exposicion{
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
-
-	// public function Eliminar($id){
-	// 	try {
-	// 		$stm = $this->pdo
-	// 		            ->prepare("DELETE FROM alumnos WHERE id = ?");			          
-
-	// 		$stm->execute(array($id));
-	// 	}catch (Exception $e){
-	// 		die($e->getMessage());
-	// 	}
-	// }
-
-	// public function Actualizar($data)
-	// {
-	// 	try 
-	// 	{
-	// 		$sql = "UPDATE alumnos SET 
-	// 					Nombre          = ?, 
-	// 					Apellido        = ?,
- //                        Correo        = ?,
-	// 					Sexo            = ?, 
-	// 					FechaNacimiento = ?
-	// 			    WHERE id = ?";
-
-	// 		$this->pdo->prepare($sql)
-	// 		     ->execute(
-	// 			    array(
- //                        $data->Nombre, 
- //                        $data->Correo,
- //                        $data->Apellido,
- //                        $data->Sexo,
- //                        $data->FechaNacimiento,
- //                        $data->id
-	// 				)
-	// 			);
-	// 	} catch (Exception $e) 
-	// 	{
-	// 		die($e->getMessage());
-	// 	}
-	// }
-
-
 }
 
 ?>

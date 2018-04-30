@@ -1,18 +1,18 @@
 <?php $i = $j = 1; ?>
-<div class="container-fluid">
+<div class="container">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
       <li class="active">Taller</li>
     </ol>
     <h3 class="page-header text-center"><?php echo $taller->nombre;?></h3>
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-8 col-md-offset-2">
         <table class="table table-striped table-hover">
             <caption class="text-center bold" >Dueño del taller</caption>
                 <tbody>
                     <tr>
                         <td><h4><?php echo $taller->nombreArt.' '.$taller->aPaterno.' '.$taller->aMaterno;?></td></h4>
                         <td class="text-right">
-                            <form action="?c=Artesano&a=Buscar" method="post" enctype="multipart/form-data">
+                            <form action="?c=Artesano&a=BuscarPorCURP" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="buscar-artesano-curp" value="<?php echo $taller->curp; ?>" />
                                 <div class="">
                                     <button id="btn-submit" class="btn btn-success">Ver información</button>
@@ -23,7 +23,7 @@
                 </tbody>
             </table>
     </div>
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <div class="col-md-6">
             <table class="table table-striped table-hover">
                 <caption class="text-center bold" >Ubicación</caption>
@@ -81,7 +81,7 @@
         </div>
     </div> 
 
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <br>
         <fieldset>
             <legend>Colaboradores</legend>
@@ -123,7 +123,7 @@
         </fieldset>
     </div>  
 
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <br>
         <fieldset>
             <legend>Empleados</legend>
