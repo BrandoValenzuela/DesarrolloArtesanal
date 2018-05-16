@@ -57,8 +57,8 @@ class ParticipanteexpoController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
+        $redireccion = 'index.php?c=Exposicion&a=BuscarPorId';
         require_once 'view/header.php';
-        require_once 'view/principal.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }

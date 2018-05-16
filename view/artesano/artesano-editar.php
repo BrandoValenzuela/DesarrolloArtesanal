@@ -1,11 +1,12 @@
+<div class="container-fluid">
+  <ol class="breadcrumb">
+    <li><a href="?c=Principal">Página principal</a></li>
+    <li><a href="?c=Principal&a=IndexArtesanos">Artesanos</a></li>
+    <li class="active"><?php echo $artesano->folio != null ? 'Folio '.$artesano->folio : 'Artesano'; ?></li>
+  </ol>
+</div>
 <div class="container">
-  <div class="row">
-    <ol class="breadcrumb">
-      <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active"><?php echo $artesano->folio != null ? 'Folio '.$artesano->folio : 'Nuevo Registro'; ?></li>
-    </ol>
-    <h1 class="text-center"><?php echo $artesano->curp != null ? $artesano->nombre.' '.$artesano->aPaterno.' '.$artesano->aMaterno : 'Nuevo Registro de artesano'; ?></h1>
-  </div>
+  <h1 class="text-center"><?php echo $artesano->curp != null ? $artesano->nombre.' '.$artesano->aPaterno.' '.$artesano->aMaterno : 'Nuevo registro de artesano'; ?></h1>
   <div class="row">
     <form id="frm-artesano" name="frm-artesano" action="?c=Artesano&a=Guardar" method="post" enctype="multipart/form-data">
       <input type="hidden" id="registrar-actualizar" name="registrar-actualizar" value="<?php echo $registrar_actualizar; ?>" />
@@ -313,5 +314,5 @@
         <button id="btn-submit-frm-artesano" class="btn btn-success" onclick="javascript:return confirm('¿Quieres guardar los datos capturados?');">Guardar</button>
       </div>
     </form>
-  </div>
+</div>
 </div>

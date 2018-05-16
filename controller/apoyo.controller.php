@@ -78,6 +78,7 @@ class ApoyoController{
             $apoyos = $this->model->ObtenerPorFecha($_SESSION['mes-apoyo'],$_SESSION['año-apoyo']);
         }
         if (!empty($apoyos)) { 
+            $_SESSION['metodo-busqueda'] = 'BuscarPorFecha';
             require_once 'view/header.php';
             require_once 'view/apoyo/apoyo-lista.php';
             require_once 'view/footer.php'; 
@@ -92,8 +93,8 @@ class ApoyoController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
+        $redireccion = 'index.php?c=Principal&a=IndexApoyosCompras';
         require_once 'view/header.php';
-        require_once 'view/principal.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }

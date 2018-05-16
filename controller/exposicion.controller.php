@@ -87,14 +87,44 @@ class ExposicionController{
             $municipio = $_SESSION['buscar-expo-munent'];
             $exposiciones = $this->model->ObtenerPorMunicipioEntidad($_SESSION['buscar-expo-munent']);
         }
-        if (!empty($exposiciones)) { 
+        if (!empty($exposiciones)) {
+            $_SESSION['metodo-busqueda'] = 'BuscarPorMunicipioEntidad';
             require_once 'view/header.php';
             require_once 'view/exposicion/exposicion-lista.php';
             require_once 'view/footer.php'; 
         }else{
             $mensaje = array(
                 'titulo' => 'No hay exposiciones.',
-                'cuerpo' => 'No se encontraron exposiciones en el municipio o entidad que ingresaste.'
+                'cuerpo' => 'No se encontraron exposiciones en '.$municipio.'.'
+            );
+            $this->mostrarMensaje($mensaje);
+        }
+    }
+
+    public function BuscarPorPeriodo(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['fecha-inicio-periodo-expo'])) {
+            $_SESSION['fecha-inicio-periodo-expo'] = $_REQUEST['fecha-inicio-periodo-expo'];
+            $_SESSION['fecha-fin-periodo-expo'] = $_REQUEST['fecha-fin-periodo-expo'];
+            $fecha_inicio =$_REQUEST['fecha-inicio-periodo-expo'];
+            $fecha_fin = $_REQUEST['fecha-fin-periodo-expo'];
+            $exposiciones = $this->model->ObtenerPorPeriodo($_REQUEST['fecha-inicio-periodo-expo'],$_REQUEST['fecha-fin-periodo-expo']);
+        }else{
+            $fecha_inicio = $_SESSION['fecha-inicio-periodo-expo'];
+            $fecha_fin = $_SESSION['fecha-fin-periodo-expo'];
+            $exposiciones = $this->model->ObtenerPorPeriodo($_SESSION['fecha-inicio-periodo-expo'],$_SESSION['fecha-fin-periodo-expo']);
+        }
+        if (!empty($exposiciones)) {
+            $_SESSION['metodo-busqueda'] = 'BuscarPorPeriodo';
+            require_once 'view/header.php';
+            require_once 'view/exposicion/exposicion-lista.php';
+            require_once 'view/footer.php'; 
+        }else{
+            $mensaje = array(
+                'titulo' => 'No hay exposiciones.',
+                'cuerpo' => 'No se encontraron exposiciones realizadas en el periodo <br>'.$fecha_inicio.' a '.$fecha_fin.'.'
             );
             $this->mostrarMensaje($mensaje);
         }
@@ -102,8 +132,8 @@ class ExposicionController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
+        $redireccion = 'index.php?c=Principal&a=IndexConcursosExposiciones';
         require_once 'view/header.php';
-        require_once 'view/principal.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }

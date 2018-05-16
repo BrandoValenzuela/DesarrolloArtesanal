@@ -1,9 +1,16 @@
+<div class="container-fluid">
+  <ol class="breadcrumb">
+    <li><a href="?c=Principal">Página principal</a></li>
+    <li><a href="?c=Principal&a=IndexConcursosExposiciones">Concursos y exposiciones</a></li>
+    <?php if ($_SESSION['metodo-busqueda'] == 'BuscarPorMunicipioEntidad' || $_SESSION['metodo-busqueda'] == 'BuscarPorPeriodo'): ?>
+      <li><a href="?c=exposicion&a=<?php echo $_SESSION['metodo-busqueda'];?>">Lista de exposiciones</a></li>
+    <?php endif ?>
+    <li><a href="?c=Exposicion&a=BuscarPorId">Exposición</a></li>
+    <li class="active">Participante</li>
+  </ol>
+</div>
 <div class="container">
   <div class="row">
-    <ol class="breadcrumb">
-      <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active">Nuevo registro</li>
-    </ol>
     <h1 class="text-center">Nuevo registro de participante</h1>
     <h3 class="text-center"><?php echo $nombre_expo; ?></h3>
   </div>

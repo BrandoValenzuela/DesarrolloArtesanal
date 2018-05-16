@@ -21,7 +21,10 @@ class TallerController{
         $talleres = $this->model->ObtenerTalleres();
         $Rama = new RamaArtesanal();
         $ramas = $Rama->Listar();
-        $curp = $_SESSION['curp-artesano'];
+        if (isset($_SESSION['curp-artesano'])) {
+            $curp = $_SESSION['curp-artesano'];
+        }
+        $curp = '';
         $_SESSION['curp-artesano'] = '';
         require_once 'view/header.php';
         require_once 'view/taller/taller-editar.php';
@@ -60,10 +63,17 @@ class TallerController{
             );
             $this->mostrarMensaje($mensaje);
         }else{
-            $mensaje = array(
-                'titulo' => 'CURP no encontrada',
-                'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
-            );
+            if ($resultado == 'taller_registrado') {
+                $mensaje = array(
+                    'titulo' => 'Taller registrado',
+                    'cuerpo' => 'El nombre de taller que ingresaste ya se encuentra registrado.'
+                    );    
+            }else{
+                $mensaje = array(
+                    'titulo' => 'CURP no encontrada',
+                    'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
+                );
+            }
             $this->mostrarMensaje($mensaje);
         }
         // $artesano->id > 0 
@@ -84,7 +94,7 @@ class TallerController{
             $nombre = $_SESSION['buscar-nombre-taller'];
             $taller = $this->model->Obtener($_SESSION['buscar-id-taller']);
         }
-        if (!empty($taller)) {
+        if (!empty($taller)) {            
             $empleado_colaborador = new EmpleadoColaborador();
             $empleados = $empleado_colaborador->ObtenerEmpleados($taller->idTaller);
             $colaboradores = $empleado_colaborador->ObtenerColaboradores($taller->idTaller);
@@ -116,7 +126,8 @@ class TallerController{
             $municipio = $_SESSION['buscar-taller-mun'];
             $talleres = $this->model->ObtenerTalleresMunicipio($_SESSION['buscar-taller-mun']);
         }
-        if (!empty($talleres)) { 
+        if (!empty($talleres)) {
+            $_SESSION['metodo-busqueda'] = 'BuscarTallerPorMunicipio';
             require_once 'view/header.php';
             require_once 'view/taller/taller-municipio.php';
             require_once 'view/footer.php'; 
@@ -143,6 +154,7 @@ class TallerController{
             $rama = $Rama->Obtener($_SESSION['ramaartesanal']);
         }
         if (!empty($talleres)) { 
+            $_SESSION['metodo-busqueda'] = 'BuscarTallerPorRamaArtesanal';
             require_once 'view/header.php';
             require_once 'view/taller/taller-rama.php';
             require_once 'view/footer.php'; 
@@ -157,9 +169,9 @@ class TallerController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
+        $redireccion = 'index.php?c=Principal&a=IndexArtesanos';
         require_once 'view/header.php';
         require_once 'view/modal-mensajes.php';
-        require_once 'view/principal.php';
         require_once 'view/footer.php';
     }
 }

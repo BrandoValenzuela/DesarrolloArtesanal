@@ -60,7 +60,7 @@ class ParticipanteExpo{
 	public function ObtenerExposiciones($curp){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT nombre,municipio,entidad,montoAsignado,ingresoObtenido FROM exposicion INNER JOIN participanteexpo ON exposicion.idExposicion = participanteexpo.idExposicion WHERE participanteexpo.curp = ?");
+			$stm = $this->pdo->prepare("SELECT exposicion.idExposicion,nombre,municipio,entidad,montoAsignado,ingresoObtenido FROM exposicion INNER JOIN participanteexpo ON exposicion.idExposicion = participanteexpo.idExposicion WHERE participanteexpo.curp = ?");
 			$stm->execute(array($curp));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {

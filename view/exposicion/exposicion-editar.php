@@ -1,11 +1,12 @@
+<div class="container-fluid">
+  <ol class="breadcrumb">
+    <li><a href="?c=Principal">Página principal</a></li>
+    <li><a href="?c=Principal&a=IndexConcursosExposiciones">Concursos y exposiciones</a></li>
+    <li class="active">Exposición</li>
+  </ol>
+</div>
 <div class="container">
-  <div class="row">
-    <ol class="breadcrumb">
-      <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active">Nuevo registro</li>
-    </ol>
     <h1 class="text-center">Nuevo registro de exposición</h1>
-  </div>
     <div class="row">
         <form id="frm-exposicion" action="?c=Exposicion&a=Guardar" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id"/>

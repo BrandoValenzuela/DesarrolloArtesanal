@@ -4,8 +4,10 @@ require_once 'model/ramaartesanal.php';
 require_once 'model/taller.php';
 require_once 'model/participanteexpo.php';
 require_once 'model/participanteconcurso.php';
+require_once 'model/participantecapacitacion.php';
 require_once 'model/empleadocolaborador.php';
 require_once 'model/apoyo.php';
+require_once 'model/compra.php';
 
 class ArtesanoController{
     private $model;
@@ -20,7 +22,7 @@ class ArtesanoController{
         }
         $artesano = new Artesano();
         if(isset($_REQUEST['curp-artesano-actualizar'])){
-            $artesano = $this->model->Obtener($_REQUEST['curp-artesano-actualizar']);
+            $artesano = $this->model->ObtenerPorCURP($_REQUEST['curp-artesano-actualizar']);
             $registrar_actualizar = $_REQUEST['registrar-actualizar'];
         }else{
             $registrar_actualizar = '0';
@@ -109,22 +111,26 @@ class ArtesanoController{
         $Taller = new Taller();
         $Participante_expo = new ParticipanteExpo();
         $Participante_concurso = new ParticipanteConcurso();
+        $Participante_capacitacion = new ParticipanteCapacitacion();
         $EmpCol = new EmpleadoColaborador();
         $Apoyo = new Apoyo();
+        $Compra = new Compra();
         if (!empty($_REQUEST['buscar-artesano-curp'])) {
             $_SESSION['buscar-artesano-curp'] = $_REQUEST['buscar-artesano-curp'];
             $artesano = $this->model->ObtenerPorCURP($_REQUEST['buscar-artesano-curp']);
         }else{
             $artesano = $this->model->ObtenerPorCURP($_SESSION['buscar-artesano-curp']);
         }
-        if (!empty($artesano)) { 
+        if (!empty($artesano)) {
             $ram_art = $Rama->Obtener($artesano->idRamaArtesanal);
             $datos_taller = $Taller->ObtenerTallerArtesano($artesano->curp);
             $datos_colaborador = $EmpCol->ObtenerTalleresColaborador($artesano->curp);
             $datos_empleado = $EmpCol->ObtenerTalleresEmpleado($artesano->curp);
             $participaciones_expo = $Participante_expo->ObtenerExposiciones($artesano->curp);
             $participaciones_concurso = $Participante_concurso->ObtenerConcursos($artesano->curp);
+            $participaciones_capacitacion = $Participante_capacitacion->ObtenerCapacitaciones($artesano->curp);
             $apoyos = $Apoyo->ObtenerApoyos($artesano->curp);
+            $compras = $Compra->ObtenerCompras($artesano->curp);
             require_once 'view/header.php';
             require_once 'view/artesano/artesano.php';
             require_once 'view/footer.php'; 
@@ -149,7 +155,8 @@ class ArtesanoController{
             $apellido = $_SESSION['buscar-artesano-ap'];
             $artesanos = $this->model->ObtenerPorApellido($_SESSION['buscar-artesano-ap']);
         }
-        if (!empty($artesanos)) { 
+        if (!empty($artesanos)) {
+            $_SESSION['metodo-busqueda'] = 'BuscarPorApellido';
             require_once 'view/header.php';
             require_once 'view/artesano/artesano-lista.php';
             require_once 'view/footer.php'; 
@@ -164,8 +171,8 @@ class ArtesanoController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
+        $redireccion = 'index.php?c=Principal&a=IndexArtesanos';
         require_once 'view/header.php';
-        require_once 'view/principal.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }

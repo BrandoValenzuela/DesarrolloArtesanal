@@ -1,10 +1,17 @@
+<div class="container-fluid">
+    <ol class="breadcrumb">
+        <li><a href="?c=Principal">Página principal</a></li>
+        <li><a href="?c=Principal&a=IndexConcursosExposiciones">Concursos y exposiciones</a></li>
+        <?php if ($_SESSION['metodo-busqueda'] == 'BuscarPorPeriodo' || $_SESSION['metodo-busqueda'] == 'BuscarPorConcepto'): ?>
+          <li><a href="?c=Concurso&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de concursos</a></li>
+        <?php endif ?>
+        <li><a href="?c=Concurso&a=BuscarPorId">Concurso</a></li>
+        <li class="active">Participante</li>
+    </ol>
+</div>
 <div class="container">
   <div class="row">
-    <ol class="breadcrumb">
-      <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?> Nuevo registro</li>
-    </ol>
-    <h1 class="text-center"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?>Nuevo registro de participante</h1>
+    <h1 class="text-center">Nuevo registro de participante</h1>
     <h3 class="text-center"><?php echo $nombre_concurso; ?></h3>
   </div>
   <br>
@@ -16,7 +23,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                     <span class="obligatorio">* </span><label>CURP del artesano:</label>
-                    <input type="text" id="curp-artesano-concurso" name="curp-artesano-concurso" value="<?php #echo $alm->Nombre; ?>" class="form-control" placeholder="Ingrese la CURP." data-validacion-tipo="requerido|curp" />
+                    <input type="text" id="curp-artesano-concurso" name="curp-artesano-concurso" class="form-control" placeholder="Ingrese la CURP." data-validacion-tipo="requerido|curp" />
                 </div>
               </div>
           </fieldset>
@@ -25,19 +32,26 @@
             <div class="col-md-4">
                 <div class="form-group">
                   <span class="obligatorio">* </span><label>Posicion obtenida en concurso:</label>
-                  <select name="lugar-concurso" id="lugar-concurso" class="form-control" data-validacion-tipo="requerido" onclick="habilitarCampoPremio()">
-                    <option <?php #echo $alm->Sexo == 1 ? 'selected' : ''; ?> value="1">Participante</option>
-                    <option <?php #echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="2">Mención honorífica</option>
-                    <option <?php #echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="3">3er. lugar</option>
-                    <option <?php #echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="4">2do. Lugar</option>
-                    <option <?php #echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="5">1er. Lugar</option>
+                  <select name="lugar-concurso" id="lugar-concurso" class="form-control" data-validacion-tipo="requerido">
+                    <option value="1">Participante</option>
+                    <option value="2">Galardon</option>
+                    <option value="3">Mención honorífica</option>
+                    <option value="4">3er. lugar</option>
+                    <option value="5">2do. Lugar</option>
+                    <option value="6">1er. Lugar</option>
                   </select>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                   <label>Premio ($):</label>
-                  <input type="text" id="monto-premio-concurso" name="monto-premio-concurso" value="<?php #echo $alm->FechaNacimiento; ?>" disabled="disabled" class="form-control" placeholder="Ejemplo: 1000" data-validacion-tipo="numero" />
+                  <input type="text" id="monto-premio-concurso" name="monto-premio-concurso" disabled="disabled" class="form-control" placeholder="Ejemplo: 1000" data-validacion-tipo="numero" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label>Pieza participante:</label>
+                  <input type="text" id="pieza-participate" name="pieza-participate" class="form-control" placeholder="Nombre de la pieza" data-validacion-tipo="requerido" />
                 </div>
             </div>
           </fieldset>

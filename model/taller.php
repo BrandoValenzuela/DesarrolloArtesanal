@@ -28,7 +28,7 @@ class Taller{
 	public function Registrar(Taller $data){
 		try {
 			$artesano = new Artesano();
-			$resultado = $artesano->Obtener($data->curp);
+			$resultado = $artesano->ObtenerPorCURP($data->curp);
 			if (!empty($resultado)) {
 				$sql = "INSERT INTO taller (curp,tipoParticipacion,nombre,domicilio,localidad,municipio,idRamaArtesanal,empTiempoCompleto,empPorHora,empIMSS,empTotales,ingresoMensual,gastoMensual) 
 			        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -54,7 +54,14 @@ class Taller{
 				return 'no_existe';
 			}
 		}catch (Exception $e) {
-			header('location: index.php?c=Principal&a=ErrorConexion');
+			$mensaje = $e->getMessage();
+			if (strpos($mensaje, 'SQLSTATE[23000]') !== false) {
+				return 'taller_registrado';
+			}else{
+				header('Location: index.php?c=Principal&a=ErrorConexion');
+			}
+
+			// die($e->getMessage());
 		}
 	}
 

@@ -2,11 +2,14 @@
 <div class="container-fluid">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
+      <li><a href="?c=Principal&a=IndexApoyosCompras">Apoyos y compras</a></li>
       <li class="active">Lista de apoyos</li>
     </ol>
+</div>
+<div class="container">
     <h1 class="page-header text-center">Búesqueda: <?php echo $mes.' de '.$año;?></h1>
 
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
     <table class="table table-striped table-hover">
         <thead>
             <tr>

@@ -1,11 +1,12 @@
+<div class="container-fluid">
+  <ol class="breadcrumb">
+    <li><a href="?c=Principal">Página principal</a></li>
+    <li><a href="?c=Principal&a=IndexApoyosCompras">Apoyos y compras</a></li>
+    <li class="active">Apoyos</li>
+  </ol>
+</div>
 <div class="container">
-  <div class="row">
-    <ol class="breadcrumb">
-      <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?> Nuevo registro</li>
-    </ol>
-    <h1 class="text-center"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?>Nuevo registro de apoyo</h1>
-  </div>
+  <h1 class="text-center"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?>Nuevo registro de apoyo</h1>
   <div class="row">
     <form id="frm-apoyo" action="?c=Apoyo&a=Guardar" method="post" enctype="multipart/form-data">
       <input type="hidden" name="id" value="<?php #echo $artesano->id; ?>" />

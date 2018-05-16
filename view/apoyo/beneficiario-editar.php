@@ -1,9 +1,16 @@
-<div class="container">
-  <div class="row">
+<div class="container-fluid">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active">Nuevo registro</li>
+      <li><a href="?c=Principal&a=IndexApoyosCompras">Apoyos y compras</a></li>
+      <?php if ($_SESSION['metodo-busqueda'] == 'BuscarPorPeriodo'): ?>
+        <li><a href="?c=Apoyo&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de talleres</a></li>
+      <?php endif ?>
+      <li><a href="?c=Apoyo&a=BuscarPorId">Apoyo</a></li>
+      <li class="active">Beneficiario</li>
     </ol>
+</div>
+<div class="container">
+  <div class="row">
     <h1 class="text-center">Nuevo registro de beneficiario</h1>
     <h3 class="text-center"><?php echo $nombre_apoyo; ?></h3>
   </div>

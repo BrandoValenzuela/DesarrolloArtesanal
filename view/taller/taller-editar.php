@@ -1,12 +1,15 @@
+<div class="container-fluid">
+  <ol class="breadcrumb">
+    <li><a href="?c=Principal">Página principal</a></li>
+    <li><a href="?c=Principal&a=IndexArtesanos">Artesanos</a></li>
+    <li class="active">Taller</li>
+  </ol>
+</div>
 <div class="container">
-  <div class="row">
-    <ol class="breadcrumb">
-      <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?> Nuevo registro</li>
-    </ol>
-    <h1 class="text-center"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?>Nuevo registro de empleo en taller</h1>
-  </div>
-    <div class="row">
+  <!-- <div class="row"> -->
+    <h1 class="text-center"><?php #echo $artesano->id != null ? $artesano->Nombre : 'Nuevo Registro'; ?>Nuevo registro de taller</h1>
+  <!-- </div> -->
+    <!-- <div class="row"> -->
       <form id="frm-taller-artesano" action="?c=Taller&a=Guardar" method="post" enctype="multipart/form-data">
         <input type="hidden" id="" name="" value="<?php #echo $artesano->id; ?>" />
         <fieldset>
@@ -47,7 +50,7 @@
               <input type="text" id="sueldo-mensual" name="sueldo-mensual" class="form-control" placeholder="Ejemplo: 2000"  data-validacion-tipo ="numero">
             </div>
           </div>
-        </fieldset><br>
+        </fieldset>
         <fieldset class="oculto" id="form-datos-taller">
           <legend>Datos del taller</legend>
             <div class="col-md-4">
@@ -99,7 +102,7 @@
               </div>
               <div class="col-md-12">
                   <div class="form-group">
-                    <h3>Empleos</h3><hr>
+                    <h4>Empleos</h4><hr>
                   </div>
               </div>
               <div class="col-md-3">
@@ -131,5 +134,5 @@
               <button id="btn-submit-frm-taller" class="btn btn-success" onclick="javascript:return confirm('¿Quieres guardar los datos capturados?');">Guardar</button>
           </div>
       </form>
-    </div>
+    <!-- </div> -->
 </div>

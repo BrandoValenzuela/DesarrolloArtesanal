@@ -87,7 +87,8 @@ class ConcursoController{
             $concepto = $_SESSION['buscar-concurso-concepto'];
             $concursos = $this->model->ObtenerPorConcepto($_SESSION['buscar-concurso-concepto']);
         }
-        if (!empty($concursos)) { 
+        if (!empty($concursos)) {
+            $_SESSION['metodo-busqueda'] = 'BuscarPorConcepto';
             require_once 'view/header.php';
             require_once 'view/concurso/concurso-lista.php';
             require_once 'view/footer.php'; 
@@ -100,10 +101,39 @@ class ConcursoController{
         }
     }
 
+    public function BuscarPorPeriodo(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['fecha-inicio-periodo-concurso'])) {
+            $_SESSION['fecha-inicio-periodo-concurso'] = $_REQUEST['fecha-inicio-periodo-concurso'];
+            $_SESSION['fecha-fin-periodo-concurso'] = $_REQUEST['fecha-fin-periodo-concurso'];
+            $fecha_inicio =$_REQUEST['fecha-inicio-periodo-concurso'];
+            $fecha_fin = $_REQUEST['fecha-fin-periodo-concurso'];
+            $concursos = $this->model->ObtenerPorPeriodo($_REQUEST['fecha-inicio-periodo-concurso'],$_REQUEST['fecha-fin-periodo-concurso']);
+        }else{
+            $fecha_inicio = $_SESSION['fecha-inicio-periodo-concurso'];
+            $fecha_fin = $_SESSION['fecha-fin-periodo-concurso'];
+            $concursos = $this->model->ObtenerPorPeriodo($_SESSION['fecha-inicio-periodo-concurso'],$_SESSION['fecha-fin-periodo-concurso']);
+        }
+        if (!empty($concursos)) { 
+            $_SESSION['metodo-busqueda'] = 'BuscarPorPeriodo';
+            require_once 'view/header.php';
+            require_once 'view/concurso/concurso-lista.php';
+            require_once 'view/footer.php'; 
+        }else{
+            $mensaje = array(
+                'titulo' => 'No hay concursos.',
+                'cuerpo' => 'No se encontraron concursos realizadas en el periodo <br>'.$fecha_inicio.' a '.$fecha_fin.'.'
+            );
+            $this->mostrarMensaje($mensaje);
+        }
+    }
+
     public function mostrarMensaje($msj){
         $mensaje = $msj;
+        $redireccion = 'index.php?c=Principal&a=IndexConcursosExposiciones';
         require_once 'view/header.php';
-        require_once 'view/principal.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }

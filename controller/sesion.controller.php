@@ -21,11 +21,10 @@ class SesionController{
         $resultado = $this->model->verificarCredenciales($sesion);
         if ($resultado == 'acceso_concedido') {
             $_SESSION['usuario'] = $_REQUEST['usuario'];
+            $_SESSION['metodo-busqueda'] = '';
             echo "acceso_concedido";
-        }else if ($resultado == 'acceso_denegado') {
+        }else{
             echo "acceso_denegado";
-        }else if ($resultado = 'conexion_nula') {
-            echo "conexion_nula";
         }
     }
     

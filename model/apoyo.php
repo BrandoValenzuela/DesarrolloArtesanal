@@ -62,7 +62,7 @@ class Apoyo{
 	public function ObtenerApoyos($curp){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT otrosapoyos.nombre,favorecidoapoyo.monto,favorecidoapoyo.fechaOtorgamiento FROM otrosapoyos INNER JOIN favorecidoapoyo ON otrosapoyos.idApoyo = favorecidoapoyo.idApoyo WHERE favorecidoapoyo.curp = ?");
+			$stm = $this->pdo->prepare("SELECT otrosapoyos.idApoyo,otrosapoyos.nombre,favorecidoapoyo.monto,favorecidoapoyo.fechaOtorgamiento FROM otrosapoyos INNER JOIN favorecidoapoyo ON otrosapoyos.idApoyo = favorecidoapoyo.idApoyo WHERE favorecidoapoyo.curp = ?");
 			$stm->execute(array($curp));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {

@@ -1,10 +1,17 @@
 <?php $i = 1;?>
-<div class="container">
+<div class="container-fluid">
     <ol class="breadcrumb">
         <li><a href="?c=Principal">Página principal</a></li>
+        <li><a href="?c=Principal&a=IndexConcursosExposiciones">Concursos y exposiciones</a></li>
         <li class="active">Lista de concursos</li>
     </ol>
+</div>
+<div class="container">
+    <?php if (isset($concepto)): ?>
     <h1 class="page-header text-center">Búsqueda: <?php echo $concepto;?></h1>
+    <?php else: ?>
+    <h1 class="page-header text-center">Concursos en el periodo: <?php echo $fecha_inicio.' a '.$fecha_fin;?></h1>
+    <?php endif ?>
     <table class="table table-striped table-hover table-responsive">
         <thead>
             <tr>

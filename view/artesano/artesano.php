@@ -1,9 +1,15 @@
-<?php $i=$j=$k=$l=1;?>
-<div class="container">
+<?php $i=1;?>
+<div class="container-fluid">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
+      <li><a href="?c=Principal&a=IndexArtesanos">Artesanos</a></li>
+      <?php if ($_SESSION['metodo-busqueda'] == 'BuscarPorApellido'): ?>
+        <li><a href="?c=Artesano&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de artesanos</a></li>          
+      <?php endif ?>
       <li class="active">Hoja de datos</li>
     </ol>
+</div>
+<div class="container">
     <h1 class="page-header text-center">Folio <?php echo $artesano->folio; ?></h1>
     <fieldset>
         <legend>Información del artesano</legend>
@@ -12,18 +18,18 @@
                 <caption class="text-center bold">Domicilio del artesano</caption>
                 <thead>
                     <tr>
-                        <th class="col-md-4">Domicilio</th>
-                        <th class="col-md-3">Localidad</th>
-                        <th class="col-md-3">Municipio</th>
-                        <th class="col-md-2">Grupo étnico</th>
+                        <th class="col-md-4 text-center">Domicilio</th>
+                        <th class="col-md-3 text-center">Localidad</th>
+                        <th class="col-md-3 text-center">Municipio</th>
+                        <th class="col-md-2 text-center">Grupo étnico</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?php echo $artesano->domicilio; ?></td>
-                        <td><?php echo $artesano->localidad == '' ? '---' : $artesano->localidad; ?></td>
-                        <td><?php echo $artesano->municipio; ?></td>
-                        <td><?php echo $artesano->grupoEtnico == '' ? '---' : $artesano->grupoEtnico; ?></td>
+                        <td class="text-center"><?php echo $artesano->domicilio; ?></td>
+                        <td class="text-center"><?php echo $artesano->localidad == '' ? '---' : $artesano->localidad; ?></td>
+                        <td class="text-center"><?php echo $artesano->municipio; ?></td>
+                        <td class="text-center"><?php echo $artesano->grupoEtnico == '' ? '---' : $artesano->grupoEtnico; ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -314,7 +320,7 @@
                 </tbody>
             </table>
             <?php else: ?>
-            <h4 class="text-center">Aún no se ha agregado información sobre los poroductos que realiza el artesano.</h4>
+            <h4 class="text-center">Aún no se ha agregado información sobre los productos que manufactura el artesano.</h4>
             <br>
             <?php endif ?>
         </div>
@@ -382,7 +388,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach($datos_colaborador as $dato_colaborador): ?>
+                <?php $i=1; foreach($datos_colaborador as $dato_colaborador): ?>
                     <tr>
                         <td class="text-center"><?php echo $i; $i++; ?></td>
                         <td><?php echo $dato_colaborador->nombre; ?></td>
@@ -422,7 +428,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach($datos_empleado as $dato_empleado): ?>
+                <?php $i=1; foreach($datos_empleado as $dato_empleado): ?>
                     <tr>
                         <td class="text-center"><?php echo $i; $i++; ?></td>
                         <td><?php echo $dato_empleado->nombre; ?></td>
@@ -449,76 +455,53 @@
         </div>
     </fieldset>
     <fieldset>
-        <legend>Participación en Exposiciones</legend>
-        <div class="col-md-10 col-md-offset-1 table-responsive">
-            <?php if (!empty($participaciones_expo)): ?>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th class="text-center">#</th>
-                        <th class="col-md-4 text-center">Nombre de la exposición</th>
-                        <th class="col-md-2 text-center">Municpio</th>
-                        <th class="col-md-2 text-center">Entidad</th>
-                        <th class="col-md-2 text-center">Apoyo</th>
-                        <th class="col-md-2 text-center">Ingresos</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($participaciones_expo as $participacion_expo): ?>
-                        <tr>
-                            <td class="text-center bold"><?php echo $k; $k++; ?></td>
-                            <td><?php echo $participacion_expo->nombre; ?></td>
-                            <td class="text-center"><?php echo $participacion_expo->municipio; ?></td>
-                            <td class="text-center"><?php echo $participacion_expo->entidad; ?></td>                
-                            <td class="text-center"><?php echo '$ '.number_format($participacion_expo->montoAsignado,2); ?></td>
-                            <td class="text-center"><?php echo '$ '.number_format($participacion_expo->ingresoObtenido,2); ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table> 
-            <?php else: ?>
-                <h4 class="text-center">No ha participado en exposiciones.</h4>
-            <?php endif ?>
-        </div>
-    </fieldset>
-    <fieldset>
         <legend>Participación en Concursos</legend>
-        <div class="col-md-10 col-md-offset-1 table-responsive">
+        <div class="col-md-12 table-responsive">
             <?php if (!empty($participaciones_concurso)): ?>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th class="text-center">#</th>
-                        <th class="col-md-4 text-center">Nombre de la exposición</th>
-                        <th class="col-md-2 text-center">Municpio</th>
-                        <th class="col-md-2 text-center">Entidad</th>
+                        <th class="col-md-4">Nombre del concurso</th>
                         <th class="col-md-2 text-center">Lugar</th>
-                        <th class="col-md-2 text-center">Ingresos</th>
+                        <th class="col-md-2 text-center">Premio</th>
+                        <th class="col-md-2 text-center">Pieza participante</th>
+                        <th class="col-md-2 text-center"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($participaciones_concurso as $participacion_concurso): ?>
+                    <?php $i=1; foreach($participaciones_concurso as $participacion_concurso): ?>
                         <tr>
-                            <td class="text-center bold"><?php echo $j; $j++; ?></td>
+                            <td class="text-center bold"><?php echo $i; $i++; ?></td>
                             <td><?php echo $participacion_concurso->nombre; ?></td>
-                            <td class="text-center"><?php echo $participacion_concurso->municipio; ?></td>
-                            <td class="text-center"><?php echo $participacion_concurso->entidad; ?></td>                
                             <td class="text-center">
                                 <?php
                                     if ($participacion_concurso->posicion == '1') {
                                         echo 'Participante';
                                     }elseif ($participacion_concurso->posicion == '2') {
-                                        echo 'Mención honorífica';
+                                        echo 'Galardon';
                                     }elseif ($participacion_concurso->posicion == '3') {
-                                        echo '3ro';
+                                        echo 'Mención honorífica';
                                     }elseif ($participacion_concurso->posicion == '4') {
+                                        echo '3er';
+                                    }elseif ($participacion_concurso->posicion == '5') {
                                         echo '2do';
                                     }else{
-                                        echo '1ro';
+                                        echo '1er';
                                     }
                                 ?>    
                             </td>
                             <td class="text-center"><?php echo '$ '.number_format($participacion_concurso->montoGanado,2); ?></td>
+                            <td class="text-center"><?php echo $participacion_concurso->piezaParticipante; ?></td>
+                            <td>
+                                <form action="?c=Concurso&a=BuscarPorId" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="buscar-id-concurso" value="<?php echo $participacion_concurso->idConcurso; ?>" />
+                                    <input type="hidden" name="buscar-nombre-concurso" value="<?php echo $participacion_concurso->nombre; ?>" />
+                                    <div class="text-right">
+                                        <button id="btn-submit" class="btn btn-success">Ver concurso</button>
+                                    </div>
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -529,32 +512,155 @@
             <?php endif ?>
         </div>
     </fieldset>
-    <fieldset>
-        <legend>Apoyos recividos</legend>
-        <div class="col-md-10 col-md-offset-1 table-responsive">
-            <?php if (!empty($apoyos)): ?>
+        <fieldset>
+        <legend>Participación en Exposiciones</legend>
+        <div class="col-md-12 table-responsive">
+            <?php if (!empty($participaciones_expo)): ?>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th class="text-center">#</th>
-                        <th class="col-md-6 text-center">Nombre del apoyo</th>
-                        <th class="col-md-2 text-center">Monto otorgado</th>
-                        <th class="col-md-4 text-center">Fecha de otorgamiento</th>
+                        <th class="col-md-4 ">Nombre de la exposición</th>
+                        <th class="col-md-2 text-center">Apoyo al artesano:</th>
+                        <th class="col-md-2 text-center">Ingresos del artesano</th>
+                        <th class="col-md-4 text-center"></th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($apoyos as $apoyo): ?>
+                    <?php $i=1; foreach($participaciones_expo as $participacion_expo): ?>
                         <tr>
-                            <td class="text-center bold"><?php echo $l; $l++; ?></td>
-                            <td><?php echo $apoyo->nombre; ?></td>
-                            <td class="text-center"><?php echo '$ '.number_format($apoyo->monto,2); ?></td>
-                            <td class="text-center"><?php echo $apoyo->fechaOtorgamiento; ?></td>
+                            <td class="text-center bold"><?php echo $i; $i++; ?></td>
+                            <td><?php echo $participacion_expo->nombre; ?></td>
+                            <td class="text-center"><?php echo '$ '.number_format($participacion_expo->montoAsignado,2); ?></td>
+                            <td class="text-center"><?php echo '$ '.number_format($participacion_expo->ingresoObtenido,2); ?></td>
+                            <td>
+                                <form action="?c=Exposicion&a=BuscarPorId" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="buscar-id-expo" value="<?php echo $participacion_expo->idExposicion; ?>" />
+                                    <input type="hidden" name="buscar-nombre-expo" value="<?php echo $participacion_expo->nombre; ?>" />
+                                    <div class="text-right">
+                                        <button id="btn-submit" class="btn btn-success">Ver exposición</button>
+                                    </div>
+                                </form> 
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table> 
             <?php else: ?>
-                <h4 class="text-center">No ha participado en concursos.</h4>
+                <h4 class="text-center">No ha participado en exposiciones.</h4>
+                <br>
+            <?php endif ?>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Participación en capacitaciones</legend>
+        <div class="col-md-12 table-responsive">
+            <?php if (!empty($participaciones_capacitacion)): ?>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="col-md-4">Nombre de la capacitación</th>
+                        <th class="col-md-2 text-center">Fecha de inicio</th>
+                        <th class="col-md-2 text-center">Fecha de fin</th>
+                        <th class="col-md-4 text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i=1; foreach($participaciones_capacitacion as $participacion_capacitacion): ?>
+                        <tr>
+                            <td class="text-center bold"><?php echo $i; $i++; ?></td>
+                            <td><?php echo $participacion_capacitacion->nombre; ?></td>
+                            <td class="text-center"><?php echo $participacion_capacitacion->fechaInicio; ?></td>
+                            <td class="text-center"><?php echo $participacion_capacitacion->fechaFin; ?></td>
+                            <td>
+                                <form action="?c=Capacitacion&a=BuscarPorId" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="buscar-id-capacitacion" value="<?php echo $participacion_capacitacion->idCapacitacion; ?>" />
+                                    <input type="hidden" name="buscar-nombre-capacitacion" value="<?php echo $participacion_capacitacion->nombre; ?>" />
+                                    <div class="text-right">
+                                        <button id="btn-submit" class="btn btn-success">Ver capacitación</button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table> 
+            <?php else: ?>
+                <h4 class="text-center">No se le han realizado compras a este artesano.</h4>
+                <br>
+            <?php endif ?>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Apoyos recividos</legend>
+        <div class="col-md-12 table-responsive">
+            <?php if (!empty($apoyos)): ?>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="col-md-4">Nombre del apoyo</th>
+                        <th class="col-md-2 text-center">Monto otorgado</th>
+                        <th class="col-md-2 text-center">Fecha de otorgamiento</th>
+                        <th class="col-md-4 text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i=1; foreach($apoyos as $apoyo): ?>
+                        <tr>
+                            <td class="text-center bold"><?php echo $i; $i++; ?></td>
+                            <td><?php echo $apoyo->nombre; ?></td>
+                            <td class="text-center"><?php echo '$ '.number_format($apoyo->monto,2); ?></td>
+                            <td class="text-center"><?php echo $apoyo->fechaOtorgamiento; ?></td>
+                            <td>
+                                <form action="?c=Apoyo&a=BuscarPorId" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="buscar-id-apoyo" value="<?php echo $apoyo->idApoyo; ?>" />
+                                    <input type="hidden" name="buscar-nombre-apoyo" value="<?php echo $apoyo->nombre; ?>" />
+                                    <div class="text-right">
+                                        <button id="btn-submit" class="btn btn-success">Ver apoyo</button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table> 
+            <?php else: ?>
+                <h4 class="text-center">No ha recibido apoyos.</h4>
+                <br>
+            <?php endif ?>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Compras</legend>
+        <div class="col-md-12 table-responsive">
+            <?php if (!empty($compras)): ?>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="col-md-3 text-center">Monto de la compra</th>
+                        <th class="col-md-3 text-center">Alcance</th>
+                        <th class="col-md-3 text-center">Tipo de pago</th>
+                        <th class="col-md-3 text-center">Fecha de compra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i=1; foreach($compras as $compra): ?>
+                        <tr>
+                            <td class="text-center bold"><?php echo $i; $i++; ?></td>
+                            <td class="text-center"><?php echo '$ '.number_format($compra->monto,2); ?></td>
+                            <td class="text-center"><?php echo $alcance = $compra->alcance == 1 ? 'Estatal' : 'Federal'; ?></td>
+                            <td class="text-center"><?php echo $pago = $compra->tipoPago == 1 ? 'Factura' : 'Apoyo'; ?></td>
+                            <td class="text-center"><?php echo $compra->fechaCompra; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table> 
+            <?php else: ?>
+                <h4 class="text-center">No se le han realizado compras a este artesano.</h4>
                 <br>
             <?php endif ?>
         </div>

@@ -1,11 +1,12 @@
+<div class="container-fluid">
+  <ol class="breadcrumb">
+    <li><a href="?c=Principal">Página principal</a></li>
+    <li><a href="?c=Principal&a=IndexConcursosExposiciones">Concursos y exposiciones</a></li>
+    <li class="active">Concurso</li>
+  </ol>
+</div>
 <div class="container">
-  <div class="row">
-    <ol class="breadcrumb">
-      <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active">Nuevo registro</li>
-    </ol>
     <h1 class="text-center">Nuevo registro de concurso</h1>
-  </div>
     <div class="row">
         <form id="frm-concurso" action="?c=Concurso&a=Guardar" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id"/>

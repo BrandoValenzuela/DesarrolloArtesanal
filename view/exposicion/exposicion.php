@@ -1,9 +1,15 @@
 <?php $i = 1;?>
-<div class="container">
+<div class="container-fluid">
     <ol class="breadcrumb">
-      <li><a href="?c=Principal">Página principal</a></li>
+        <li><a href="?c=Principal">Página principal</a></li>
+        <li><a href="?c=Principal&a=IndexConcursosExposiciones">Concursos y exposiciones</a></li>
+        <?php if ($_SESSION['metodo-busqueda'] == 'BuscarPorMunicipioEntidad' || $_SESSION['metodo-busqueda'] == 'BuscarPorPeriodo'): ?>
+            <li><a href="?c=exposicion&a=<?php echo $_SESSION['metodo-busqueda'];?>">Lista de exposiciones</a></li>
+        <?php endif ?>
       <li class="active">Exposición</li>
     </ol>
+</div>
+<div class="container">
     <h3 class="page-header text-center"><?php echo $expo->nombre;?></h3>
     <div class="col-md-12">
         <div class="col-xs-12">
@@ -24,18 +30,18 @@
         </div>
         <div class="col-md-6 table-responsive">
             <table class="table table-striped table-hover">
-                <caption class="text-center negrita" >Ubicación</caption>
+                <caption class="text-center bold" >Ubicación</caption>
                 <tbody>
                     <tr>
-                        <td class="negrita">Domicilio del evento</td>
+                        <td class="bold">Domicilio del evento</td>
                         <td><?php echo $expo->domicilio; ?></td>
                     </tr>
                     <tr>
-                        <td class="negrita">Municipio</td>
+                        <td class="bold">Municipio</td>
                         <td><?php echo $expo->municipio; ?></td>
                     </tr>
                     <tr>
-                        <td class="negrita">Entidad</td>
+                        <td class="bold">Entidad</td>
                         <td><?php echo $expo->entidad; ?></td>
                     </tr>
                 </tbody>
@@ -43,20 +49,20 @@
         </div>
         <div class="col-md-6 table-responsive">
             <table class="table table-striped table-hover">
-                <caption class="text-center negrita">Apoyo</caption>
+                <caption class="text-center bold">Apoyo</caption>
             <tbody>
                 <tr>
-                    <td class="negrita">Tipo de apoyo</td>
+                    <td class="bold">Tipo de apoyo</td>
                     <td>
                         <?php echo $expo->tipoApoyo;?>    
                     </td>
                 </tr>
                 <tr>
-                    <td class="negrita">Ingreso total</td>
+                    <td class="bold">Ingreso total</td>
                     <td><?php echo '$ '.number_format($expo->ingresoTotal,2);?></td>
                 </tr>
                 <tr>
-                    <td class="negrita">Monto invertido</td>
+                    <td class="bold">Monto invertido</td>
                     <td><?php echo '$ '.number_format($expo->montoInvertido,2); ?></td>
                 </tr>
             </tbody>

@@ -1,9 +1,12 @@
 <?php $i = 1;?>
-<div class="container">
+<div class="container-fluid">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active">Hoja de datos</li>
+      <li><a href="?c=Principal&a=IndexArtesanos">Artesanos</a></li>
+      <li class="active">Lista de talleres</li>
     </ol>
+</div>
+<div class="container">
     <h1 class="page-header text-center">Talleres de <?php echo $rama->nombre;?></h1>
     <table class="table table-striped">
         <thead>

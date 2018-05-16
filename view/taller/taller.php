@@ -1,9 +1,15 @@
 <?php $i = $j = 1; ?>
-<div class="container">
+<div class="container-fluid">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
+      <li><a href="?c=Principal&a=IndexArtesanos">Artesanos</a></li>
+      <?php if ($_SESSION['metodo-busqueda'] == 'BuscarTallerPorMunicipio' || $_SESSION['metodo-busqueda'] == 'BuscarTallerPorRamaArtesanal'): ?>
+        <li><a href="?c=Taller&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de talleres</a></li>
+      <?php endif ?>
       <li class="active">Taller</li>
     </ol>
+</div>
+<div class="container">
     <h3 class="page-header text-center"><?php echo $taller->nombre;?></h3>
     <div class="col-md-8 col-md-offset-2">
         <table class="table table-striped table-hover">
@@ -24,7 +30,7 @@
             </table>
     </div>
     <div class="col-md-12">
-        <div class="col-md-6">
+        <div class="col-md-6 table-responsive">
             <table class="table table-striped table-hover">
                 <caption class="text-center bold" >Ubicación</caption>
                 <tbody>
@@ -56,7 +62,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 table-responsive">
             <table class="table table-striped table-hover">
                 <caption class="text-center bold">Empleos</caption>
                 <tbody>
@@ -81,7 +87,7 @@
         </div>
     </div> 
 
-    <div class="col-md-12">
+    <div class="col-md-12 table-responsive">
         <br>
         <fieldset>
             <legend>Colaboradores</legend>
@@ -106,7 +112,7 @@
                         <td><?php echo $colaborador->aMaterno; ?></td>
                         <td><?php echo $colaborador->nombre; ?></td>
                         <td>
-                            <form action="?c=Artesano&a=Buscar" method="post" enctype="multipart/form-data">
+                            <form action="?c=Artesano&a=BuscarPorCURP" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="buscar-artesano-curp" value="<?php echo $colaborador->curp; ?>" />
                                 <div class="text-right">
                                     <button id="btn-submit" class="btn btn-success">Ver información</button>
@@ -123,7 +129,7 @@
         </fieldset>
     </div>  
 
-    <div class="col-md-12">
+    <div class="col-md-12 table-responsive">
         <br>
         <fieldset>
             <legend>Empleados</legend>
@@ -143,12 +149,12 @@
                 <?php foreach($empleados as $empleado): ?>
                     <tr>
                         <td class="text-center"><?php echo $j; $j++; ?></td>
-                        <td><?php echo $empleado->curp; ?></td>
-                        <td><?php echo $empleado->aPaterno; ?></td>
-                        <td><?php echo $empleado->aMaterno; ?></td>
-                        <td><?php echo $empleado->nombre; ?></td>
+                        <td><?php echo $empleado->curp;?></td>
+                        <td><?php echo $empleado->aPaterno;?></td>
+                        <td><?php echo $empleado->aMaterno;?></td>
+                        <td><?php echo $empleado->nombre;?></td>
                         <td>
-                            <form action="?c=Artesano&a=Buscar" method="post" enctype="multipart/form-data">
+                            <form action="?c=Artesano&a=BuscarPorCURP" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="buscar-artesano-curp" value="<?php echo $empleado->curp; ?>" />
                                 <div class="text-right">
                                     <button id="btn-submit" class="btn btn-success">Ver información</button>
@@ -160,7 +166,7 @@
                 </tbody>
             </table>
             <?php else: ?>
-                <h4 class="text-center">No hay participantes registrados en este concurso.</h4>
+                <h4 class="text-center">Aún no se indica quienes son los empleados de este taller.</h4>
             <?php endif ?>
         </fieldset>
     </div>  

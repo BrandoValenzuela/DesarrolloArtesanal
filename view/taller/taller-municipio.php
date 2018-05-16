@@ -1,9 +1,12 @@
 <?php $i = 1;?>
-<div class="container">
+<div class="container-fluid">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active">Hoja de datos</li>
+      <li><a href="?c=Principal&a=IndexArtesanos">Artesanos</a></li>
+      <li class="active">Lista de talleres</li>
     </ol>
+</div>
+<div class="container">
     <h1 class="page-header text-center">Talleres en <?php echo $municipio;?></h1>
     <table class="table table-striped">
         <thead>
@@ -31,7 +34,8 @@
                 <td><?php echo $taller->localidad; ?></td>
                 <td>
                     <form action="?c=Taller&a=Buscar" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="buscar-artesano-curp" value="<?php echo $taller->curp; ?>" />
+                        <input type="hidden" name="buscar-id-taller" value="<?php echo $taller->idTaller; ?>" />
+                        <input type="hidden" name="buscar-nombre-taller" value="<?php echo $taller->nombre; ?>" />
                         <div class="text-right">
                             <button id="btn-submit" class="btn btn-success">Ver detalle</button>
                         </di>

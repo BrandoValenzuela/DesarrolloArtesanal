@@ -76,6 +76,18 @@ class Exposicion{
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
+	
+	public function ObtenerPorPeriodo($fi,$ff){
+		try {
+			$result = array();
+			$stm = $this->pdo->prepare("SELECT * FROM exposicion WHERE fechaInicio BETWEEN ? AND ?");
+			$stm->execute(array($fi,$ff));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			// header('location: index.php?c=Principal&a=ErrorConexion');
+			die($e->getMessage());
+		}
+	}
 }
 
 ?>

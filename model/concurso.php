@@ -71,7 +71,19 @@ class Concurso{
   			}
   			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
+			// die($e->getMessage());
 			header('location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}
+
+	public function ObtenerPorPeriodo($fi,$ff){
+		try {
+			$result = array();
+			$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE fecha BETWEEN ? AND ?");
+			$stm->execute(array($fi,$ff));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			die($e->getMessage());
 		}
 	}
 }

@@ -7,21 +7,22 @@ class Sesion{
 	public function __CONSTRUCT(){
 		try{
 			$this->pdo = Conexion::obtenerConexion();   
-		}catch(Exception $e){}
+		}catch(Exception $e){
+			header("Location: index.php?c=Sesion&a=ErrorConexion");
+		}
 	}
 
-	public function verificarCredenciales($data){
+	public function verificarCredenciales(Sesion $data){
 		try{
-			$result = array();
-			$stm = $this->pdo->prepare("SELECT nombre,contrasenia FROM usuario WHERE nombre = ? AND contrasenia = ? Limit 1");
+			$stm = $this->pdo->prepare("SELECT nombre,contrasenia FROM usuario WHERE nombre = ? AND contrasenia = ?");
 			$stm->execute(
 				array(
                     $data->usuario, 
                     $data->contraseña
 				)
 			);
-			$stm->fetchAll(PDO::FETCH_OBJ);
-			return $resultado = !empty($stm) ? "acceso_concedido" : "acceso_denegado";
+			$resultado = $stm->fetch(PDO::FETCH_OBJ);
+			return $acceso = !empty($resultado) ? "acceso_concedido" : "acceso_denegado";
 		}
 		catch(Exception $e){
 			die($e->getMessage());

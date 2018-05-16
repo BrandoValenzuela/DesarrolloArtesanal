@@ -16,7 +16,7 @@
 				<h3 class="text-center">Problemas de conexión</h3>
 				<hr>
 				<p>Se presentó un error en la conexión con la base de datos.</p>
-				<p>Vuelve a intentar más tarde.</p>
+				<p>Vuelve a intentarlo.</p>
 				<hr>
 				<a href="index.php"><button class="btn btn-warning">Recargar página</button></a>
 			</div>

@@ -53,22 +53,18 @@ class BeneficiarioController{
             }
             $this->mostrarMensaje($mensaje);
         }
-        // $artesano->id > 0 
-        //     ? $this->model->Actualizar($artesano)
-        //     : $this->model->Registrar($artesano);
     }
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
+        if ($mensaje['titulo'] == 'CURP no encontrada') {
+            $redireccion = 'index.php?c=Principal&a=Index';
+        }else{
+            $redireccion = 'index.php?c=Apoyo&a=BuscarPorId';
+        }
         require_once 'view/header.php';
-        require_once 'view/principal.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }
-
-    // public function Eliminar(){
-    //     $this->model->Eliminar($_REQUEST['id']);
-    //     header('Location: index.php?c=Alumno');
-    // }
 }
 ?>

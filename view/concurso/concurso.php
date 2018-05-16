@@ -1,9 +1,15 @@
 <?php $i = 1;?>
-<div class="container">
+<div class="container-fluid">
     <ol class="breadcrumb">
-      <li><a href="?c=Principal">Página principal</a></li>
-      <li class="active">Concurso</li>
+        <li><a href="?c=Principal">Página principal</a></li>
+        <li><a href="?c=Principal&a=IndexConcursosExposiciones">Concursos y exposiciones</a></li>
+        <?php if ($_SESSION['metodo-busqueda'] == 'BuscarPorPeriodo' || $_SESSION['metodo-busqueda'] == 'BuscarPorConcepto'): ?>
+            <li><a href="?c=Concurso&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de concursos</a></li>
+        <?php endif ?>
+        <li class="active">Concurso</li>
     </ol>
+</div>
+<div class="container">
     <h3 class="page-header text-center"><?php echo $concurso->nombre;?></h3>
     <div class="col-md-12">
         <div class="col-md-8 col-md-offset-2">

@@ -4,27 +4,23 @@ $(document).ready(function(){
       return $(this).validate();
    });
 });
+
 $("#login-submit").click(function(){
-   if ($("#usuario").val()!= '' && $("#contraseña").val() != ''){
-     var datos = {
-        usuario: $("#usuario").val(), 
-        contraseña: sha256($("#contraseña").val())
-     };
-     $.post("?c=Sesion&a=IniciarSesion",datos,function(data, status){
-        if (data == "acceso_concedido") {
-           location.href = "?c=Principal";             
-        }else{
-           if (datos.usuario != '' && datos.contraseña != '') {
-              if (data == 'accesso_denegado' ) {
-                 alert("El usuario o contraseña están equivocados. Vuelve a intentar");
-              }else{
-                 location.href = "?c=Sesion&a=ErrorConexion";                  
-              }
-           }
-        }
-     });
-   }
+  if ($("#usuario").val() != '' && $("#contraseña").val() != '') {
+    var datos = {
+      usuario: $("#usuario").val(), 
+      contraseña: sha256($("#contraseña").val())
+    };
+    $.post("?c=Sesion&a=IniciarSesion",datos,function(data, status){
+      if (data == "acceso_concedido") {
+        location.href = "?c=Principal";             
+      }else{ 
+        alert("Usuario o contraseña equivocados. Vuelve a intentar.");
+      }
+    });
+  }
 });
+
 //-------------------------------------------------------------------------//
 // -------------------- Funciones "Form" Artesano -------------------------//
 $(document).ready(function(){
@@ -190,10 +186,19 @@ $(document).ready(function(){
    $("#participacion-artesano").change(function(){
       $("#taller-de-empleado").val('0');
       $("#sueldo-mensual").val('');
+      $("#rama-artesanal-taller").val('0');
+      $("#nombre-taller").val('');
+      $("#direccion-taller").val('');
+      $("#localidad-taller").val('');
+      $("#municipio-taller").val('');
+      $("#ingreso-mensual-taller").val('');
+      $("#gasto-mensual-taller").val('');
+      $("#empleos-tc").val('');
+      $("#empleos-hr").val('');
+      $("#empleos-imss").val('');
+      $("#empleos-totales").val('');
    })
 })
-
-
 //-------------------------------------------------------------------------//
 //-------------------- Funciones pagina principal -------------------------//
 $(document).ready(function(){
@@ -231,9 +236,6 @@ $(document).ready(function(){
     return $(this).validate();
   });
 });
-
-
-
 //-------------------------------------------------------------------------//
 //----------------------- Funciones Form apoyo ----------------------------//
 $(function() {
@@ -264,10 +266,6 @@ $(document).ready(function(){
     });
 });
 //-------------------------------------------------------------------------//
-
-
-
-
 $(function() {
     formato = "yy-mm-dd";
     $("#fecha-inicio-expo").datepicker({
@@ -302,8 +300,6 @@ $(document).ready(function(){
     });
 });
 
-
-
 $(document).ready(function(){
     $("#curp-artesano-expo").blur(function(){
         text = $(this).val();
@@ -320,14 +316,16 @@ $(document).ready(function(){
 
 //-------------------- Concurso -------------------------
 
-function habilitarCampoPremio(){
-  if ($("#lugar-concurso option:selected").val() == 1) {
-    $("#monto-premio-concurso").prop("disabled", true);
-    $("#monto-premio-concurso").val('');
-  }else{
-    $("#monto-premio-concurso").prop("disabled", false);
-  }
-}
+$(document).ready(function(){
+  $("#lugar-concurso").change(function(){
+    if ($("#lugar-concurso option:selected").val() == 1) {
+      $("#monto-premio-concurso").prop("disabled", true);
+      $("#monto-premio-concurso").val('');
+    }else{
+      $("#monto-premio-concurso").prop("disabled", false);
+    }  
+  })
+});
 
 $(document).ready(function(){
   $("#frm-concurso").submit(function(){
@@ -335,3 +333,217 @@ $(document).ready(function(){
   });
 });
 //-------------------------------------------------------
+//-------------------- Compra -------------------------
+$(document).ready(function(){
+    $("#curp-vendedor").blur(function(){
+        text = $(this).val();
+        $(this).val(text.toUpperCase());
+    });
+});
+
+$(document).ready(function(){
+  $("#frm-busqueda-compra-fecha").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(document).ready(function(){
+  $("#frm-busqueda-compra-periodo").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(function() {
+    formato = "yy-mm-dd";
+    $("#fecha-inicio-periodo-compra").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $("#fecha-inicio-periodo-compra").datepicker( "option", "dateFormat", formato );
+})
+
+$(function() {
+    formato = "yy-mm-dd";
+    $("#fecha-fin-periodo-compra").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $("#fecha-fin-periodo-compra").datepicker( "option", "dateFormat", formato );
+})
+
+
+$(document).ready(function(){
+  $("#frm-busqueda-expo-periodo").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(function() {
+    formato = "yy-mm-dd";
+    $("#fecha-inicio-periodo-expo").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $("#fecha-inicio-periodo-expo").datepicker( "option", "dateFormat", formato );
+})
+
+$(function() {
+    formato = "yy-mm-dd";
+    $("#fecha-fin-periodo-expo").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $("#fecha-fin-periodo-expo").datepicker( "option", "dateFormat", formato );
+})
+
+
+$(document).ready(function(){
+  $("#frm-busqueda-concurso-periodo").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(function() {
+    formato = "yy-mm-dd";
+    $("#fecha-inicio-periodo-concurso").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $("#fecha-inicio-periodo-concurso").datepicker( "option", "dateFormat", formato );
+})
+
+$(function() {
+    formato = "yy-mm-dd";
+    $("#fecha-fin-periodo-concurso").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $("#fecha-fin-periodo-concurso").datepicker( "option", "dateFormat", formato );
+})
+
+$(document).ready(function(){
+   $('#mensaje').modal();
+});
+
+$(document).ready(function(){
+  $("#frm-tallerista").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(document).ready(function(){
+    $("#curp-tallerista").blur(function(){
+        text = $(this).val();
+        $(this).val(text.toUpperCase());
+    });
+});
+
+$(document).ready(function(){
+   $("#frm-busqueda-tallerista-curp").submit(function(){
+      return $(this).validate();
+   });
+});
+
+$(document).ready(function(){
+   $("#buscar-tallerista-curp").blur(function(){
+      text = $(this).val();
+      $(this).val(text.toUpperCase());
+   });
+});
+
+$(document).ready(function(){
+  $("#frm-capacitacion").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(function() {
+    formato = "yy-mm-dd";
+    $("#fecha-inicio-capacitacion").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $("#fecha-inicio-capacitacion").datepicker( "option", "dateFormat", formato );
+})
+
+$(function() {
+    formato = "yy-mm-dd";
+    $("#fecha-fin-capacitacion").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $("#fecha-fin-capacitacion").datepicker( "option", "dateFormat", formato );
+})
+
+$(document).ready(function(){
+  $("#rama-artesanal-capacitacion").click(function(){
+    if($("#rama-artesanal-capacitacion option:selected").val() == 14) {
+      $("#tema-capacitacion").prop("disabled", false);
+      $("#tema-capacitacion").val('');
+    }else{
+      $("#tema-capacitacion").prop("disabled", true);
+    }
+  })
+})
+
+$(document).ready(function(){
+  $("#frm-capacitacion").submit(function(){
+    $("#tema-capacitacion").prop("disabled", false);
+  });
+});
+
+$(function() {
+    formato = "yy-mm-dd";
+    $("#fecha-inicio-periodo-capacitacion").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $("#fecha-inicio-periodo-capacitacion").datepicker( "option", "dateFormat", formato );
+})
+
+$(function() {
+    formato = "yy-mm-dd";
+    $("#fecha-fin-periodo-capacitacion").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $("#fecha-fin-periodo-capacitacion").datepicker( "option", "dateFormat", formato );
+})
+
+$(document).ready(function(){
+  $("#frm-busqueda-capacitacion-periodo").submit(function(){
+    return $(this).validate();
+  });
+});
+
+
+$(document).ready(function(){
+    $("#frm-participantes-capacitacion-artesano").submit(function(){
+        return $(this).validate();
+    });
+});
+
+$(function(){
+  $("#agregar-participante").click(function(){
+    var renglon = '<div class="form-group"><label class="col-xs-4 control-label"><span class="obligatorio">* </span>CURP del artesano:</label><div class="col-xs-4"><input type="text" name="curp-artesano-capacitacion[]" class="form-control clon" placeholder="Ingrese la CURP" data-validacion-tipo="requerido|curp" /></div><div class="col-xs-4" id="btn-quitar-prducto"><input type="button" class="btn btn-primary quitar-participante" value="Quitar"></div></div>'
+    $("#participantes").append(renglon);
+  })
+
+  $(document).on("click",".quitar-participante",function(){
+    var parent = $(this).parents().get(1);
+    $(parent).remove();
+  });
+});
+
+$(document).ready(function(){
+   $(".lista").blur(function(){
+      text = $(this).val();
+      $(this).val(text.toUpperCase());
+   });
+});
+
+$(document).ready(function(){
+  $("#frm-tallerista-capacitacion").submit(function(){
+    return $(this).validate();
+  });
+});
