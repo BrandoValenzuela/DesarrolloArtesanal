@@ -3,6 +3,9 @@
   <ol class="breadcrumb">
     <li><a href="?c=Principal">Página principal</a></li>
     <li><a href="?c=Capacitacion&a=Index">Capacitaciones</a></li>
+    <?php if ($_SESSION['busqueda'] == 'TalleristaPorApellido'): ?>
+        <li><a href="?c=Tallerista&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de talleristas</a></li>
+      <?php endif ?>
     <li class="active">Tallerista</li>
   </ol>
 </div>

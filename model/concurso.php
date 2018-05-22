@@ -86,5 +86,15 @@ class Concurso{
 			die($e->getMessage());
 		}
 	}
+
+    public function ObtenerConcursosTotales(){
+        try {
+            $stm = $this->pdo->prepare('SELECT count(*) AS numero FROM concurso');
+            $stm->execute();
+            return $stm->fetch(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+         	die($e->getMessage());   
+        }
+    }
 }
 ?>

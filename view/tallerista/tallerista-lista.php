@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
-      <li><a href="?c=Principal&a=IndexCapacitacion">Talleristas</a></li>
+      <li><a href="?c=Principal&a=IndexCapacitaciones">Capacitaciones</a></li>
       <li class="active">Lista de talleristas</li>
     </ol>  
 </div>

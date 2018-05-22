@@ -69,7 +69,7 @@ class TalleristaController{
             $tallerista = $this->model->ObtenerPorCURP($_SESSION['buscar-tallerista-curp']);
         }
         if (!empty($tallerista)) {
-            $capacitaciones = $tallerista_capacitaciones->ObtenerCapacitaciones($tallerista->curp);
+            $capacitaciones = $tallerista_capacitaciones->ObtenerCapacitacionesTallerista($tallerista->curp);            
             require_once 'view/header.php';
             require_once 'view/tallerista/tallerista.php';
             require_once 'view/footer.php'; 
@@ -94,7 +94,9 @@ class TalleristaController{
             $apellido = $_SESSION['buscar-tallerista-ap'];
             $talleristas = $this->model->ObtenerPorApellido($_SESSION['buscar-tallerista-ap']);
         }
-        if (!empty($talleristas)) { 
+        if (!empty($talleristas)) {
+            $_SESSION['busqueda'] = 'TalleristaPorApellido';
+            $_SESSION['metodo-busqueda'] = 'BuscarPorApellido';
             require_once 'view/header.php';
             require_once 'view/tallerista/tallerista-lista.php';
             require_once 'view/footer.php'; 

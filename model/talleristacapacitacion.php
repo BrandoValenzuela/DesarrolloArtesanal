@@ -74,8 +74,8 @@ class TalleristaCapacitacion{
 	// 	}
 	// }
 
-	//Recupera las capacitaciones en las que el tallerista ha participado.
-	public function ObtenerCapacitaciones($curp){
+	//Recupera las capacitaciones que un tallerista ha impartido
+	public function ObtenerCapacitacionesTallerista($curp){
 		try {
 			$result = array();
 			$stm = $this->pdo->prepare("SELECT capacitacion.idCapacitacion,capacitacion.nombre,fechaInicio,fechaFin,pagoTallerista,formaPago FROM capacitacion INNER JOIN talleristacapacitacion ON capacitacion.idCapacitacion = talleristacapacitacion.idCapacitacion WHERE talleristacapacitacion.curp = ?");
@@ -85,6 +85,30 @@ class TalleristaCapacitacion{
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
+
+	//Recupera las capacitaciones que un artesano ha impartido
+	public function ObtenerCapacitacionesArtesano($curp){
+		try {
+			$result = array();
+			$stm = $this->pdo->prepare("SELECT capacitacion.idCapacitacion,capacitacion.nombre,fechaInicio,fechaFin,pagoTallerista,formaPago FROM artesanotallerista INNER JOIN capacitacion ON artesanotallerista.idCapacitacion = capacitacion.idCapacitacion WHERE artesanotallerista.curp = ?");
+			$stm->execute(array($curp));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}
+
+	// //Recupera las capacitaciones en las que un artesano ha sido tallerista
+	// public function ObtenerCapacitacionesImpartidas($curp){
+	// 	try {
+	// 		$stm = $this->pdo
+	// 		          ->prepare("SELECT artesanotallerista.*,capacitacion.nombre FROM artesanotallerista INNER JOIN capacitacion ON artesanotallerista.idCapacitacion = capacitacion.idCapacitacion WHERE curp = ?");
+	// 		$stm->execute(array($curp));
+	// 		return $stm->fetchAll(PDO::FETCH_OBJ);
+	// 	} catch (Exception $e) {
+	// 		header('Location: index.php?c=Principal&a=ErrorConexion');
+	// 	}
+	// }
 
 	//Recupera los individuos registrados como talleristas participantes en una capacitacion en específico.
 	public function ObtenerTalleristas($idCapacitacion){

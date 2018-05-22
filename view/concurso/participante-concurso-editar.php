@@ -56,20 +56,8 @@
             </div>
           </fieldset>
           <div class="text-right">
-              <button id="btn-submit" class="btn btn-success" onclick="javascript:return confirm('¿Quieres guardar los datos capturados?');">Guardar</button>
+              <button id="btn-submit-frm-artesano-concurso" class="btn btn-success" onclick="javascript:return confirm('¿Quieres guardar los datos capturados?');">Guardar</button>
           </div>
       </form>
   </div>
 </div>
-<script>
-    $(document).ready(function(){
-        $("#frm-artesano-concurso").submit(function(){
-            return $(this).validate();
-        });
-    });
-    $(document).ready(function(){
-        $("#btn-submit").click(function(){
-            $("#monto-premio-concurso").prop("disabled",false);
-        });
-    });
-</script>

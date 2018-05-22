@@ -7,11 +7,7 @@
     </ol>
 </div>
 <div class="container">
-    <!-- <?php #if (isset($municipio)): ?> -->
-        <!-- <h1 class="page-header text-center">capacitaciones en: <?php #echo $municipio;?></h1> -->
-    <!-- <?php #else: ?> -->
-        <h1 class="page-header text-center">Capacitaciones en el periodo: <?php echo $fecha_inicio.' a '.$fecha_fin;?></h1>
-    <!-- <?php #endif ?> -->
+    <h1 class="page-header text-center">Capacitaciones en el periodo: <?php echo $fecha_inicio.' a '.$fecha_fin;?></h1>
     <div class="table-responsive">
         
         <table class="table table-striped table-hover">

@@ -119,18 +119,15 @@ class Taller{
 		}
 	}
 
-
-
-	// public function Eliminar($id){
-	// 	try {
-	// 		$stm = $this->pdo
-	// 		            ->prepare("DELETE FROM alumnos WHERE id = ?");			          
-
-	// 		$stm->execute(array($id));
-	// 	}catch (Exception $e){
-	// 		die($e->getMessage());
-	// 	}
-	// }
+	public function ObtenerTotalTalleres(){
+		try {
+			$stm = $this->pdo->prepare('SELECT count(*) AS numero FROM taller');
+			$stm->execute();
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('Location: index.php?c=Principal&a=ErrorConexion');	
+		}
+	}
 
 	// public function Actualizar($data)
 	// {

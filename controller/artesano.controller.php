@@ -8,6 +8,9 @@ require_once 'model/participantecapacitacion.php';
 require_once 'model/empleadocolaborador.php';
 require_once 'model/apoyo.php';
 require_once 'model/compra.php';
+require_once 'model/comodatoartesano.php';
+require_once 'model/talleristacapacitacion.php';
+require_once 'model/productoartesano.php';
 
 class ArtesanoController{
     private $model;
@@ -115,6 +118,9 @@ class ArtesanoController{
         $EmpCol = new EmpleadoColaborador();
         $Apoyo = new Apoyo();
         $Compra = new Compra();
+        $Comodato = new ComodatoArtesano();
+        $Capacitaciones = new TalleristaCapacitacion();
+        $Productos = new ProductoArtesano();
         if (!empty($_REQUEST['buscar-artesano-curp'])) {
             $_SESSION['buscar-artesano-curp'] = $_REQUEST['buscar-artesano-curp'];
             $artesano = $this->model->ObtenerPorCURP($_REQUEST['buscar-artesano-curp']);
@@ -131,6 +137,9 @@ class ArtesanoController{
             $participaciones_capacitacion = $Participante_capacitacion->ObtenerCapacitaciones($artesano->curp);
             $apoyos = $Apoyo->ObtenerApoyos($artesano->curp);
             $compras = $Compra->ObtenerCompras($artesano->curp);
+            $comodatos = $Comodato->ObtenerComodatos($artesano->curp);
+            $capacitaciones_impartidas = $Capacitaciones->ObtenerCapacitacionesArtesano($artesano->curp);
+            $productos = $Productos->ObtenerProductosArtesano($artesano->curp);
             require_once 'view/header.php';
             require_once 'view/artesano/artesano.php';
             require_once 'view/footer.php'; 
@@ -156,6 +165,7 @@ class ArtesanoController{
             $artesanos = $this->model->ObtenerPorApellido($_SESSION['buscar-artesano-ap']);
         }
         if (!empty($artesanos)) {
+            $_SESSION['busqueda'] = 'ArtesanoPorApellido';
             $_SESSION['metodo-busqueda'] = 'BuscarPorApellido';
             require_once 'view/header.php';
             require_once 'view/artesano/artesano-lista.php';

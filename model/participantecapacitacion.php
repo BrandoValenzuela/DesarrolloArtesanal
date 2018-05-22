@@ -53,18 +53,6 @@ class ParticipanteCapacitacion{
 		}
 	}
 
-	// public function Obtener($curp){
-	// 	try {
-	// 		$result = array();
-	// 		$stm = $this->pdo->prepare("SELECT * FROM participanteexpo WHERE curp = ?");
-	// 		$stm->execute(array($curp));
-	// 		return $stm->fetch(PDO::FETCH_OBJ);
-	// 	} catch (Exception $e) {
-	// 		// die($e->getMessage());
-	// 		header('location: index.php?c=Principal&a=ErrorConexion');
-	// 	}
-	// }
-
 	//Recupera las capacitaciones en la que ha participado un artesano.
 	public function ObtenerCapacitaciones($curp){
 		try {

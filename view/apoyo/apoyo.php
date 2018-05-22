@@ -3,8 +3,8 @@
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
       <li><a href="?c=Principal&a=IndexApoyosCompras">Apoyos y compras</a></li>
-      <?php if ($_SESSION['metodo-busqueda'] == 'BuscarPorPeriodo'): ?>
-        <li><a href="?c=Apoyo&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de talleres</a></li>  
+      <?php if ($_SESSION['busqueda'] == 'ApoyoPorFecha'): ?>
+        <li><a href="?c=Apoyo&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de apoyos</a></li>  
       <?php endif ?>
       <li class="active">Apoyo</li>
     </ol>

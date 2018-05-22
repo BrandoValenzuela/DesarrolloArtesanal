@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
         <li><a href="?c=Principal">Página principal</a></li>
         <li><a href="?c=Principal&a=IndexConcursosExposiciones">Concursos y exposiciones</a></li>
-        <?php if ($_SESSION['metodo-busqueda'] == 'BuscarPorMunicipioEntidad' || $_SESSION['metodo-busqueda'] == 'BuscarPorPeriodo'): ?>
+        <?php if ($_SESSION['busqueda'] == 'ExpoPorMunicipioEntidad' || $_SESSION['busqueda'] == 'ExpoPorPeriodo'): ?>
             <li><a href="?c=exposicion&a=<?php echo $_SESSION['metodo-busqueda'];?>">Lista de exposiciones</a></li>
         <?php endif ?>
       <li class="active">Exposición</li>

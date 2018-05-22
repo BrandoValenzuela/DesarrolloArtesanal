@@ -73,6 +73,16 @@ class Tallerista{
 		}
 	}
 
+	public function ObtenerTalleristasTotales(){
+		try {
+			$stm = $this->pdo->prepare("SELECT count(*) AS numero FROM tallerista");
+			$stm->execute();
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('Location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}
+
 	// public function Actualizar($data){
 	// 	try {
 	// 		$sql = "UPDATE artesano SET 

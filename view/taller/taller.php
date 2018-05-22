@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
       <li><a href="?c=Principal&a=IndexArtesanos">Artesanos</a></li>
-      <?php if ($_SESSION['metodo-busqueda'] == 'BuscarTallerPorMunicipio' || $_SESSION['metodo-busqueda'] == 'BuscarTallerPorRamaArtesanal'): ?>
+      <?php if ($_SESSION['busqueda'] == 'TallerPorMunicipio' || $_SESSION['busqueda'] == 'TallerPorRamaArtesanal'): ?>
         <li><a href="?c=Taller&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de talleres</a></li>
       <?php endif ?>
       <li class="active">Taller</li>

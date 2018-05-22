@@ -84,8 +84,18 @@ class Exposicion{
 			$stm->execute(array($fi,$ff));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			// header('location: index.php?c=Principal&a=ErrorConexion');
-			die($e->getMessage());
+			header('location: index.php?c=Principal&a=ErrorConexion');
+			// die($e->getMessage());
+		}
+	}
+
+	public function ObtenerExposTotales(){
+		try {
+			$stm = $this->pdo->prepare("SELECT count(*) AS numero FROM exposicion");
+			$stm->execute();
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 }

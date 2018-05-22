@@ -14,57 +14,55 @@ class ProductoArtesano{
 
 	public function Registrar(ProductoArtesano $data){
 		try {
-			$sql = "INSERT INTO concurso (nombre,domicilio,municipio,entidad,alcance,fecha,montoTotalEstatal,montoTotalFederal) 
-		        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-			$this->pdo->prepare($sql)->execute(
-				array(
-                    $data->Nombre, 
-                    $data->Direccion,
-                    $data->Municipio, 
-  					$data->Entidad,
-                    $data->Alcance, 
-                    $data->Fecha,
-                    $data->MontoTotalEstatal,
-                    $data->MontoTotalFederal
-                )
-			);
-			return 'exito';
-		}catch (Exception $e) {
-			$mensaje = $e->getMessage();
-			if (strpos($mensaje, 'SQLSTATE[23000]') !== false) {
-				return 'nombre_existente';
-			}else{
-				header('location: index.php?c=Principal&a=ErrorConexion');
+			$productos_previamente_registrados = 0;			
+			while (true) {
+				$producto = current($data->idProducto);
+				$registro = $this->verificarProductoArtesano($producto,$data->curp);
+				if (empty($registro)) {
+					$sql = "INSERT INTO produccionartesano (curp,idProducto) VALUES (?, ?)";
+					$this->pdo->prepare($sql)->execute(
+						array(
+		                    $data->curp,
+		                    $producto
+		                )
+					);
+				}else{
+					$productos_previamente_registrados += 1;
+				}
+				$producto = next($data->idProducto);
+				if ($producto === false) {
+					break;
+				}
 			}
+			if ($productos_previamente_registrados > 0) {
+				return 'exito_con_observación';
+			}else{
+				return 'exito';
+			}
+		}catch (Exception $e) {
+			header('location: index.php?c=Principal&a=ErrorConexion');
+			// die($e->getMessage());
 		}
 	}
 
-	public function Obtener($idConcurso){
+	public function verificarProductoArtesano($curp,$idProducto){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE idConcurso = ?");
-			$stm->execute(array($idConcurso));
+			$stm = $this->pdo->prepare("SELECT * FROM produccionartesano WHERE curp = ? AND idProducto = ?");
+			$stm->execute(array($curp,$idProducto));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
 			die($e->getMessage());
 		}
 	}
 
-	public function ObtenerPorNombre($frase){
-		try {
-			$palabras = explode(" ",$frase); 
-   			$numero = count($palabras); 
-			$result = array();
-			if ($numero == 1) { 
-				$pattern = '%'.$frase.'%';
-				$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE nombre Like ?");
-				$stm->execute(array($pattern));
-  			}elseif ($numero > 1) {
-  				$stm = $this->pdo->prepare("SELECT *, MATCH(nombre) AGAINST(?) AS Score FROM concurso WHERE MATCH(nombre) AGAINST(?) ORDER BY Score DESC LIMIT 50");
-				$stm->execute(array($frase,$frase));
-  			}
+	public function ObtenerProductosArtesano($curp){
+		try {			
+			$stm = $this->pdo->prepare("SELECT producto.nombre FROM produccionartesano INNER JOIN producto ON produccionartesano.idProducto = producto.idProducto WHERE produccionartesano.curp = ?");
+			$stm->execute(array($curp));
   			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
+			// die($e->getMessage());
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}

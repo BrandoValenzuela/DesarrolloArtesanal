@@ -88,6 +88,7 @@ class ExposicionController{
             $exposiciones = $this->model->ObtenerPorMunicipioEntidad($_SESSION['buscar-expo-munent']);
         }
         if (!empty($exposiciones)) {
+            $_SESSION['busqueda'] = 'ExpoPorMunicipioEntidad';
             $_SESSION['metodo-busqueda'] = 'BuscarPorMunicipioEntidad';
             require_once 'view/header.php';
             require_once 'view/exposicion/exposicion-lista.php';
@@ -117,6 +118,7 @@ class ExposicionController{
             $exposiciones = $this->model->ObtenerPorPeriodo($_SESSION['fecha-inicio-periodo-expo'],$_SESSION['fecha-fin-periodo-expo']);
         }
         if (!empty($exposiciones)) {
+            $_SESSION['busqueda'] = 'ExpoPorPeriodo';
             $_SESSION['metodo-busqueda'] = 'BuscarPorPeriodo';
             require_once 'view/header.php';
             require_once 'view/exposicion/exposicion-lista.php';

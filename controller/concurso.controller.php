@@ -88,6 +88,7 @@ class ConcursoController{
             $concursos = $this->model->ObtenerPorConcepto($_SESSION['buscar-concurso-concepto']);
         }
         if (!empty($concursos)) {
+            $_SESSION['busqueda'] = 'ConcurosPorConcepto';
             $_SESSION['metodo-busqueda'] = 'BuscarPorConcepto';
             require_once 'view/header.php';
             require_once 'view/concurso/concurso-lista.php';
@@ -116,7 +117,8 @@ class ConcursoController{
             $fecha_fin = $_SESSION['fecha-fin-periodo-concurso'];
             $concursos = $this->model->ObtenerPorPeriodo($_SESSION['fecha-inicio-periodo-concurso'],$_SESSION['fecha-fin-periodo-concurso']);
         }
-        if (!empty($concursos)) { 
+        if (!empty($concursos)) {
+            $_SESSION['busqueda'] = 'ConcurosPorPeriodo';
             $_SESSION['metodo-busqueda'] = 'BuscarPorPeriodo';
             require_once 'view/header.php';
             require_once 'view/concurso/concurso-lista.php';

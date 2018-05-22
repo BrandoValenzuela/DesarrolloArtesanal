@@ -78,6 +78,7 @@ class ApoyoController{
             $apoyos = $this->model->ObtenerPorFecha($_SESSION['mes-apoyo'],$_SESSION['año-apoyo']);
         }
         if (!empty($apoyos)) { 
+            $_SESSION['busqueda'] = 'ApoyoPorFecha';
             $_SESSION['metodo-busqueda'] = 'BuscarPorFecha';
             require_once 'view/header.php';
             require_once 'view/apoyo/apoyo-lista.php';

@@ -12,6 +12,26 @@ class RamaArtesanal{
 		}
 	}
 
+	public function Registrar(RamaArtesanal $data){
+		try {
+			$sql = "INSERT INTO ramaartesanal (nombre) 
+		        VALUES (?)";
+			$this->pdo->prepare($sql)->execute(
+				array(
+                    $data->nombre
+                )
+			);
+			return 'exito';
+		}catch (Exception $e) {
+			$mensaje = $e->getMessage();
+			if (strpos($mensaje, 'SQLSTATE[23000]') !== false) {
+				return 'rama_existente';
+			}else{
+				header('location: index.php?c=Principal&a=ErrorConexion');
+			}
+		}
+	}
+
 	public function Listar(){
 		try{
 			$result = array();

@@ -32,7 +32,6 @@
                 <li>
                     <a href="?c=Principal&a=IndexCapacitaciones"><span class="glyphicon glyphicon-education"></span> Capacitaciones</a>
                 </li>
-                <!-- <li><a href="?c=Principal"><span class="glyphicon glyphicon-list-alt"></span> Comodatos</a></li> -->
                 <li>
                     <a href="?c=Principal&a=IndexConcursosExposiciones"><span class="glyphicon glyphicon-globe"></span> Concursos y exposiciones</a>
                 </li>

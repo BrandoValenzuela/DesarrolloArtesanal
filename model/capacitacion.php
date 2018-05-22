@@ -76,6 +76,17 @@ class Capacitacion{
 			die($e->getMessage());
 		}
 	}
+
+
+	public function ObtenerCapacitacionesTotales(){
+		try {
+			$stm = $this->pdo->prepare("SELECT count(*) AS numero FROM capacitacion");
+			$stm->execute();
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}
 }
 
 ?>

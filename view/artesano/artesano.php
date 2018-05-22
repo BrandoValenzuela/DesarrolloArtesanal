@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
       <li><a href="?c=Principal&a=IndexArtesanos">Artesanos</a></li>
-      <?php if ($_SESSION['metodo-busqueda'] == 'BuscarPorApellido'): ?>
+      <?php if ($_SESSION['busqueda'] == 'ArtesanoPorApellido'): ?>
         <li><a href="?c=Artesano&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de artesanos</a></li>          
       <?php endif ?>
       <li class="active">Hoja de datos</li>
@@ -292,29 +292,20 @@
     </fieldset>
     <fieldset>
         <legend>Productos</legend>
-            <div class="col-md-12">
-            <?php if (false): ?>
-            <!-- <?php #if (!empty($datos_taller)): ?> -->
+            <div class="col-md-10 col-md-offset-1">
+             <?php if (!empty($productos)): ?>
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th class="text-center">#</th>
-                        <th class="col-md-3">Nombre del taller</th>
-                        <th class="col-md-3">Domicilio</th>
-                        <th class="col-md-2">Localidad</th>
-                        <th class="col-md-2">Municipio</th>
-                        <th class="col-md-2"></th>
+                        <th class="col-md-12">Nombre del producto</th>
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach($datos_taller as $dato_taller): ?>
+                <?php foreach($productos as $producto): ?>
                     <tr>
-                        <td class="text-center"><?php #echo $i; $i++; ?></td>
-                        <td><?php #echo $dato_taller->nombre; ?></td>
-                        <td><?php #echo $dato_taller->domicilio; ?></td>
-                        <td><?php #echo $dato_taller->localidad; ?></td>
-                        <td><?php #echo $dato_taller->municipio; ?></td>
-                        <td></td>
+                        <td class="text-center"><?php echo $i; $i++; ?></td>
+                        <td><?php echo $producto->nombre; ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -325,7 +316,7 @@
             <?php endif ?>
         </div>
         <form action="?c=Productoartesano&a=Crud" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="curp-artesano" value="<?php echo  $artesano->curp; ?>" />
+            <input type="hidden" name="curp-artesano" value="<?php echo $artesano->curp; ?>" />
             <div class="text-right">
                 <button id="btn-submit-agregar-producto" class="btn btn-primary">Agregar producto</button>
             </div>
@@ -455,7 +446,7 @@
         </div>
     </fieldset>
     <fieldset>
-        <legend>Participación en Concursos</legend>
+        <legend>Participación en concursos</legend>
         <div class="col-md-12 table-responsive">
             <?php if (!empty($participaciones_concurso)): ?>
             <table class="table table-striped table-hover">
@@ -513,7 +504,7 @@
         </div>
     </fieldset>
         <fieldset>
-        <legend>Participación en Exposiciones</legend>
+        <legend>Participación en exposiciones</legend>
         <div class="col-md-12 table-responsive">
             <?php if (!empty($participaciones_expo)): ?>
             <table class="table table-striped table-hover">
@@ -588,7 +579,52 @@
                 </tbody>
             </table> 
             <?php else: ?>
-                <h4 class="text-center">No se le han realizado compras a este artesano.</h4>
+                <h4 class="text-center">No ha participado en capacitaciones.</h4>
+                <br>
+            <?php endif ?>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Capacitaciones impartidas</legend>
+        <div class="col-md-12 table-responsive">
+            <?php if (!empty($capacitaciones_impartidas)): ?>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="col-md-4 ">Nombre de la capacitacion</th>
+                        <th class="col-md-2 text-center">Fecha de inicio:</th>
+                        <th class="col-md-2 text-center">Fecha de fin:</th>
+                        <th class="col-md-1 text-center">Pago</th>
+                        <th class="col-md-2 text-center">Forma de pago:</th>
+                        <th class="col-md-1 text-center"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i=1; foreach($capacitaciones_impartidas as $capacitacion_impartida): ?>
+                        <tr>
+                            <td class="text-center bold"><?php echo $i; $i++; ?></td>
+                            <td><?php echo $capacitacion_impartida->nombre; ?></td>
+                            <td class="text-center"><?php echo $capacitacion_impartida->fechaInicio; ?></td>
+                            <td class="text-center"><?php echo $capacitacion_impartida->fechaFin; ?></td>
+                            <td class="text-center"><?php echo '$ '.number_format($capacitacion_impartida->pagoTallerista,2); ?></td>
+                            <td class="text-center"><?php echo $forma = $capacitacion_impartida->formaPago == '1' ? 'Apoyo' : 'Factura'; ?></td>
+                            <td>
+                                <form action="?c=Capacitacion&a=BuscarPorId" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="buscar-id-capacitacion" value="<?php echo $capacitacion_impartida->idCapacitacion; ?>" />
+                                    <input type="hidden" name="buscar-nombre-capacitacion" value="<?php echo $capacitacion_impartida->nombre; ?>" />
+                                    <div class="text-right">
+                                        <button id="btn-submit" class="btn btn-success">Ver capacitacion</button>
+                                    </div>
+                                </form> 
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table> 
+            <?php else: ?>
+                <h4 class="text-center">No ha impartido ninguna capacitación.</h4>
                 <br>
             <?php endif ?>
         </div>
@@ -661,6 +697,36 @@
             </table> 
             <?php else: ?>
                 <h4 class="text-center">No se le han realizado compras a este artesano.</h4>
+                <br>
+            <?php endif ?>
+        </div>
+    </fieldset>
+        <fieldset>
+        <legend>Comodatos</legend>
+        <div class="col-md-12 table-responsive">
+            <?php if (!empty($comodatos)): ?>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="col-md-3 text-center">Folio</th>
+                        <th class="col-md-3 text-center">Fecha de otorgamiento</th>
+                        <th class="col-md-6 text-center">Bienes comodatados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i=1; foreach($comodatos as $comodato): ?>
+                        <tr>
+                            <td class="text-center bold"><?php echo $i; $i++; ?></td>
+                            <td class="text-center"><?php echo $comodato->folio; ?></td>
+                            <td class="text-center"><?php echo $comodato->fechaInicio; ?></td>
+                            <td class="text-center"><?php echo $comodato->bienesComodatados; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table> 
+            <?php else: ?>
+                <h4 class="text-center">No se le han otorgado comodatos a este artesano.</h4>
                 <br>
             <?php endif ?>
         </div>

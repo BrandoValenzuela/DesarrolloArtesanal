@@ -1,50 +1,48 @@
 <?php
-require_once 'model/productoartesano.php';
 require_once 'model/producto.php';
 
-class ProductoartesanoController{
+class ProductoController{
     private $model;
     
     public function __CONSTRUCT(){
-        $this->model = new ProductoArtesano();
-    }
-    
-    public function Crud(){
-        if (empty($_SESSION)) {
-            header('Location: index.php');
-        }
-        if (!empty($_REQUEST['curp-artesano'])) {
-            $_SESSION['curp-artesano'] = $_REQUEST['curp-artesano'];            
-            $curp_artesano = $_REQUEST['curp-artesano'];
-        }else{
-            $curp_artesano = $_SESSION['curp-artesano'];
-        }
-        $Producto = new Producto();
-        $productos = $Producto->Listar();
-        require_once 'view/header.php';
-        require_once 'view/producto/producto-agregar.php';
-        require_once 'view/footer.php';
+        $this->model = new Producto();
     }
      
     public function Guardar(){
-        $productos = new ProductoArtesano();    
-        $productos->curp = $_REQUEST['curp-artesano'];
-        $productos->idProducto = $_REQUEST['producto-artesano'];
-        $resultado = $this->model->Registrar($productos);
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Exito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
+        $producto = new Producto();
+        if (!empty($_REQUEST['nuevo-producto'])) {
+            $_SESSION['nuevo-producto'] = $_REQUEST['nuevo-producto'];
+            $producto->nombre = $_REQUEST['nuevo-producto'];
+            $resultado = $this->model->Registrar($producto);
+            if ($resultado == 'exito') {
+                $mensaje = array(
+                    'titulo' => 'Exito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+            }else{
+                $mensaje = array(
+                    'titulo' => 'Producto ya existente',
+                    'cuerpo' => 'El producto que ingresaste ya se encontra registrado en el sistema.'
+                );
+            }
+            $this->mostrarMensaje($mensaje);
         }else{
-            $mensaje = array(
-                'titulo' => 'Exito',
-                'cuerpo' => 'Algunos productos que se ingresaron ya habían sido registrados con anterioridad.<br>Sin embargo, las datos se almacenaron con exito.'
-            );
+            header('location: index.php?c=Principal');
         }
-        $this->mostrarMensaje($mensaje);
     }
 
+    public function mostrarMensaje($msj){
+        $mensaje = $msj;
+        $redireccion = '?c=Principal&a=Index';
+        $ramas = $_SESSION['ramas'];
+        $artesanos = $_SESSION['artesanos'];
+        $talleres = $_SESSION['talleres'];
+        $productos = $_SESSION['productos'];
+        require_once 'view/header.php';
+        require_once 'view/principal.php';
+        require_once 'view/modal-mensajes.php';
+        require_once 'view/footer.php';
+    }
 
     // public function Buscar(){
     //     if (empty($_SESSION)) {
@@ -98,20 +96,6 @@ class ProductoartesanoController{
     //         );
     //         $this->mostrarMensaje($mensaje);
     //     }
-    // }
-
-    public function mostrarMensaje($msj){
-        $mensaje = $msj;
-        $redireccion = '?c=Artesano&a=BuscarPorCURP';
-        require_once 'view/header.php';
-        require_once 'view/principal.php';
-        require_once 'view/modal-mensajes.php';
-        require_once 'view/footer.php';
-    }
-
-    // public function Eliminar(){
-    //     $this->model->Eliminar($_REQUEST['id']);
-    //     header('Location: index.php?c=Alumno');
     // }
 }
 ?>

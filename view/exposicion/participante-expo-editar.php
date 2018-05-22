@@ -23,7 +23,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                     <span class="obligatorio">* </span><label>CURP del artesano:</label>
-                    <input type="text" id="curp-artesano-expo" name="curp-artesano-expo" value="<?php #echo $alm->Nombre; ?>" class="form-control" placeholder="Ingrese la CURP." data-validacion-tipo="requerido|curp" />
+                    <input type="text" id="curp-artesano-expo" name="curp-artesano-expo" class="form-control" placeholder="Ingrese la CURP." data-validacion-tipo="requerido|curp" />
                 </div>
               </div>
           </fieldset>
@@ -32,13 +32,13 @@
             <div class="col-md-4">
                 <div class="form-group">
                   <span class="obligatorio">* </span><label>Monto asigando para exposición:</label>
-                  <input type="text" id="inversion-artesano-expo" name="inversion-artesano-expo" value="<?php #echo $alm->FechaNacimiento; ?>" class="form-control" placeholder="Ejemplo: 10000" data-validacion-tipo="requerido|numero" />
+                  <input type="text" id="inversion-artesano-expo" name="inversion-artesano-expo" class="form-control" placeholder="Ejemplo: 10000" data-validacion-tipo="requerido|numero" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                   <span class="obligatorio">* </span><label>Ingresos obtenidos en la exposición:</label>
-                  <input type="text" id="ingreso-artesano-expo" name="ingreso-artesano-expo" value="<?php #echo $alm->FechaNacimiento; ?>" class="form-control" placeholder="Ejemplo: 10000" data-validacion-tipo="requerido|numero" />
+                  <input type="text" id="ingreso-artesano-expo" name="ingreso-artesano-expo" class="form-control" placeholder="Ejemplo: 10000" data-validacion-tipo="requerido|numero" />
                 </div>
             </div>
           </fieldset>
@@ -48,10 +48,3 @@
       </form>
   </div>
 </div>
-<script>
-    $(document).ready(function(){
-        $("#frm-artesano-expo").submit(function(){
-            return $(this).validate();
-        });
-    });
-</script>

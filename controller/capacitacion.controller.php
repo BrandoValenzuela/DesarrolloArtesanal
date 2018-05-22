@@ -112,6 +112,7 @@ class CapacitacionController{
             $capacitaciones = $this->model->ObtenerPorPeriodo($_SESSION['fecha-inicio-periodo-capacitacion'],$_SESSION['fecha-fin-periodo-capacitacion']);
         }
         if (!empty($capacitaciones)) { 
+            $_SESSION['busqueda'] = 'CapacitacionPorPeriodo';
             $_SESSION['metodo-busqueda'] = 'BuscarPorPeriodo';
             require_once 'view/header.php';
             require_once 'view/capacitaciones/capacitacion-lista.php';

@@ -127,6 +127,7 @@ class TallerController{
             $talleres = $this->model->ObtenerTalleresMunicipio($_SESSION['buscar-taller-mun']);
         }
         if (!empty($talleres)) {
+            $_SESSION['busqueda'] = 'TallerPorMunicipio';
             $_SESSION['metodo-busqueda'] = 'BuscarTallerPorMunicipio';
             require_once 'view/header.php';
             require_once 'view/taller/taller-municipio.php';
@@ -154,6 +155,7 @@ class TallerController{
             $rama = $Rama->Obtener($_SESSION['ramaartesanal']);
         }
         if (!empty($talleres)) { 
+            $_SESSION['busqueda'] = 'TallerPorRamaArtesanal';
             $_SESSION['metodo-busqueda'] = 'BuscarTallerPorRamaArtesanal';
             require_once 'view/header.php';
             require_once 'view/taller/taller-rama.php';

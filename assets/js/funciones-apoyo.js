@@ -60,7 +60,8 @@ $(function() {
    formato = "yy-mm-dd";
    $("#fecha-registro-rfc").datepicker({
       changeMonth: true,
-      changeYear: true
+      changeYear: true,
+      maxDate:"0M"
    });
    $("#fecha-registro-rfc").datepicker( "option", "dateFormat", formato );
 });
@@ -242,7 +243,8 @@ $(function() {
   formato = "yy-mm-dd";
   $("#fecha-otorgamiento-apoyo").datepicker({
     changeMonth: true,
-    changeYear: true
+    changeYear: true,
+    maxDate:"0M"
   });
   $("#fecha-otorgamiento-apoyo").datepicker( "option", "dateFormat", formato );
 })
@@ -270,7 +272,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-inicio-expo").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-inicio-expo").datepicker( "option", "dateFormat", formato );
 })
@@ -279,7 +282,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-fin-expo").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-fin-expo").datepicker( "option", "dateFormat", formato );
 })
@@ -288,7 +292,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-concurso").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-concurso").datepicker( "option", "dateFormat", formato );
 })
@@ -317,7 +322,7 @@ $(document).ready(function(){
 //-------------------- Concurso -------------------------
 
 $(document).ready(function(){
-  $("#lugar-concurso").change(function(){
+  $("#lugar-concurso").click(function(){
     if ($("#lugar-concurso option:selected").val() == 1) {
       $("#monto-premio-concurso").prop("disabled", true);
       $("#monto-premio-concurso").val('');
@@ -357,7 +362,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-inicio-periodo-compra").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-inicio-periodo-compra").datepicker( "option", "dateFormat", formato );
 })
@@ -366,7 +372,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-fin-periodo-compra").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-fin-periodo-compra").datepicker( "option", "dateFormat", formato );
 })
@@ -382,7 +389,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-inicio-periodo-expo").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-inicio-periodo-expo").datepicker( "option", "dateFormat", formato );
 })
@@ -391,7 +399,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-fin-periodo-expo").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-fin-periodo-expo").datepicker( "option", "dateFormat", formato );
 })
@@ -407,7 +416,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-inicio-periodo-concurso").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-inicio-periodo-concurso").datepicker( "option", "dateFormat", formato );
 })
@@ -416,7 +426,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-fin-periodo-concurso").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-fin-periodo-concurso").datepicker( "option", "dateFormat", formato );
 })
@@ -445,6 +456,12 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+   $("#frm-busqueda-tallerista-ap").submit(function(){
+      return $(this).validate();
+   });
+});
+
+$(document).ready(function(){
    $("#buscar-tallerista-curp").blur(function(){
       text = $(this).val();
       $(this).val(text.toUpperCase());
@@ -461,7 +478,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-inicio-capacitacion").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-inicio-capacitacion").datepicker( "option", "dateFormat", formato );
 })
@@ -470,7 +488,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-fin-capacitacion").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-fin-capacitacion").datepicker( "option", "dateFormat", formato );
 })
@@ -496,7 +515,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-inicio-periodo-capacitacion").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-inicio-periodo-capacitacion").datepicker( "option", "dateFormat", formato );
 })
@@ -505,7 +525,8 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-fin-periodo-capacitacion").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate:"0M"
     });
     $("#fecha-fin-periodo-capacitacion").datepicker( "option", "dateFormat", formato );
 })
@@ -542,8 +563,138 @@ $(document).ready(function(){
    });
 });
 
+
+
 $(document).ready(function(){
   $("#frm-tallerista-capacitacion").submit(function(){
     return $(this).validate();
   });
+});
+
+$(document).ready(function(){
+  $("#frm-artesano-expo").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(document).ready(function(){
+    $("#frm-artesano-concurso").submit(function(){
+        return $(this).validate();
+    });
+});
+
+$(document).ready(function(){
+    $("#btn-submit-frm-artesano-concurso").click(function(){
+        $("#monto-premio-concurso").prop("disabled",false);
+    });
+});
+
+$(function() {
+   formato = "yy-mm-dd";
+   $("#fecha-inicio-comodato").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      maxDate:"0M"
+   });
+   $("#fecha-inicio-comodato").datepicker( "option", "dateFormat", formato );
+});
+
+$(document).ready(function(){
+  $("#frm-exposicion").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(document).ready(function(){
+    $("#frm-comodato").submit(function(){
+        return $(this).validate();
+    });
+});
+
+$(document).ready(function(){
+  $("#poseedor-comodato").click(function(){
+    if ($("#poseedor-comodato").val() == '1') {
+      $("#bloque-nombre-poseedor-comodato").addClass('oculto')
+      $("#bloque-direccion-poseedor-comodato").addClass('oculto')
+      $("#bloque-municipio-poseedor-comodato").addClass('oculto')
+      $("#bloque-telefono-poseedor-comodato").addClass('oculto')
+      $("#bloque-curp-artesano-comodato").removeClass('oculto');
+    }else{
+      $("#bloque-nombre-poseedor-comodato").removeClass('oculto');
+      $("#bloque-direccion-poseedor-comodato").removeClass('oculto');
+      $("#bloque-municipio-poseedor-comodato").removeClass('oculto');
+      $("#bloque-telefono-poseedor-comodato").removeClass('oculto');
+      $("#bloque-curp-artesano-comodato").addClass('oculto');
+    }
+  })
+});
+
+$(document).ready(function(){
+  $("#btn-submit-frm-comodato").click(function(){
+    if ($("#poseedor-comodato").val() == '1') {
+      $("#nombre-poseedor-comodato").attr("data-validacion-tipo","");
+      $("#direccion-poseedor-comodato").attr("data-validacion-tipo","");
+      $("#municipio-poseedor-comodato").attr("data-validacion-tipo","");
+      $("#telefono-poseedor-comodato").attr("data-validacion-tipo","");
+      $("#curp-artesano-comodato").attr("data-validacion-tipo",'curp|requerido');
+    }else{
+      $("#nombre-poseedor-comodato").attr("data-validacion-tipo",'requerido');
+      $("#direccion-poseedor-comodato").attr("data-validacion-tipo",'requerido');
+      $("#municipio-poseedor-comodato").attr("data-validacion-tipo",'requerido');
+      $("#telefono-poseedor-comodato").attr("data-validacion-tipo",'numero|requerido');
+      $("#curp-artesano-comodato").attr("data-validacion-tipo","");
+    }
+  })
+});
+
+
+$(document).ready(function(){
+   $("#curp-artesano-comodato").blur(function(){
+      text = $(this).val();
+      $(this).val(text.toUpperCase());
+   });
+});
+
+$(function() {
+   formato = "yy-mm-dd";
+   $("#fecha-inicio-periodo-comodato").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      maxDate:"0M"
+   });
+   $("#fecha-inicio-periodo-comodato").datepicker( "option", "dateFormat", formato );
+});
+
+$(function() {
+   formato = "yy-mm-dd";
+   $("#fecha-fin-periodo-comodato").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      maxDate:"0M"
+   });
+   $("#fecha-fin-periodo-comodato").datepicker( "option", "dateFormat", formato );
+});
+
+$(document).ready(function(){
+    $("#frm-busqueda-comodato-periodo").submit(function(){
+        return $(this).validate();
+    });
+});
+
+$(document).ready(function(){
+    $("#frm-nuevo-producto").submit(function(){
+        return $(this).validate();
+    });
+});
+
+$(document).ready(function(){
+    $("#frm-nueva-rama-artesanal").submit(function(){
+        return $(this).validate();
+    });
+});
+
+$(document).ready(function(){
+    $("#frm-nuevo-producto").submit(function(){
+        return $(this).validate();
+    });
 });

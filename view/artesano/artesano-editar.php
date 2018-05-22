@@ -147,16 +147,16 @@
           </div>
         </div>
         <div class="col-md-3">
-            <div class="form-group">
-              <span class="obligatorio">* </span><label>¿Cómo aprendió el oficio?</label>
-              <select id="aprendizaje-oficio" name="aprendizaje-oficio" class="form-control">
-                <option <?php echo $artesano->aprendizajeOficio == 1 ? 'selected' : ''; ?> value="1">Autodidacta</option>
-                <option <?php echo $artesano->aprendizajeOficio == 2 ? 'selected' : ''; ?> value="2">Cursos</option>
-                <option <?php echo $artesano->aprendizajeOficio == 3 ? 'selected' : ''; ?> value="3">Talleres</option>
-                <option <?php echo $artesano->aprendizajeOficio == 4 ? 'selected' : ''; ?> value="4">Herencia familiar</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <span class="obligatorio">* </span><label>¿Cómo aprendió el oficio?</label>
+            <select id="aprendizaje-oficio" name="aprendizaje-oficio" class="form-control">
+              <option <?php echo $artesano->aprendizajeOficio == 1 ? 'selected' : ''; ?> value="1">Autodidacta</option>
+              <option <?php echo $artesano->aprendizajeOficio == 2 ? 'selected' : ''; ?> value="2">Cursos</option>
+              <option <?php echo $artesano->aprendizajeOficio == 3 ? 'selected' : ''; ?> value="3">Talleres</option>
+              <option <?php echo $artesano->aprendizajeOficio == 4 ? 'selected' : ''; ?> value="4">Herencia familiar</option>
+            </select>
           </div>
+        </div>
         <div class="col-md-3">
           <div class="form-group">
             <span class="obligatorio">* </span><label>Perioricidad:</label>
@@ -223,10 +223,9 @@
           </div>
         </div>
         <div class="oculto" id="si-pertenece-taller">       
-            <div class="col-md-9">
-              <br>
-              <h4>La información referente al taller será capturada al guardar los datos de este formulario.<h4>
-            </div>
+          <div class="col-md-9">
+            <br>
+            <h4>La información referente al taller será capturada al guardar los datos de este formulario.<h4>
           </div>
         </div>
       </fieldset><br>
@@ -314,5 +313,5 @@
         <button id="btn-submit-frm-artesano" class="btn btn-success" onclick="javascript:return confirm('¿Quieres guardar los datos capturados?');">Guardar</button>
       </div>
     </form>
-</div>
+  </div>
 </div>

@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
       <li><a href="?c=Principal&a=IndexCapacitaciones">Capacitaciones</a></li>
-      <?php if ($_SESSION['metodo-busqueda'] == 'BuscarPorPeriodo'): ?>
+      <?php if ($_SESSION['busqueda'] == 'CapacitacionPorPeriodo'): ?>
         <li><a href="?c=Capacitacion&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de capacitaciones</a></li>            
       <?php endif ?>
       <li class="active">Capacitación</li>
@@ -193,6 +193,4 @@
             <button id="btn-submit" class="btn btn-primary">Registrar participante(s)</button>
         </div>
     </form>
-    
-    
 </div>

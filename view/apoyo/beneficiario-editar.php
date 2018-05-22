@@ -23,7 +23,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                     <span class="obligatorio">* </span><label>CURP del artesano:</label>
-                    <input type="text" id="curp-artesano-apoyo" name="curp-artesano-apoyo" value="<?php #echo $alm->Nombre; ?>" class="form-control" placeholder="Ingrese la CURP." data-validacion-tipo="requerido|curp" />
+                    <input type="text" id="curp-artesano-apoyo" name="curp-artesano-apoyo" class="form-control" placeholder="Ingrese la CURP." data-validacion-tipo="requerido|curp" />
                 </div>
               </div>
           </fieldset>
@@ -32,7 +32,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                   <span class="obligatorio">* </span><label>Monto otorgado:</label>
-                  <input type="text" id="monto-apoyo-otorgado" name="monto-apoyo-otorgado" value="<?php #echo $alm->FechaNacimiento; ?>" class="form-control" placeholder="Ejemplo: 10000" data-validacion-tipo="requerido|numero" />
+                  <input type="text" id="monto-apoyo-otorgado" name="monto-apoyo-otorgado" class="form-control" placeholder="Ejemplo: 10000" data-validacion-tipo="requerido|numero" />
                 </div>
             </div>
           </fieldset>
