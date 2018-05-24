@@ -52,8 +52,7 @@ class ComodatoController{
         }
         $this->mostrarMensaje($mensaje);
     }
-
-
+    
     public function BuscarPorId(){
         if (empty($_SESSION)) {
             header('Location: index.php');

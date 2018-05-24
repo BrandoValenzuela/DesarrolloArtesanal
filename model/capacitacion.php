@@ -47,8 +47,7 @@ class Capacitacion{
 			if (strpos($mensaje, 'SQLSTATE[23000]') !== false) {
 				return 'nombre_existente';
 			}else{
-				// header('location: index.php?c=Principal&a=ErrorConexion');
-				die($e->getMessage());
+				header('location: index.php?c=Principal&a=ErrorConexion');
 			}
 		}
 	}
@@ -72,8 +71,7 @@ class Capacitacion{
 			$stm->execute(array($fi,$ff));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			// header('location: index.php?c=Principal&a=ErrorConexion');
-			die($e->getMessage());
+			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 
@@ -88,5 +86,4 @@ class Capacitacion{
 		}
 	}
 }
-
 ?>

@@ -17,7 +17,7 @@ class ProductoArtesano{
 			$productos_previamente_registrados = 0;			
 			while (true) {
 				$producto = current($data->idProducto);
-				$registro = $this->verificarProductoArtesano($producto,$data->curp);
+				$registro = $this->verificarProductoArtesano($data->curp,$producto);
 				if (empty($registro)) {
 					$sql = "INSERT INTO produccionartesano (curp,idProducto) VALUES (?, ?)";
 					$this->pdo->prepare($sql)->execute(
@@ -27,7 +27,7 @@ class ProductoArtesano{
 		                )
 					);
 				}else{
-					$productos_previamente_registrados += 1;
+					$productos_previamente_registrados++;
 				}
 				$producto = next($data->idProducto);
 				if ($producto === false) {
@@ -41,13 +41,11 @@ class ProductoArtesano{
 			}
 		}catch (Exception $e) {
 			header('location: index.php?c=Principal&a=ErrorConexion');
-			// die($e->getMessage());
 		}
 	}
 
 	public function verificarProductoArtesano($curp,$idProducto){
 		try {
-			$result = array();
 			$stm = $this->pdo->prepare("SELECT * FROM produccionartesano WHERE curp = ? AND idProducto = ?");
 			$stm->execute(array($curp,$idProducto));
 			return $stm->fetch(PDO::FETCH_OBJ);
@@ -62,52 +60,8 @@ class ProductoArtesano{
 			$stm->execute(array($curp));
   			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			// die($e->getMessage());
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
-
-	// public function Eliminar($id){
-	// 	try {
-	// 		$stm = $this->pdo
-	// 		            ->prepare("DELETE FROM alumnos WHERE id = ?");			          
-
-	// 		$stm->execute(array($id));
-	// 	}catch (Exception $e){
-	// 		die($e->getMessage());
-	// 	}
-	// }
-
-	// public function Actualizar($data)
-	// {
-	// 	try 
-	// 	{
-	// 		$sql = "UPDATE alumnos SET 
-	// 					Nombre          = ?, 
-	// 					Apellido        = ?,
- //                        Correo        = ?,
-	// 					Sexo            = ?, 
-	// 					FechaNacimiento = ?
-	// 			    WHERE id = ?";
-
-	// 		$this->pdo->prepare($sql)
-	// 		     ->execute(
-	// 			    array(
- //                        $data->Nombre, 
- //                        $data->Correo,
- //                        $data->Apellido,
- //                        $data->Sexo,
- //                        $data->FechaNacimiento,
- //                        $data->id
-	// 				)
-	// 			);
-	// 	} catch (Exception $e) 
-	// 	{
-	// 		die($e->getMessage());
-	// 	}
-	// }
-
-
 }
-
 ?>

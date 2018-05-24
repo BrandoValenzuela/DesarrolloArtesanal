@@ -71,7 +71,6 @@ class Concurso{
   			}
   			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			// die($e->getMessage());
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}

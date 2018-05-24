@@ -51,7 +51,6 @@ class EmpleadoColaborador{
 		}
 	}
 
-
 	public function ObtenerColaboradores($idTaller){
 		try {
 			$result = array();
@@ -71,7 +70,6 @@ class EmpleadoColaborador{
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
 			header('location: index.php?c=Principal&a=ErrorConexion');
-						// die($e->getMessage());
 		}
 	}
 
@@ -83,7 +81,6 @@ class EmpleadoColaborador{
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
 			header('location: index.php?c=Principal&a=ErrorConexion');
-			// die($e->getMessage());
 		}
 	}
 }

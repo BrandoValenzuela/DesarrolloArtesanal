@@ -1,28 +1,15 @@
-// -------------------- Funciones inicio sesion -.-------------------------//
 $(document).ready(function(){
    $("#login-form").submit(function(){
       return $(this).validate();
    });
 });
 
-$("#login-submit").click(function(){
-  if ($("#usuario").val() != '' && $("#contraseña").val() != '') {
-    var datos = {
-      usuario: $("#usuario").val(), 
-      contraseña: sha256($("#contraseña").val())
-    };
-    $.post("?c=Sesion&a=IniciarSesion",datos,function(data, status){
-      if (data == "acceso_concedido") {
-        location.href = "?c=Principal";             
-      }else{ 
-        alert("Usuario o contraseña equivocados. Vuelve a intentar.");
-      }
-    });
-  }
+$(document).ready(function(){
+  $("#pwd").blur(function(){
+    $("#contraseña").val(sha256($("#pwd").val()));
+  })
 });
 
-//-------------------------------------------------------------------------//
-// -------------------- Funciones "Form" Artesano -------------------------//
 $(document).ready(function(){
    $("#btn-submit-frm-artesano").click(function(){
       $("#frm-artesano").submit(function(){
@@ -116,8 +103,6 @@ $(document).ready(function(){
    }
 });
 
-//-------------------------------------------------------------------------//
-// -------------------- Funciones "Form" Taller ---------------------------//
 $(document).ready(function(){
    $("#frm-taller-artesano").submit(function(){
       return $(this).validate();
@@ -200,8 +185,7 @@ $(document).ready(function(){
       $("#empleos-totales").val('');
    })
 })
-//-------------------------------------------------------------------------//
-//-------------------- Funciones pagina principal -------------------------//
+
 $(document).ready(function(){
   $("#frm-busqueda-artesano-curp").submit(function(){
     return $(this).validate();
@@ -237,8 +221,7 @@ $(document).ready(function(){
     return $(this).validate();
   });
 });
-//-------------------------------------------------------------------------//
-//----------------------- Funciones Form apoyo ----------------------------//
+
 $(function() {
   formato = "yy-mm-dd";
   $("#fecha-otorgamiento-apoyo").datepicker({
@@ -267,7 +250,7 @@ $(document).ready(function(){
         $(this).val(text.toUpperCase());
     });
 });
-//-------------------------------------------------------------------------//
+
 $(function() {
     formato = "yy-mm-dd";
     $("#fecha-inicio-expo").datepicker({
@@ -319,8 +302,6 @@ $(document).ready(function(){
     });
 });
 
-//-------------------- Concurso -------------------------
-
 $(document).ready(function(){
   $("#lugar-concurso").click(function(){
     if ($("#lugar-concurso option:selected").val() == 1) {
@@ -337,8 +318,7 @@ $(document).ready(function(){
     return $(this).validate();
   });
 });
-//-------------------------------------------------------
-//-------------------- Compra -------------------------
+
 $(document).ready(function(){
     $("#curp-vendedor").blur(function(){
         text = $(this).val();
@@ -563,8 +543,6 @@ $(document).ready(function(){
    });
 });
 
-
-
 $(document).ready(function(){
   $("#frm-tallerista-capacitacion").submit(function(){
     return $(this).validate();
@@ -647,7 +625,6 @@ $(document).ready(function(){
   })
 });
 
-
 $(document).ready(function(){
    $("#curp-artesano-comodato").blur(function(){
       text = $(this).val();
@@ -697,4 +674,76 @@ $(document).ready(function(){
     $("#frm-nuevo-producto").submit(function(){
         return $(this).validate();
     });
+});
+
+$(document).ready(function(){
+   $("#frm-nueva-incidencia").submit(function(){
+      return $(this).validate();
+   });
+});
+
+$(document).ready(function(){
+   $("#curp-artesano-incidencia").blur(function(){
+      text = $(this).val();
+      $(this).val(text.toUpperCase());
+   });
+});
+
+$(document).ready(function(){
+  $("#confirmacion-contraseña-intermedia").blur(function(){
+    var pwd_a = $("#contraseña-intermedia").val();
+    var pwd_b = $("#confirmacion-contraseña-intermedia").val();
+    if (pwd_a == pwd_b) {
+      $("#coincidencia").addClass('oculto');
+      $("#contraseña-secretario").val(sha256($("#contraseña-intermedia").val()));
+    }else{
+      $("#coincidencia").removeClass('oculto')
+      $("#contraseña-secretario").val('');
+    }
+  })
+});
+
+$(document).ready(function(){
+   $("#frm-nuevo-secretario").submit(function(){
+      return $(this).validate();
+   });
+});
+
+$(document).ready(function(){
+  $("#frm-busqueda-incidencia-curp").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(document).ready(function(){
+  $("#buscar-incidencia-curp").blur(function(){
+    text = $(this).val();
+    $(this).val(text.toUpperCase());
+  });
+});
+
+$(document).ready(function(){
+  $("#frm-busqueda-incidencia-periodo").submit(function(){
+    return $(this).validate();
+  });
+});
+
+$(function() {
+   formato = "yy-mm-dd";
+   $("#fecha-inicio-periodo-incidencias").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      maxDate:"0M"
+   });
+   $("#fecha-inicio-periodo-incidencias").datepicker( "option", "dateFormat", formato );
+});
+
+$(function() {
+   formato = "yy-mm-dd";
+   $("#fecha-fin-periodo-incidencias").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      maxDate:"0M"
+   });
+   $("#fecha-fin-periodo-incidencias").datepicker( "option", "dateFormat", formato );
 });

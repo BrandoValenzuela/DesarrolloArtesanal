@@ -44,29 +44,6 @@ class Beneficiario{
 		}
 	}
 
-	// public function Obtener($curp){
-	// 	try {
-	// 		$result = array();
-	// 		$stm = $this->pdo->prepare("SELECT * FROM participanteexpo WHERE curp = ?");
-	// 		$stm->execute(array($curp));
-	// 		return $stm->fetch(PDO::FETCH_OBJ);
-	// 	} catch (Exception $e) {
-	// 		// die($e->getMessage());
-	// 		header('location: index.php?c=Principal&a=ErrorConexion');
-	// 	}
-	// }
-
-	// public function ObtenerConcursos($curp){
-	// 	try {
-	// 		$result = array();
-	// 		$stm = $this->pdo->prepare("SELECT nombre,municipio,entidad,posicion,montoGanado FROM concurso INNER JOIN participantecon ON concurso.idConcurso = participantecon.idConcurso WHERE participantecon.curp = ?");
-	// 		$stm->execute(array($curp));
-	// 		return $stm->fetchAll(PDO::FETCH_OBJ);
-	// 	} catch (Exception $e) {
-	// 		header('location: index.php?c=Principal&a=ErrorConexion');
-	// 	}
-	// }
-
 	public function ObtenerBeneficiarios($idBeneficiario){
 		try {
 			$result = array();

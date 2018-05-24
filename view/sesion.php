@@ -16,15 +16,15 @@
 				<img class="img img-responsive" src="assets/images/Logo.png" class="img-rounded" width="460" height="345">
 				<h3 class="text-center">Iniciar sesión</h3>
 				<hr>
-				<form id="login-form" action="" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="id"/>
+				<form id="login-form" action="?c=Sesion&a=IniciarSesion" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="contraseña" id="contraseña"/>
 					<div class="form-group">
-						<label>Usuario:</label>
+						<label>ID Usuario:</label>
 						<input type="text" name="usuario" id="usuario" tabindex="1" class="form-control" placeholder="Usuario" value="" data-validacion-tipo="requerido">
 					</div>
 					<div class="form-group">
 						<label>Contraseña:</label>
-						<input type="password" name="contraseña" id="contraseña" tabindex="2" class="form-control" placeholder="Contraseña" data-validacion-tipo="requerido">
+						<input type="password" name="pwd" id="pwd" tabindex="2" class="form-control" placeholder="Contraseña" data-validacion-tipo="requerido">
 					</div>
 					<br>
 					<div class="form-group">

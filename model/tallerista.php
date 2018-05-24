@@ -82,39 +82,5 @@ class Tallerista{
 			header('Location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
-
-	// public function Actualizar($data){
-	// 	try {
-	// 		$sql = "UPDATE artesano SET 
-	// 			    nombre = ?,
-	// 			    aPaterno = ?,
-	// 			    aMaterno = ?,
-	// 			    domicilio = ?,
-	// 			    localidad = ?,
-	// 			    municipio = ?,
-	// 			    telefono = ?,
-	// 			    email = ?,
-	// 			    especialidad = ?
-	// 			    WHERE curp = ?";
-	// 		$this->pdo->prepare($sql)
-	// 		     ->execute(
-	// 			    array(				
-	// 				    $data->nombre,
-	// 				    $data->aPaterno,
-	// 				    $data->aMaterno,
-	// 				    $data->domicilio,
-	// 			    	$data->localidad,
-	// 			    	$data->municipio,
-	// 				    $data->telefono,
-	// 				    $data->email,
-	// 				    $data->especialidad,
-	// 				    $data->curp
- //                	)
-	// 			);
-	// 		return 'exito';
-	// 	} catch (Exception $e){
-	// 		die($e->getMessage());
-	// 	}
-	// }
 }
 ?>

@@ -60,8 +60,6 @@ class Taller{
 			}else{
 				header('Location: index.php?c=Principal&a=ErrorConexion');
 			}
-
-			// die($e->getMessage());
 		}
 	}
 
@@ -128,37 +126,5 @@ class Taller{
 			header('Location: index.php?c=Principal&a=ErrorConexion');	
 		}
 	}
-
-	// public function Actualizar($data)
-	// {
-	// 	try 
-	// 	{
-	// 		$sql = "UPDATE alumnos SET 
-	// 					Nombre          = ?, 
-	// 					Apellido        = ?,
- //                        Correo        = ?,
-	// 					Sexo            = ?, 
-	// 					FechaNacimiento = ?
-	// 			    WHERE id = ?";
-
-	// 		$this->pdo->prepare($sql)
-	// 		     ->execute(
-	// 			    array(
- //                        $data->Nombre, 
- //                        $data->Correo,
- //                        $data->Apellido,
- //                        $data->Sexo,
- //                        $data->FechaNacimiento,
- //                        $data->id
-	// 				)
-	// 			);
-	// 	} catch (Exception $e) 
-	// 	{
-	// 		die($e->getMessage());
-	// 	}
-	// }
-
-
 }
-
 ?>

@@ -55,7 +55,7 @@ class Apoyo{
 			$stm->execute(array($idApoyo));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			die($e->getMessage());
+			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 
@@ -66,8 +66,7 @@ class Apoyo{
 			$stm->execute(array($curp));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			// header('location: index.php?c=Principal&a=ErrorConexion');
-			die($e->getMessage());
+			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 }

@@ -8,7 +8,6 @@
 </div>
 <div class="container">
     <h1 class="page-header text-center">Búesqueda: <?php echo $mes.' de '.$año;?></h1>
-
     <div class="col-md-12">
     <table class="table table-striped table-hover">
         <thead>

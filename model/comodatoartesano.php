@@ -36,7 +36,6 @@ class ComodatoArtesano{
 				return 'artesano_inexistente';
 			}
 		}catch (Exception $e) {
-			// die($e->getMessage());
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
@@ -48,7 +47,7 @@ class ComodatoArtesano{
 			$stm->execute(array($curp));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			die($e->getMessage());
+			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 
@@ -59,7 +58,7 @@ class ComodatoArtesano{
 			$stm->execute(array($fi,$ff));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			die($e->getMessage());
+			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 }

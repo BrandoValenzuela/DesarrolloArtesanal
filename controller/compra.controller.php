@@ -66,7 +66,6 @@ class CompraController{
         }
     }
 
-
     public function BuscarPorPeriodo(){
         if (empty($_SESSION)) {
             header('Location: index.php');
@@ -94,7 +93,6 @@ class CompraController{
             $this->mostrarMensaje($mensaje);
         }
     }
-
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;

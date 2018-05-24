@@ -58,21 +58,8 @@ class TalleristaCapacitacion{
 			return 'exito';			
 		}catch (Exception $e) {
 			die($e->getMessage());
-			// header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
-
-	// public function Obtener($curp){
-	// 	try {
-	// 		$result = array();
-	// 		$stm = $this->pdo->prepare("SELECT * FROM participanteexpo WHERE curp = ?");
-	// 		$stm->execute(array($curp));
-	// 		return $stm->fetch(PDO::FETCH_OBJ);
-	// 	} catch (Exception $e) {
-	// 		// die($e->getMessage());
-	// 		header('location: index.php?c=Principal&a=ErrorConexion');
-	// 	}
-	// }
 
 	//Recupera las capacitaciones que un tallerista ha impartido
 	public function ObtenerCapacitacionesTallerista($curp){
@@ -97,18 +84,6 @@ class TalleristaCapacitacion{
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
-
-	// //Recupera las capacitaciones en las que un artesano ha sido tallerista
-	// public function ObtenerCapacitacionesImpartidas($curp){
-	// 	try {
-	// 		$stm = $this->pdo
-	// 		          ->prepare("SELECT artesanotallerista.*,capacitacion.nombre FROM artesanotallerista INNER JOIN capacitacion ON artesanotallerista.idCapacitacion = capacitacion.idCapacitacion WHERE curp = ?");
-	// 		$stm->execute(array($curp));
-	// 		return $stm->fetchAll(PDO::FETCH_OBJ);
-	// 	} catch (Exception $e) {
-	// 		header('Location: index.php?c=Principal&a=ErrorConexion');
-	// 	}
-	// }
 
 	//Recupera los individuos registrados como talleristas participantes en una capacitacion en específico.
 	public function ObtenerTalleristas($idCapacitacion){
@@ -152,8 +127,7 @@ class TalleristaCapacitacion{
 			$stm->execute(array($curp,$idCapacitacion));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			die($e->getMessage());
-			// header('location: index.php?c=Principal&a=ErrorConexion');
+			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
 }

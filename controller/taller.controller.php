@@ -14,10 +14,6 @@ class TallerController{
         if (empty($_SESSION)) {
             header('Location: index.php');
         }
-//     $artesano = new Artesano();
-//     if(isset($_REQUEST['id'])){
-//         $artesano = $this->model->Obtener($_REQUEST['id']);
-//     }
         $talleres = $this->model->ObtenerTalleres();
         $Rama = new RamaArtesanal();
         $ramas = $Rama->Listar();
@@ -76,9 +72,6 @@ class TallerController{
             }
             $this->mostrarMensaje($mensaje);
         }
-        // $artesano->id > 0 
-        //     ? $this->model->Actualizar($artesano)
-        //     : $this->model->Registrar($artesano);
     }
 
     public function Buscar(){

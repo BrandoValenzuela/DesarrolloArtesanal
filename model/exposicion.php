@@ -84,8 +84,7 @@ class Exposicion{
 			$stm->execute(array($fi,$ff));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			header('location: index.php?c=Principal&a=ErrorConexion');
-			// die($e->getMessage());
+			die($e->getMessage());
 		}
 	}
 

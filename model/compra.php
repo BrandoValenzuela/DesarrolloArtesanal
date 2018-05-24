@@ -59,7 +59,7 @@ class Compra{
 			$stm->execute(array($fi,$ff));
   			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			header('location: index.php?c=Principal&a=ErrorConexion');
+			die($e->getMessage());
 		}
 	}
 
@@ -70,7 +70,6 @@ class Compra{
 			$stm->execute(array($curp));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			// header('location: index.php?c=Principal&a=ErrorConexion');
 			die($e->getMessage());
 		}
 	}

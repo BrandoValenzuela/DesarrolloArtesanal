@@ -33,12 +33,7 @@ class RamaartesanalController{
     public function mostrarMensaje($msj){
         $mensaje = $msj;
         $redireccion = '?c=Principal&a=Index';
-        $ramas = $_SESSION['ramas'];
-        $artesanos = $_SESSION['artesanos'];
-        $talleres = $_SESSION['talleres'];
-        $productos = $_SESSION['productos'];
         require_once 'view/header.php';
-        require_once 'view/principal.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }

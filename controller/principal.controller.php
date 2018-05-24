@@ -7,6 +7,7 @@ include_once 'model/concurso.php';
 include_once 'model/exposicion.php';
 include_once 'model/tallerista.php';
 include_once 'model/capacitacion.php';
+include_once 'model/secretario.php';
 
 class PrincipalController{
 
@@ -30,9 +31,21 @@ class PrincipalController{
         $expos = $Exposicion->ObtenerExposTotales();
         $talleristas = $Tallerista->ObtenerTalleristasTotales();
         $capacitaciones = $Capacitacion->ObtenerCapacitacionesTotales();
-        $_SESSION = ['artesanos' => $artesanos,'talleres' => $talleres, 'ramas' => $ramas, 'productos' => $productos];
         require_once 'view/header.php';
         require_once 'view/principal.php';
+        require_once 'view/footer.php';
+    }
+
+    public function IndexAdministracion(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        $Secretario = new Secretario();
+        $secretarios = $Secretario->Listar();
+        $_SESSION['busqueda'] = 'IncidenciaPorCURP';
+        $_SESSION['metodo-busqueda'] = 'BuscarPorCURP';
+        require_once 'view/header.php';
+        require_once 'view/administracion/principal-administracion.php';
         require_once 'view/footer.php';
     }
 
@@ -93,9 +106,12 @@ class PrincipalController{
             'titulo' => 'Error de conexión',
             'cuerpo' => 'Se presentó un error de conexión a la base de datos.</br>Intenta más tarde.'
         );
-        $redireccion = 'index.php?c=Principal';
+        if ($_SESSION['permisos'] == '1') {
+            $redireccion = 'index.php?c=Principal&a=IndexAdministracion';
+        }else{
+            $redireccion = 'index.php?c=Principal';
+        }
         require_once 'view/header.php';
-        require_once 'view/principal.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
     }

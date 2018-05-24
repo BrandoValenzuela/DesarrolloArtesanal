@@ -18,13 +18,24 @@ class SesionController{
         $sesion = new Sesion();
         $sesion->usuario = $_REQUEST['usuario'];
         $sesion->contraseña = $_REQUEST['contraseña'];
-        $resultado = $this->model->verificarCredenciales($sesion);
-        if ($resultado == 'acceso_concedido') {
-            $_SESSION['usuario'] = $_REQUEST['usuario'];
-            $_SESSION['metodo-busqueda'] = '';
-            echo "acceso_concedido";
-        }else{
-            echo "acceso_denegado";
+        $usuario = $this->model->verificarCredenciales($sesion);
+        if (!empty($usuario)) {
+            $_SESSION = ['usuario' => $usuario->nombre, 'permisos' => $usuario->permisos];
+            $GLOBALS['permisos'] = $_SESSION['permisos'];
+            if ($usuario->permisos == 0) {
+                header('location: ?c=Principal');
+            }else{
+                header('location: ?c=Principal&a=IndexAdministracion');
+            }
+        }
+        else{
+            $mensaje = array(
+                    'titulo' => 'Sesion no iniciada',
+                    'cuerpo' => 'El usuario o contraseña son incorrectos.<br>Vuelve a intentar.'
+                );
+            $redireccion = 'index.php';
+            include_once 'view/sesion.php';
+            require_once 'view/modal-mensajes.php';
         }
     }
     

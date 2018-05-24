@@ -13,5 +13,6 @@
         <script src="assets/js/ini.js"></script>
         <script src="assets/js/jquery.anexsoft-validator.js"></script>
         <script src="assets/js/funciones-apoyo.js"></script>
+        <script src="assets/js/sha256.min.js"></script>
     </body>
 </html>

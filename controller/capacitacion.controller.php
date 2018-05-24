@@ -94,8 +94,6 @@ class CapacitacionController{
         }
     }
 
-    
-
     public function BuscarPorPeriodo(){
         if (empty($_SESSION)) {
             header('Location: index.php');

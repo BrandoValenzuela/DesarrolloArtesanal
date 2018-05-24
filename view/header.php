@@ -14,7 +14,11 @@
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="?Principal"><span class="navbar-brand">Desarrollo Artesanal</span></a>
+                <?php if ($_SESSION['permisos'] == '0'): ?>
+                <a href="?Principal"><span class="navbar-brand">Desarrollo Artesanal</span></a>                    
+                <?php else: ?>
+                <span class="navbar-brand">Desarrollo Artesanal</span>                    
+                <?php endif ?>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -23,6 +27,7 @@
                 </button>               
             </div>
             <ul class="nav navbar-nav navbar-right collapse navbar-collapse">
+                <?php if ($_SESSION['permisos'] == '0'): ?>                    
                 <li>
                     <a href="?c=Principal&a=IndexApoyosCompras"><span class="glyphicon glyphicon-usd"></span> Apoyos y compras</a>
                 </li>
@@ -35,6 +40,7 @@
                 <li>
                     <a href="?c=Principal&a=IndexConcursosExposiciones"><span class="glyphicon glyphicon-globe"></span> Concursos y exposiciones</a>
                 </li>
+                <?php endif ?>
                 <li class="dropdown hidden-xs">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>
                     <ul class="dropdown-menu">

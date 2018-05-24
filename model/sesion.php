@@ -14,7 +14,7 @@ class Sesion{
 
 	public function verificarCredenciales(Sesion $data){
 		try{
-			$stm = $this->pdo->prepare("SELECT nombre,contrasenia FROM usuario WHERE nombre = ? AND contrasenia = ?");
+			$stm = $this->pdo->prepare("SELECT nombre,permisos FROM usuario WHERE apodo = ? AND contrasenia = ?");
 			$stm->execute(
 				array(
                     $data->usuario, 
@@ -22,7 +22,7 @@ class Sesion{
 				)
 			);
 			$resultado = $stm->fetch(PDO::FETCH_OBJ);
-			return $acceso = !empty($resultado) ? "acceso_concedido" : "acceso_denegado";
+			return $resultado;
 		}
 		catch(Exception $e){
 			die($e->getMessage());
@@ -32,6 +32,7 @@ class Sesion{
 	public function cerrarSesion(){
 		session_start();
 		session_unset();
+		session_destroy();
 		header('Location: index.php?c=Sesion&a=Index');
 	}
 }

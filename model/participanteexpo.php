@@ -52,7 +52,6 @@ class ParticipanteExpo{
 			$stm->execute(array($curp));
 			return $stm->fetch(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
-			// die($e->getMessage());
 			header('location: index.php?c=Principal&a=ErrorConexion');
 		}
 	}
