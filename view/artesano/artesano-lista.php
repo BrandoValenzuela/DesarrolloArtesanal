@@ -7,7 +7,15 @@
     </ol>  
 </div>
 <div class="container">
-    <h1 class="page-header text-center">Artesanos con apellido: <?php echo $apellido;?></h1>
+    <?php if (isset($apellido)): ?>
+        <h1 class="page-header text-center">Artesanos con apellido: <?php echo $apellido;?></h1>
+    <?php else: ?>
+        <?php if (isset($nombre_rama)): ?>
+        <h1 class="page-header text-center">Artesanos de la rama: <?php echo $nombre_rama;?></h1>
+        <?php else: ?>
+        <h1 class="page-header text-center">Artesanos de la rama: <?php echo $nombre_producto;?></h1>
+        <?php endif ?>
+    <?php endif ?>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>

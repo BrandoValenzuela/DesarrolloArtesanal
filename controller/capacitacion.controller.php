@@ -32,31 +32,35 @@ class CapacitacionController{
     }
 
     public function Guardar(){
-        $capacitacion = new Capacitacion();    
-        $capacitacion->nombre = $_REQUEST['nombre-capacitacion'];
-        $capacitacion->domicilio = $_REQUEST['direccion-capacitacion'];
-        $capacitacion->localidad = $_REQUEST['localidad-capacitacion'];
-        $capacitacion->municipio = $_REQUEST['municipio-capacitacion'];
-        $capacitacion->idRamaArtesanal = $_REQUEST['rama-artesanal-capacitacion'];
-        $capacitacion->otraArea = $_REQUEST['tema-capacitacion'];
-        $capacitacion->fechaInicio = $_REQUEST['fecha-inicio-capacitacion'];
-        $capacitacion->fechaFin = $_REQUEST['fecha-fin-capacitacion'];
-        $capacitacion->material = $_REQUEST['material-capacitacion'];
-        $capacitacion->montoMaterial = $_REQUEST['inversion-capacitacion'];
-        $capacitacion->observacion = $_REQUEST['observacion-capacitacion'];
-        $resultado = $this->model->Registrar($capacitacion);
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Exito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
-            $this->mostrarMensaje($mensaje);
+        $capacitacion = new Capacitacion();
+        if (!empty($_REQUEST['nombre-capacitacion'])) {
+            $capacitacion->nombre = $_REQUEST['nombre-capacitacion'];
+            $capacitacion->domicilio = $_REQUEST['direccion-capacitacion'];
+            $capacitacion->localidad = $_REQUEST['localidad-capacitacion'];
+            $capacitacion->municipio = $_REQUEST['municipio-capacitacion'];
+            $capacitacion->idRamaArtesanal = $_REQUEST['rama-artesanal-capacitacion'];
+            $capacitacion->otraArea = $_REQUEST['tema-capacitacion'];
+            $capacitacion->fechaInicio = $_REQUEST['fecha-inicio-capacitacion'];
+            $capacitacion->fechaFin = $_REQUEST['fecha-fin-capacitacion'];
+            $capacitacion->material = $_REQUEST['material-capacitacion'];
+            $capacitacion->montoMaterial = $_REQUEST['inversion-capacitacion'];
+            $capacitacion->observacion = $_REQUEST['observacion-capacitacion'];
+            $resultado = $this->model->Registrar($capacitacion);
+            if ($resultado == 'exito') {
+                $mensaje = array(
+                    'titulo' => 'Exito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+                $this->mostrarMensaje($mensaje);
+            }else{
+                $mensaje = array(
+                    'titulo' => 'Capacitación existente',
+                    'cuerpo' => 'Ya existe registrada una capacitación con el nombre: <br>"'.$_REQUEST['nombre-capacitacion'].'".'
+                );
+                $this->mostrarMensaje($mensaje);
+            }
         }else{
-            $mensaje = array(
-                'titulo' => 'Capacitación existente',
-                'cuerpo' => 'Ya existe registrada una capacitación con el nombre: <br>"'.$_REQUEST['nombre-capacitacion'].'".'
-            );
-            $this->mostrarMensaje($mensaje);
+            header('Location: index.php?c=Principal');
         }
     }
 

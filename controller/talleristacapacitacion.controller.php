@@ -27,33 +27,37 @@ class TalleristacapacitacionController{
     }
      
     public function Guardar(){
-        $tallerista_capacitacion = new TalleristaCapacitacion();    
-        $tallerista_capacitacion->idCapacitacion = $_REQUEST['id-capacitacion'];
-        $tallerista_capacitacion->curp = $_REQUEST['curp-tallerista-capacitacion'];
-        $tallerista_capacitacion->pagoTallerista = $_REQUEST['pago-tallerista-capacitacion'];
-        $tallerista_capacitacion->formaPago = $_REQUEST['forma-pago-tallerista'];
-        $tallerista_capacitacion->registroIndividuo = $_REQUEST['registro'];
-        $resultado = $this->model->Registrar($tallerista_capacitacion);
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Exito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
-            $this->mostrarMensaje($mensaje);
-        }else{
-            if ($resultado == 'nombre_existente') {
+        $tallerista_capacitacion = new TalleristaCapacitacion();
+        if (!empty($_REQUEST['id-capacitacion'])) {
+            $tallerista_capacitacion->idCapacitacion = $_REQUEST['id-capacitacion'];
+            $tallerista_capacitacion->curp = $_REQUEST['curp-tallerista-capacitacion'];
+            $tallerista_capacitacion->pagoTallerista = $_REQUEST['pago-tallerista-capacitacion'];
+            $tallerista_capacitacion->formaPago = $_REQUEST['forma-pago-tallerista'];
+            $tallerista_capacitacion->registroIndividuo = $_REQUEST['registro'];
+            $resultado = $this->model->Registrar($tallerista_capacitacion);
+            if ($resultado == 'exito') {
                 $mensaje = array(
-                    'titulo' => 'Tallerista ya inscrito',
-                    'cuerpo' => 'Este tallerista ya se encuentra registrado en la capacitación:<br>'.$_SESSION['nombre-capacitacion']
+                    'titulo' => 'Exito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
                 );
-            }elseif ($resultado == 'registro_inexistente'){
-                $mensaje = array(
-                    'titulo' => 'CURP no encontrada',
-                    'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el tallerista debe estar registrado en el sistema.'
-                );
+                $this->mostrarMensaje($mensaje);
+            }else{
+                if ($resultado == 'nombre_existente') {
+                    $mensaje = array(
+                        'titulo' => 'Tallerista ya inscrito',
+                        'cuerpo' => 'Este tallerista ya se encuentra registrado en la capacitación:<br>'.$_SESSION['nombre-capacitacion']
+                    );
+                }elseif ($resultado == 'registro_inexistente'){
+                    $mensaje = array(
+                        'titulo' => 'CURP no encontrada',
+                        'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el tallerista debe estar registrado en el sistema.'
+                    );
+                }
+                $this->mostrarMensaje($mensaje);
             }
-            $this->mostrarMensaje($mensaje);
-        }
+        }else{
+            header('Location: index.php?c=Principal');
+        }  
     }
 
     public function mostrarMensaje($msj){

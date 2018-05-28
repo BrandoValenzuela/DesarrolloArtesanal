@@ -27,22 +27,26 @@ class ProductoartesanoController{
     }
      
     public function Guardar(){
-        $productos = new ProductoArtesano();    
-        $productos->curp = $_REQUEST['curp-artesano'];
-        $productos->idProducto = $_REQUEST['producto-artesano'];
-        $resultado = $this->model->Registrar($productos);
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Exito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
+        $productos = new ProductoArtesano();
+        if (!empty($_REQUEST['curp-artesano'])) {
+            $productos->curp = $_REQUEST['curp-artesano'];
+            $productos->idProducto = $_REQUEST['producto-artesano'];
+            $resultado = $this->model->Registrar($productos);
+            if ($resultado == 'exito') {
+                $mensaje = array(
+                    'titulo' => 'Exito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+            }else{
+                $mensaje = array(
+                    'titulo' => 'Atencion',
+                    'cuerpo' => 'Algunos productos que se ingresaron ya habían sido registrados con anterioridad.<br>Sin embargo, los datos se almacenaron con exito.'
+                );
+            }
+            $this->mostrarMensaje($mensaje);
         }else{
-            $mensaje = array(
-                'titulo' => 'Atencion',
-                'cuerpo' => 'Algunos productos que se ingresaron ya habían sido registrados con anterioridad.<br>Sin embargo, los datos se almacenaron con exito.'
-            );
+            header('Location: index.php?c=Principal');
         }
-        $this->mostrarMensaje($mensaje);
     }
 
     public function mostrarMensaje($msj){

@@ -30,47 +30,51 @@ class TallerController{
     public function Guardar(){
         $taller = new Taller();    
         $emp_col = new EmpleadoColaborador();
-        $emp_col->curp = $_REQUEST['curp-artesano-taller'];
-        $emp_col->tipoParticipacion = $_REQUEST['participacion-artesano']; 
-        $emp_col->idTaller = $_REQUEST['taller-de-empleado'];
-        $emp_col->sueldoMensual = $_REQUEST['sueldo-mensual'];
-        $taller->curp = $_REQUEST['curp-artesano-taller'];
-        $taller->tipoParticipacion = $_REQUEST['participacion-artesano'];
-        $taller->idRamaArtesanal = $_REQUEST['rama-artesanal-taller'];
-        $taller->nombre = $_REQUEST['nombre-taller'];
-        $taller->domicilio = $_REQUEST['direccion-taller'];
-        $taller->localidad = $_REQUEST['localidad-taller'];
-        $taller->municipio = $_REQUEST['municipio-taller'];
-        $taller->empTiempoCompleto = $_REQUEST['empleos-tc'];
-        $taller->empPorHora = $_REQUEST['empleos-hr'];
-        $taller->empIMSS = $_REQUEST['empleos-imss'];
-        $taller->empTotales = $_REQUEST['empleos-totales'];
-        $taller->ingresoMensual = $_REQUEST['ingreso-mensual-taller'];
-        $taller->gastoMensual = $_REQUEST['gasto-mensual-taller'];
-        if ($_REQUEST['participacion-artesano'] == '3') {
-            $resultado = $this->model->Registrar($taller);
-        }else{
-            $resultado = $emp_col->Registrar($emp_col);
-        }
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Éxito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
-            $this->mostrarMensaje($mensaje);
-        }else{
-            if ($resultado == 'taller_registrado') {
-                $mensaje = array(
-                    'titulo' => 'Taller registrado',
-                    'cuerpo' => 'El nombre de taller que ingresaste ya se encuentra registrado.'
-                    );    
+        if (!empty($_REQUEST['curp-artesano-taller'])) {
+            $emp_col->curp = $_REQUEST['curp-artesano-taller'];
+            $emp_col->tipoParticipacion = $_REQUEST['participacion-artesano']; 
+            $emp_col->idTaller = $_REQUEST['taller-de-empleado'];
+            $emp_col->sueldoMensual = $_REQUEST['sueldo-mensual'];
+            $taller->curp = $_REQUEST['curp-artesano-taller'];
+            $taller->tipoParticipacion = $_REQUEST['participacion-artesano'];
+            $taller->idRamaArtesanal = $_REQUEST['rama-artesanal-taller'];
+            $taller->nombre = $_REQUEST['nombre-taller'];
+            $taller->domicilio = $_REQUEST['direccion-taller'];
+            $taller->localidad = $_REQUEST['localidad-taller'];
+            $taller->municipio = $_REQUEST['municipio-taller'];
+            $taller->empTiempoCompleto = $_REQUEST['empleos-tc'];
+            $taller->empPorHora = $_REQUEST['empleos-hr'];
+            $taller->empIMSS = $_REQUEST['empleos-imss'];
+            $taller->empTotales = $_REQUEST['empleos-totales'];
+            $taller->ingresoMensual = $_REQUEST['ingreso-mensual-taller'];
+            $taller->gastoMensual = $_REQUEST['gasto-mensual-taller'];
+            if ($_REQUEST['participacion-artesano'] == '3') {
+                $resultado = $this->model->Registrar($taller);
             }else{
-                $mensaje = array(
-                    'titulo' => 'CURP no encontrada',
-                    'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
-                );
+                $resultado = $emp_col->Registrar($emp_col);
             }
-            $this->mostrarMensaje($mensaje);
+            if ($resultado == 'exito') {
+                $mensaje = array(
+                    'titulo' => 'Éxito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+                $this->mostrarMensaje($mensaje);
+            }else{
+                if ($resultado == 'taller_registrado') {
+                    $mensaje = array(
+                        'titulo' => 'Taller registrado',
+                        'cuerpo' => 'El nombre de taller que ingresaste ya se encuentra registrado.'
+                        );    
+                }else{
+                    $mensaje = array(
+                        'titulo' => 'CURP no encontrada',
+                        'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
+                    );
+                }
+                $this->mostrarMensaje($mensaje);
+            }
+        }else{
+            header('Location: index.php?c=Principal');
         }
     }
 

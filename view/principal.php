@@ -26,7 +26,7 @@
           <ol>
             <?php foreach ($ramas as $rama): ?>
               <?php if ($rama->nombre != 'Otra'): ?>
-                <li><?php echo $rama->nombre; ?></li>
+                <li><a href="?c=Artesano&a=BuscarPorRama&idRamaArtesanal=<?php echo $rama->idRamaArtesanal;?>&nombre-rama=<?php echo $rama->nombre;?>"><?php echo $rama->nombre; ?></a></li>
               <?php endif ?>
             <?php endforeach ?>
           </ol>
@@ -35,7 +35,7 @@
           <h5 class="bold">Productos</h5>
           <ol>
             <?php foreach ($productos as $producto): ?>
-              <li><?php echo $producto->nombre; ?></li>
+              <li><a href="?c=Artesano&a=BuscarPorProducto&idProducto=<?php echo $producto->idProducto;?>&nombre-producto=<?php echo $producto->nombre;?>"><?php echo $producto->nombre; ?></a></li>
             <?php endforeach ?>
           </ol>
         </div>
@@ -63,17 +63,29 @@
       </div>
     </div>
     <div class="panel panel-default">
-      <div class="panel-heading bold">Ramas y productos artesanales</div>
+      <div class="panel-heading bold">Registros adicionales</div>
         <div class="panel-body">
+          <div id="nuevo-corredor">
+            <a href="javascript:void(0)" data-toggle="collapse" data-target="#frm-nuevo-corredor" >Registrar nuevo corredor artesanal</a>
+            <form class="collapse" id="frm-nuevo-corredor" name="frm-nuevo-corredor" action="?c=Corredor&a=Guardar" method="post" enctype="multipart/form-data">
+               <div class="form-group">
+                  <label></label>
+                  <input type="text" id="nuevo-corredor" name="nuevo-corredor" class="form-control" placeholder="Nombre corredor artesanal" data-validacion-tipo="requerido" />
+               </div>
+               <div class="text-right">
+                  <button id="btn-submit-frm-nuevo-corredor" class="btn btn-success" onclick="javascript:return confirm('¿Quieres guardar los datos capturados?');">Guardar</button>
+               </div>
+            </form>
+          </div>
           <div id="nuevo-producto-artesanal">
-            <a href="javascript:void(0)" data-toggle="collapse" data-target="#frm-nuevo-producto" >Registrar nuevo producto</a>
+            <a href="javascript:void(0)" data-toggle="collapse" data-target="#frm-nuevo-producto" >Registrar nuevo producto artesanal</a>
             <form class="collapse" id="frm-nuevo-producto" name="frm-nuevo-producto" action="?c=Producto&a=Guardar" method="post" enctype="multipart/form-data">
                <div class="form-group">
                   <label></label>
                   <input type="text" id="nuevo-producto" name="nuevo-producto" class="form-control" placeholder="Producto artesanal" data-validacion-tipo="requerido" />
                </div>
                <div class="text-right">
-                  <button id="btn-submit-frm-artesano" class="btn btn-success" onclick="javascript:return confirm('¿Quieres guardar los datos capturados?');">Guardar</button>
+                  <button id="btn-submit-frm-producto" class="btn btn-success" onclick="javascript:return confirm('¿Quieres guardar los datos capturados?');">Guardar</button>
                </div>
             </form>
           </div>
@@ -85,10 +97,11 @@
                   <input type="text" id="nueva-rama-artesanal" name="nueva-rama-artesanal" class="form-control" placeholder="Rama artesanal" data-validacion-tipo="requerido" />
                </div>
                <div class="text-right">
-                  <button id="btn-submit-frm-artesano" class="btn btn-success" onclick="javascript:return confirm('¿Quieres guardar los datos capturados?');">Guardar</button>
+                  <button id="btn-submit-frm-nueva-rama" class="btn btn-success" onclick="javascript:return confirm('¿Quieres guardar los datos capturados?');">Guardar</button>
                </div>
             </form>
           </div>
+          
        </div>
     </div>
   </div>

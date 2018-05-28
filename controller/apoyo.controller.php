@@ -19,24 +19,29 @@ class ApoyoController{
     }
      
     public function Guardar(){
-        $apoyo = new Apoyo();    
-        $apoyo->nombre = $_REQUEST['nombre-apoyo'];
-        $apoyo->descripcion = $_REQUEST['descripcion-apoyo'];
-        $apoyo->fechaOtorgamiento = $_REQUEST['fecha-otorgamiento-apoyo'];
-        $apoyo->monto = $_REQUEST['monto-apoyo'];
-        $resultado = $this->model->Registrar($apoyo);
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Exito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
+        $apoyo = new Apoyo();
+        if (!empty($_REQUEST['nombre-apoyo'])) {
+            $apoyo->nombre = $_REQUEST['nombre-apoyo'];
+            $apoyo->descripcion = $_REQUEST['descripcion-apoyo'];
+            $apoyo->fechaOtorgamiento = $_REQUEST['fecha-otorgamiento-apoyo'];
+            $apoyo->monto = $_REQUEST['monto-apoyo'];
+            $resultado = $this->model->Registrar($apoyo);
+            if ($resultado == 'exito') {
+                $_SESSION['busqueda'] = 'ApoyoPorNombre';
+                $_SESSION['nombre-apoyo'] = $_REQUEST['nombre-apoyo'];
+                $mensaje = array(
+                    'titulo' => 'Exito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+            }else{
+                $mensaje = array(
+                    'titulo' => 'Apoyo existente',
+                    'cuerpo' => 'Ya existe registrado un apoyo con el nombre:<br>"'.$_REQUEST['nombre-apoyo'].'".'
+                );
+            }
             $this->mostrarMensaje($mensaje);
         }else{
-            $mensaje = array(
-                'titulo' => 'Apoyo existente',
-                'cuerpo' => 'Ya existe registrado un apoyo con el nombre:<br>"'.$_REQUEST['nombre-apoyo'].'".'
-            );
-            $this->mostrarMensaje($mensaje);
+            header('Location: index.php?c=Principal');
         }
     }
 
@@ -52,6 +57,27 @@ class ApoyoController{
         }else{
             $nombre = $_SESSION['buscar-nombre-apoyo'];
             $apoyo = $this->model->ObtenerPorId($_SESSION['buscar-id-apoyo']);
+        }
+        if (!empty($apoyo)) {
+            $beneficiario = new Beneficiario();
+            $beneficiarios = $beneficiario->ObtenerBeneficiarios($apoyo->idApoyo);
+            require_once 'view/header.php';
+            require_once 'view/apoyo/apoyo.php';
+            require_once 'view/footer.php'; 
+        }
+    }
+
+    public function BuscarPorNombre(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['nombre-apoyo'])) {
+            $_SESSION['nombre-apoyo'] = $_REQUEST['nombre-apoyo'];
+            $nombre = $_REQUEST['nombre-apoyo'];
+            $apoyo = $this->model->ObtenerPorNombre($_REQUEST['nombre-apoyo']);
+        }else{
+            $nombre = $_SESSION['nombre-apoyo'];
+            $apoyo = $this->model->ObtenerPorNombre($_SESSION['nombre-apoyo']);
         }
         if (!empty($apoyo)) {
             $beneficiario = new Beneficiario();
@@ -94,7 +120,11 @@ class ApoyoController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        $redireccion = 'index.php?c=Principal&a=IndexApoyosCompras';
+        if ($_SESSION['busqueda'] == 'ApoyoPorNombre') {
+            $redireccion = 'index.php?c=Apoyo&a=BuscarPorNombre&nombre-apoyo='.$_SESSION['nombre-apoyo'];
+        }else{
+            $redireccion = 'index.php?c=Principal&a=IndexApoyosCompras';
+        }
         require_once 'view/header.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';

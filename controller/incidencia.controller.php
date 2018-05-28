@@ -9,23 +9,27 @@ class IncidenciaController{
     }
      
     public function Guardar(){
-        $incidencia = new Incidencia();    
-        $incidencia->curp = $_REQUEST['curp-artesano-incidencia'];
-        $incidencia->observacion = $_REQUEST['observacion-incidencia'];
-        $incidencia->informante = $_REQUEST['nombre-informante-incidencia'];
-        $resultado = $this->model->Registrar($incidencia);
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Exito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
-        }elseif ($resultado == 'registro_inexistente'){
-            $mensaje = array(
-                'titulo' => 'CURP no encontrada',
-                'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
-            );
+        $incidencia = new Incidencia();
+        if (!empty($_REQUEST['curp-artesano-incidencia'])) {
+            $incidencia->curp = $_REQUEST['curp-artesano-incidencia'];
+            $incidencia->observacion = $_REQUEST['observacion-incidencia'];
+            $incidencia->informante = $_REQUEST['nombre-informante-incidencia'];
+            $resultado = $this->model->Registrar($incidencia);
+            if ($resultado == 'exito') {
+                $mensaje = array(
+                    'titulo' => 'Exito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+            }elseif ($resultado == 'registro_inexistente'){
+                $mensaje = array(
+                    'titulo' => 'CURP no encontrada',
+                    'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
+                );
+            }
+            $this->mostrarMensaje($mensaje);
+        }else{
+            header('Location: index.php?c=Principal');
         }
-        $this->mostrarMensaje($mensaje);
     }
 
     public function BuscarPorCURP(){

@@ -131,6 +131,28 @@ class Artesano{
 		}
 	}
 
+	public function ObtenerPorRama($idRamaArtesanal){
+		try {
+			$stm = $this->pdo
+			          ->prepare("SELECT * FROM artesano WHERE idRamaArtesanal = ?");
+			$stm->execute(array($idRamaArtesanal));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('Location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}	
+
+	public function ObtenerPorProducto($idProducto){
+		try {
+			$stm = $this->pdo
+			          ->prepare("SELECT * FROM artesano INNER JOIN produccionartesano ON artesano.curp = produccionartesano.curp WHERE produccionartesano.idProducto = ?");
+			$stm->execute(array($idProducto));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('Location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}
+
 	public function GenerarFolioArtesano(){
 		try {
 			$stm = $this->pdo

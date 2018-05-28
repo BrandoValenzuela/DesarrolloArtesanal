@@ -23,34 +23,38 @@ class ComodatoController{
     public function Guardar(){
         $comodato_artesano = new ComodatoArtesano();
         $comodato_externo = new ComodatoExterno();
-        if ($_REQUEST['poseedor-comodato'] == '1') {
-            $comodato_artesano->curp = $_REQUEST['curp-artesano-comodato'];
-            $comodato_artesano->folio = $_REQUEST['folio-comodato'];
-            $comodato_artesano->fechaInicio = $_REQUEST['fecha-inicio-comodato'];
-            $comodato_artesano->bienesComodatados = $_REQUEST['bienes-comodato'];
-            $resultado = $this->modelA->Registrar($comodato_artesano);
+        if (!empty($_REQUEST['curp-artesano-comodato'] || !empty($_REQUEST['nombre-poseedor-comodato']))) {
+            if ($_REQUEST['poseedor-comodato'] == '1') {
+                $comodato_artesano->curp = $_REQUEST['curp-artesano-comodato'];
+                $comodato_artesano->folio = $_REQUEST['folio-comodato'];
+                $comodato_artesano->fechaInicio = $_REQUEST['fecha-inicio-comodato'];
+                $comodato_artesano->bienesComodatados = $_REQUEST['bienes-comodato'];
+                $resultado = $this->modelA->Registrar($comodato_artesano);
+            }else{
+                $comodato_externo->folio = $_REQUEST['folio-comodato'];
+                $comodato_externo->fechaInicio = $_REQUEST['fecha-inicio-comodato'];
+                $comodato_externo->bienesComodatados = $_REQUEST['bienes-comodato'];
+                $comodato_externo->nombrePoseedorComodato = $_REQUEST['nombre-poseedor-comodato'];
+                $comodato_externo->domicilioPoseedorComodato = $_REQUEST['direccion-poseedor-comodato'];
+                $comodato_externo->municipioPoseedorComodato = $_REQUEST['municipio-poseedor-comodato'];
+                $comodato_externo->telefonoPoseedorComodato = $_REQUEST['telefono-poseedor-comodato'];
+                $resultado = $this->modelB->Registrar($comodato_externo);
+            }
+            if ($resultado == 'exito') {
+                $mensaje = array(
+                    'titulo' => 'Éxito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+            }else if ($resultado == 'artesano_inexistente'){
+                $mensaje = array(
+                    'titulo' => 'CURP no encontrada',
+                    'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
+                );
+            }
+            $this->mostrarMensaje($mensaje);
         }else{
-            $comodato_externo->folio = $_REQUEST['folio-comodato'];
-            $comodato_externo->fechaInicio = $_REQUEST['fecha-inicio-comodato'];
-            $comodato_externo->bienesComodatados = $_REQUEST['bienes-comodato'];
-            $comodato_externo->nombrePoseedorComodato = $_REQUEST['nombre-poseedor-comodato'];
-            $comodato_externo->domicilioPoseedorComodato = $_REQUEST['direccion-poseedor-comodato'];
-            $comodato_externo->municipioPoseedorComodato = $_REQUEST['municipio-poseedor-comodato'];
-            $comodato_externo->telefonoPoseedorComodato = $_REQUEST['telefono-poseedor-comodato'];
-            $resultado = $this->modelB->Registrar($comodato_externo);
+            header('Location: index.php?c=Principal');
         }
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Éxito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
-        }else if ($resultado == 'artesano_inexistente'){
-            $mensaje = array(
-                'titulo' => 'CURP no encontrada',
-                'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
-            );
-        }
-        $this->mostrarMensaje($mensaje);
     }
     
     public function BuscarPorId(){

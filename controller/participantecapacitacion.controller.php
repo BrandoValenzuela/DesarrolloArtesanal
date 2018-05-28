@@ -27,15 +27,19 @@ class ParticipantecapacitacionController{
     }
      
     public function Guardar(){
-        $artesano_capacitacion = new ParticipanteCapacitacion();    
-        $artesano_capacitacion->idCapacitacion = $_REQUEST['id-capacitacion'];
-        $artesano_capacitacion->curp = $_REQUEST['curp-artesano-capacitacion'];
-        $resultado = $this->model->Registrar($artesano_capacitacion);
-        $mensaje = array(
-            'titulo' => 'Datos registrados',
-            'cuerpo' => $resultado
-        );
-        $this->mostrarMensaje($mensaje);
+        $artesano_capacitacion = new ParticipanteCapacitacion();
+        if (!empty($_REQUEST['id-capacitacion'])) {
+            $artesano_capacitacion->idCapacitacion = $_REQUEST['id-capacitacion'];
+            $artesano_capacitacion->curp = $_REQUEST['curp-artesano-capacitacion'];
+            $resultado = $this->model->Registrar($artesano_capacitacion);
+            $mensaje = array(
+                'titulo' => 'Datos registrados',
+                'cuerpo' => $resultado
+            );
+            $this->mostrarMensaje($mensaje);
+        }else{
+            header('Location: index.php?c=Principal');
+        }
     }
 
     public function mostrarMensaje($msj){

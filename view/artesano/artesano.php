@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
       <li><a href="?c=Principal&a=IndexArtesanos">Artesanos</a></li>
-      <?php if ($_SESSION['busqueda'] == 'ArtesanoPorApellido'): ?>
+      <?php if ($_SESSION['busqueda'] == 'ArtesanoPorApellido' || $_SESSION['busqueda'] == 'ArtesanoPorRama'): ?>
         <li><a href="?c=Artesano&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de artesanos</a></li>          
       <?php endif ?>
       <li class="active">Hoja de datos</li>
@@ -630,7 +630,7 @@
         </div>
     </fieldset>
     <fieldset>
-        <legend>Apoyos recividos</legend>
+        <legend>Apoyos recibidos</legend>
         <div class="col-md-12 table-responsive">
             <?php if (!empty($apoyos)): ?>
             <table class="table table-striped table-hover">

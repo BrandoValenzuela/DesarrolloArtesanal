@@ -27,31 +27,35 @@ class ParticipanteconcursoController{
     }
      
     public function Guardar(){
-        $participante_concurso = new ParticipanteConcurso();    
-        $participante_concurso->IdConcurso = $_REQUEST['id-concurso'];
-        $participante_concurso->CURP = $_REQUEST['curp-artesano-concurso'];
-        $participante_concurso->Posicion = $_REQUEST['lugar-concurso'];
-        $participante_concurso->MontoPremio = $_REQUEST['monto-premio-concurso'];
-        $resultado = $this->model->Registrar($participante_concurso);
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Exito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
-            $this->mostrarMensaje($mensaje);
-        }else{
-            if ($resultado == 'nombre_existente') {
+        $participante_concurso = new ParticipanteConcurso();  
+        if (!empty($_REQUEST['id-concurso'])) {
+            $participante_concurso->IdConcurso = $_REQUEST['id-concurso'];
+            $participante_concurso->CURP = $_REQUEST['curp-artesano-concurso'];
+            $participante_concurso->Posicion = $_REQUEST['lugar-concurso'];
+            $participante_concurso->MontoPremio = $_REQUEST['monto-premio-concurso'];
+            $resultado = $this->model->Registrar($participante_concurso);
+            if ($resultado == 'exito') {
                 $mensaje = array(
-                    'titulo' => 'Artesano ya inscrito',
-                    'cuerpo' => 'El artesano ya se encuentra registrado en el concurso:<br>'.$_SESSION['nombre-concurso']
+                    'titulo' => 'Exito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
                 );
-            }elseif ($resultado == 'registro_inexistente'){
-                $mensaje = array(
-                    'titulo' => 'CURP no encontrada',
-                    'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
-                );
+                $this->mostrarMensaje($mensaje);
+            }else{
+                if ($resultado == 'nombre_existente') {
+                    $mensaje = array(
+                        'titulo' => 'Artesano ya inscrito',
+                        'cuerpo' => 'El artesano ya se encuentra registrado en el concurso:<br>'.$_SESSION['nombre-concurso']
+                    );
+                }elseif ($resultado == 'registro_inexistente'){
+                    $mensaje = array(
+                        'titulo' => 'CURP no encontrada',
+                        'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
+                    );
+                }
+                $this->mostrarMensaje($mensaje);
             }
-            $this->mostrarMensaje($mensaje);
+        } else{
+            header('Location: index.php?c=Principal');
         }
     }
 

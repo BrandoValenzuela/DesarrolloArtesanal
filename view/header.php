@@ -42,7 +42,7 @@
                 </li>
                 <?php endif ?>
                 <li class="dropdown hidden-xs">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)"><span class="glyphicon glyphicon-option-vertical"></span></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="?c=Sesion&a=CerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a>

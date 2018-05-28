@@ -19,30 +19,34 @@ class ExposicionController{
     }
      
     public function Guardar(){
-        $exposicion = new Exposicion();    
-        $exposicion->Nombre = $_REQUEST['nombre-expo'];
-        $exposicion->Direccion = $_REQUEST['direccion-expo'];
-        $exposicion->Localidad = $_REQUEST['localidad-expo'];
-        $exposicion->Municipio = $_REQUEST['municipio-expo'];
-        $exposicion->Entidad = $_REQUEST['entidad-expo'];
-        $exposicion->FechaInicioExpo = $_REQUEST['fecha-inicio-expo'];
-        $exposicion->FechaFinExpo = $_REQUEST['fecha-fin-expo'];
-        $exposicion->TipoApoyo = $_REQUEST['tipo-apoyo-expo'];
-        $exposicion->IngresosExpo = $_REQUEST['ingreso-expo'];
-        $exposicion->InversionExpo = $_REQUEST['inversion-expo'];
-        $resultado = $this->model->Registrar($exposicion);
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Exito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
-            $this->mostrarMensaje($mensaje);
+        $exposicion = new Exposicion();
+        if (!empty($_REQUEST['nombre-expo'])) {
+            $exposicion->Nombre = $_REQUEST['nombre-expo'];
+            $exposicion->Direccion = $_REQUEST['direccion-expo'];
+            $exposicion->Localidad = $_REQUEST['localidad-expo'];
+            $exposicion->Municipio = $_REQUEST['municipio-expo'];
+            $exposicion->Entidad = $_REQUEST['entidad-expo'];
+            $exposicion->FechaInicioExpo = $_REQUEST['fecha-inicio-expo'];
+            $exposicion->FechaFinExpo = $_REQUEST['fecha-fin-expo'];
+            $exposicion->TipoApoyo = $_REQUEST['tipo-apoyo-expo'];
+            $exposicion->IngresosExpo = $_REQUEST['ingreso-expo'];
+            $exposicion->InversionExpo = $_REQUEST['inversion-expo'];
+            $resultado = $this->model->Registrar($exposicion);
+            if ($resultado == 'exito') {
+                $mensaje = array(
+                    'titulo' => 'Exito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+                $this->mostrarMensaje($mensaje);
+            }else{
+                $mensaje = array(
+                    'titulo' => 'Exposición existente',
+                    'cuerpo' => 'Ya existe registrado una exposición con el nombre "'.$_REQUEST['nombre-expo'].'".'
+                );
+                $this->mostrarMensaje($mensaje);
+            }
         }else{
-            $mensaje = array(
-                'titulo' => 'Exposición existente',
-                'cuerpo' => 'Ya existe registrado una exposición con el nombre "'.$_REQUEST['nombre-expo'].'".'
-            );
-            $this->mostrarMensaje($mensaje);
+            header('Location: index.php?c=Principal');
         }
     }
 

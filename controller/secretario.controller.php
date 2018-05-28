@@ -9,23 +9,27 @@ class SecretarioController{
     }
      
     public function Guardar(){
-        $secretario = new Secretario();    
-        $secretario->nombre = $_REQUEST['nombre-secretario-sistema'];
-        $secretario->apodo = $_REQUEST['ID-secretario'];
-        $secretario->contrasenia = $_REQUEST['contraseña-secretario'];
-        $resultado = $this->model->Registrar($secretario);
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Exito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
-        }elseif ($resultado == 'registro_existente'){
-            $mensaje = array(
-                'titulo' => 'Usuario registrado',
-                'cuerpo' => 'Los datos que ingresaste ya se encuentran almacenados en el sistema.'
-            );
+        $secretario = new Secretario();
+        if (!empty($_REQUEST['nombre-secretario-sistema'])) {
+            $secretario->nombre = $_REQUEST['nombre-secretario-sistema'];
+            $secretario->apodo = $_REQUEST['ID-secretario'];
+            $secretario->contrasenia = $_REQUEST['contraseña-secretario'];
+            $resultado = $this->model->Registrar($secretario);
+            if ($resultado == 'exito') {
+                $mensaje = array(
+                    'titulo' => 'Exito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+            }elseif ($resultado == 'registro_existente'){
+                $mensaje = array(
+                    'titulo' => 'Usuario registrado',
+                    'cuerpo' => 'Los datos que ingresaste ya se encuentran almacenados en el sistema.'
+                );
+            }
+            $this->mostrarMensaje($mensaje);
+        } else{
+            header('Location: index.php?c=Principal&a=IndexAdministracion');
         }
-        $this->mostrarMensaje($mensaje);
     }
 
     public function Eliminar(){

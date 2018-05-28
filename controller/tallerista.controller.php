@@ -27,34 +27,38 @@ class TalleristaController{
     
     public function Guardar(){
         $tallerista = new Tallerista();
-        $tallerista->curp = $_REQUEST['curp-tallerista'];
-        $tallerista->nombre = $_REQUEST['nombre-tallerista'];        
-        $tallerista->aPaterno = $_REQUEST['aPaterno-tallerista'];
-        $tallerista->aMaterno = $_REQUEST['aMaterno-tallerista'];
-        $tallerista->domicilio = $_REQUEST['domicilio-tallerista'];
-        $tallerista->localidad = $_REQUEST['localidad-tallerista'];
-        $tallerista->municipio = $_REQUEST['municipio-tallerista'];
-        $tallerista->telefonoFijo = $_REQUEST['telefono-tallerista'];
-        $tallerista->email = $_REQUEST['email-tallerista'];
-        $tallerista->especialidad = $_REQUEST['especialidad-tallerista'];
-        $registrar_actualizar = $_REQUEST['registrar-actualizar'];
-        if ($registrar_actualizar == 0) {
-            $resultado =  $this->model->Registrar($tallerista);          
-        }elseif ($registrar_actualizar == 1) {
-            $resultado =  $this->model->Actualizar($tallerista);
-        }
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Éxito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
+        if (!empty($_REQUEST['curp-tallerista'])) {
+            $tallerista->curp = $_REQUEST['curp-tallerista'];
+            $tallerista->nombre = $_REQUEST['nombre-tallerista'];        
+            $tallerista->aPaterno = $_REQUEST['aPaterno-tallerista'];
+            $tallerista->aMaterno = $_REQUEST['aMaterno-tallerista'];
+            $tallerista->domicilio = $_REQUEST['domicilio-tallerista'];
+            $tallerista->localidad = $_REQUEST['localidad-tallerista'];
+            $tallerista->municipio = $_REQUEST['municipio-tallerista'];
+            $tallerista->telefonoFijo = $_REQUEST['telefono-tallerista'];
+            $tallerista->email = $_REQUEST['email-tallerista'];
+            $tallerista->especialidad = $_REQUEST['especialidad-tallerista'];
+            $registrar_actualizar = $_REQUEST['registrar-actualizar'];
+            if ($registrar_actualizar == 0) {
+                $resultado =  $this->model->Registrar($tallerista);          
+            }elseif ($registrar_actualizar == 1) {
+                $resultado =  $this->model->Actualizar($tallerista);
+            }
+            if ($resultado == 'exito') {
+                $mensaje = array(
+                    'titulo' => 'Éxito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+            }else{
+                $mensaje = array(
+                    'titulo' => 'Registro existente',
+                    'cuerpo' => 'Los datos ingresados ya se encuentran registrados en el sistema.'
+                );
+            }
+            $this->mostrarMensaje($mensaje);
         }else{
-            $mensaje = array(
-                'titulo' => 'Registro existente',
-                'cuerpo' => 'Los datos ingresados ya se encuentran registrados en el sistema.'
-            );
+            header('Location: index.php?c=Principal');
         }
-        $this->mostrarMensaje($mensaje);
     }
 
     public function BuscarPorCURP(){

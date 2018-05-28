@@ -179,9 +179,72 @@ class ArtesanoController{
         }
     }
 
+    public function BuscarPorRama(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['idRamaArtesanal'])) {
+            $_SESSION['idRamaArtesanal'] = $_REQUEST['idRamaArtesanal'];
+            $_SESSION['nombre-rama'] = $_REQUEST['nombre-rama'];
+            $rama = $_REQUEST['idRamaArtesanal'];
+            $nombre_rama = $_REQUEST['nombre-rama'];
+            $artesanos = $this->model->ObtenerPoRrama($_REQUEST['idRamaArtesanal']);
+        }else{
+            $rama = $_SESSION['idRamaArtesanal'];
+            $nombre_rama = $_SESSION['nombre-rama'];
+            $artesanos = $this->model->ObtenerPorRama($_SESSION['idRamaArtesanal']);
+        }
+        if (!empty($artesanos)) {
+            $_SESSION['busqueda'] = 'ArtesanoPorRama';
+            $_SESSION['metodo-busqueda'] = 'BuscarPorrama';
+            require_once 'view/header.php';
+            require_once 'view/artesano/artesano-lista.php';
+            require_once 'view/footer.php'; 
+        }else{
+            $mensaje = array(
+                'titulo' => 'Sin registros',
+                'cuerpo' => 'No hay artesanos registardos pertenecientes a la rama artesanal:<br>'.$nombre_rama.'.'
+            );
+            $this->mostrarMensaje($mensaje);
+        }
+    }
+
+    public function BuscarPorProducto(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['idProducto'])) {
+            $_SESSION['idProducto'] = $_REQUEST['idProducto'];
+            $_SESSION['nombre-producto'] = $_REQUEST['nombre-producto'];
+            $producto = $_REQUEST['idProducto'];
+            $nombre_producto = $_REQUEST['nombre-producto'];
+            $artesanos = $this->model->ObtenerPorProducto($_REQUEST['idProducto']);
+        }else{
+            $producto = $_SESSION['idProducto'];
+            $nombre_producto = $_SESSION['nombre-producto'];
+            $artesanos = $this->model->ObtenerPorProducto($_SESSION['idProducto']);
+        }
+        if (!empty($artesanos)) {
+            $_SESSION['busqueda'] = 'ArtesanoPorProducto';
+            $_SESSION['metodo-busqueda'] = 'BuscarPorproducto';
+            require_once 'view/header.php';
+            require_once 'view/artesano/artesano-lista.php';
+            require_once 'view/footer.php'; 
+        }else{
+            $mensaje = array(
+                'titulo' => 'Sin registros',
+                'cuerpo' => 'No hay artesanos registardos que confeccionen el producto artesanal:<br>'.$nombre_producto.'.'
+            );
+            $this->mostrarMensaje($mensaje);
+        }
+    }
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        $redireccion = 'index.php?c=Principal&a=IndexArtesanos';
+        if ($_SESSION['busqueda']=='ArtesanoPorRama' || $_SESSION['busqueda']=='ArtesanoPorProducto') {
+            $redireccion = 'index.php?c=Principal&Index';
+        }else{
+            $redireccion = 'index.php?c=Principal&a=IndexArtesanos';
+        }
         require_once 'view/header.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';

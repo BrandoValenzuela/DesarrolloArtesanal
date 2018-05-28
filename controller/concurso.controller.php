@@ -20,27 +20,31 @@ class ConcursoController{
      
     public function Guardar(){
         $concurso = new Concurso();    
-        $concurso->Nombre = $_REQUEST['nombre-concurso'];
-        $concurso->Direccion = $_REQUEST['direccion-concurso'];
-        $concurso->Municipio = $_REQUEST['municipio-concurso'];
-        $concurso->Entidad = $_REQUEST['entidad-concurso'];
-        $concurso->Alcance = $_REQUEST['alcance-concurso'];
-        $concurso->Fecha = $_REQUEST['fecha-concurso'];
-        $concurso->MontoTotalEstatal = $_REQUEST['mte-concurso'];
-        $concurso->MontoTotalFederal = $_REQUEST['mtf-concurso'];
-        $resultado = $this->model->Registrar($concurso);
-        if ($resultado == 'exito') {
-            $mensaje = array(
-                'titulo' => 'Exito',
-                'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-            );
-            $this->mostrarMensaje($mensaje);
+        if (!empty($_REQUEST['nombre-concurso'])) {
+            $concurso->Nombre = $_REQUEST['nombre-concurso'];
+            $concurso->Direccion = $_REQUEST['direccion-concurso'];
+            $concurso->Municipio = $_REQUEST['municipio-concurso'];
+            $concurso->Entidad = $_REQUEST['entidad-concurso'];
+            $concurso->Alcance = $_REQUEST['alcance-concurso'];
+            $concurso->Fecha = $_REQUEST['fecha-concurso'];
+            $concurso->MontoTotalEstatal = $_REQUEST['mte-concurso'];
+            $concurso->MontoTotalFederal = $_REQUEST['mtf-concurso'];
+            $resultado = $this->model->Registrar($concurso);
+            if ($resultado == 'exito') {
+                $mensaje = array(
+                    'titulo' => 'Exito',
+                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+                );
+                $this->mostrarMensaje($mensaje);
+            }else{
+                $mensaje = array(
+                    'titulo' => 'Concurso existente',
+                    'cuerpo' => 'Ya existe registrado un concurso con el nombre:<br>"'.$_REQUEST['nombre-concurso'].'".'
+                );
+                $this->mostrarMensaje($mensaje);
+            }
         }else{
-            $mensaje = array(
-                'titulo' => 'Concurso existente',
-                'cuerpo' => 'Ya existe registrado un concurso con el nombre:<br>"'.$_REQUEST['nombre-concurso'].'".'
-            );
-            $this->mostrarMensaje($mensaje);
+            header('Location: index.php?c=Principal');
         }
     }
 
