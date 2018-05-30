@@ -32,7 +32,7 @@ class TalleristaController{
             $tallerista->nombre = $_REQUEST['nombre-tallerista'];        
             $tallerista->aPaterno = $_REQUEST['aPaterno-tallerista'];
             $tallerista->aMaterno = $_REQUEST['aMaterno-tallerista'];
-            $tallerista->domicilio = $_REQUEST['domicilio-tallerista'];
+            $tallerista->domicilio = $_REQUEST['direccion-tallerista'];
             $tallerista->localidad = $_REQUEST['localidad-tallerista'];
             $tallerista->municipio = $_REQUEST['municipio-tallerista'];
             $tallerista->telefonoFijo = $_REQUEST['telefono-tallerista'];

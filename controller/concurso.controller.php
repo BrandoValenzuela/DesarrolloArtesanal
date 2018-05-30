@@ -31,6 +31,8 @@ class ConcursoController{
             $concurso->MontoTotalFederal = $_REQUEST['mtf-concurso'];
             $resultado = $this->model->Registrar($concurso);
             if ($resultado == 'exito') {
+                $_SESSION['busqueda'] = 'ConcursoPorNombre';
+                $_SESSION['nombre-concurso'] = $_REQUEST['nombre-concurso'];
                 $mensaje = array(
                     'titulo' => 'Exito',
                     'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
@@ -54,7 +56,7 @@ class ConcursoController{
         }
         if (!empty($_REQUEST['buscar-id-concurso'])) {
             $_SESSION['buscar-id-concurso'] = $_REQUEST['buscar-id-concurso'];
-            $_SESSION['buscar-nombre-concurso'] = $_REQUEST['buscar-id-concurso'];
+            $_SESSION['buscar-nombre-concurso'] = $_REQUEST['buscar-nombre-concurso'];
             $nombre = $_REQUEST['buscar-nombre-concurso'];
             $concurso = $this->model->ObtenerPorId($_REQUEST['buscar-id-concurso']);
         }else{
@@ -67,15 +69,37 @@ class ConcursoController{
             require_once 'view/header.php';
             require_once 'view/concurso/concurso.php';
             require_once 'view/footer.php'; 
+        }
+        // else{
+        //     $mensaje = array(
+        //         'titulo' => 'No hay exposiciones.',
+        //         'cuerpo' => 'No se encontraron concursos con el nombre "'.$nombre.'"'
+        //     );
+        //     require_once 'view/header.php';
+        //     require_once 'view/principal.php';
+        //     require_once 'view/modal-mensajes.php';
+        //     require_once 'view/footer.php';
+        // }
+    }
+
+    public function BuscarPorNombre(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['nombre-concurso'])) {
+            $_SESSION['nombre-concurso'] = $_REQUEST['nombre-concurso'];
+            $nombre = $_REQUEST['nombre-concurso'];
+            $concurso = $this->model->ObtenerPorNombre($_REQUEST['nombre-concurso']);
         }else{
-            $mensaje = array(
-                'titulo' => 'No hay exposiciones.',
-                'cuerpo' => 'No se encontraron concursos con el nombre "'.$nombre.'"'
-            );
+            $nombre = $_SESSION['nombre-concurso'];
+            $concurso = $this->model->ObtenerPorNombre($_SESSION['nombre-concurso']);
+        }
+        if (!empty($concurso)) {
+            $artesano_concurso = new ParticipanteConcurso();
+            $participantes = $artesano_concurso->ObtenerParticipantes($concurso->idConcurso);
             require_once 'view/header.php';
-            require_once 'view/principal.php';
-            require_once 'view/modal-mensajes.php';
-            require_once 'view/footer.php';
+            require_once 'view/concurso/concurso.php';
+            require_once 'view/footer.php'; 
         }
     }
 
@@ -92,7 +116,7 @@ class ConcursoController{
             $concursos = $this->model->ObtenerPorConcepto($_SESSION['buscar-concurso-concepto']);
         }
         if (!empty($concursos)) {
-            $_SESSION['busqueda'] = 'ConcurosPorConcepto';
+            $_SESSION['busqueda'] = 'ConcursosPorConcepto';
             $_SESSION['metodo-busqueda'] = 'BuscarPorConcepto';
             require_once 'view/header.php';
             require_once 'view/concurso/concurso-lista.php';
@@ -122,7 +146,7 @@ class ConcursoController{
             $concursos = $this->model->ObtenerPorPeriodo($_SESSION['fecha-inicio-periodo-concurso'],$_SESSION['fecha-fin-periodo-concurso']);
         }
         if (!empty($concursos)) {
-            $_SESSION['busqueda'] = 'ConcurosPorPeriodo';
+            $_SESSION['busqueda'] = 'ConcursosPorPeriodo';
             $_SESSION['metodo-busqueda'] = 'BuscarPorPeriodo';
             require_once 'view/header.php';
             require_once 'view/concurso/concurso-lista.php';
@@ -138,7 +162,11 @@ class ConcursoController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        $redireccion = 'index.php?c=Principal&a=IndexConcursosExposiciones';
+        if ($_SESSION['busqueda'] == 'ConcursoPorNombre') {
+            $redireccion = 'index.php?c=Concurso&a=BuscarPorNombre&nombre-concurso='.$_SESSION['nombre-concurso'];
+        }else{
+            $redireccion = 'index.php?c=Principal&a=IndexConcursosExposiciones';
+        }
         require_once 'view/header.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';

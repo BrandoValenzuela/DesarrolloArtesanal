@@ -34,7 +34,7 @@
           <fieldset>                  
             <div class="col-md-3">
                 <div class="form-group">
-                    <span class="obligatorio">* </span><label>CURP del artesano:</label>
+                    <span class="obligatorio">* </span><label>CURP:</label>
                     <input type="text" id="curp-tallerista-capacitacion" name="curp-tallerista-capacitacion" class="form-control" placeholder="Ingrese la CURP." data-validacion-tipo="requerido|curp" />
                 </div>
               </div>

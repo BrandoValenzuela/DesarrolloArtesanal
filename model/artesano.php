@@ -18,6 +18,7 @@ class Artesano{
     public $twitter;
     public $instagram;
     public $idRamaArtesanal;
+    public $idCorredor;
     public $anioInicioOficio;
     public $tipoActividad;
     public $actividadPrincipal;
@@ -52,8 +53,8 @@ class Artesano{
 	public function Registrar(Artesano $data){
 		try {
 			$folio = $this->GenerarFolioArtesano();
-			$sql = "INSERT INTO artesano (curp,nombre,aPaterno,aMaterno,domicilio,localidad,municipio,grupoEtnico,sexo,edad,telefonoFijo,telefonoCel,email,facebook,twitter,instagram,idRamaArtesanal,anioInicioOficio,tipoActividad,actividadPrincipal,aprendizajeOficio,perioricidad,ingresoMensual,gastoMensual,perteneceTaller,trabajoDomicilio,propiedadLugarTrabajo,tipoVenta,anioInicioSDA,quiz,rfc,fechaAltaRFC,participacionAsocPasada,participacionAsocActual,nombreAsocActual,fidelidadRamaArtesanal,satisfaccion,necesidadesPrioritarias,folio) 
-		        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			$sql = "INSERT INTO artesano (curp,nombre,aPaterno,aMaterno,domicilio,localidad,municipio,grupoEtnico,sexo,edad,telefonoFijo,telefonoCel,email,facebook,twitter,instagram,idRamaArtesanal,idCorredor,anioInicioOficio,tipoActividad,actividadPrincipal,aprendizajeOficio,perioricidad,ingresoMensual,gastoMensual,perteneceTaller,trabajoDomicilio,propiedadLugarTrabajo,tipoVenta,anioInicioSDA,quiz,rfc,fechaAltaRFC,participacionAsocPasada,participacionAsocActual,nombreAsocActual,fidelidadRamaArtesanal,satisfaccion,necesidadesPrioritarias,folio) 
+		        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			$this->pdo->prepare($sql)
 		     ->execute(
 				array(
@@ -74,6 +75,7 @@ class Artesano{
 				    $data->twitter,
 				    $data->instagram,
 				    $data->idRamaArtesanal,
+				    $data->idCorredor,
 				    $data->anioInicioOficio,
 				    $data->tipoActividad,
 				    $data->actividadPrincipal,
@@ -183,6 +185,7 @@ class Artesano{
 		try {
 			$sql = "UPDATE artesano SET 
 					idRamaArtesanal = ?,
+					idCorredor = ?,
 				    nombre = ?,
 				    aPaterno = ?,
 				    aMaterno = ?,
@@ -225,6 +228,7 @@ class Artesano{
 			     ->execute(
 				    array(				
 						$data->idRamaArtesanal,
+						$data->idCorredor,
 					    $data->nombre,
 					    $data->aPaterno,
 					    $data->aMaterno,

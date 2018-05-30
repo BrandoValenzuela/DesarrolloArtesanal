@@ -11,6 +11,7 @@ require_once 'model/compra.php';
 require_once 'model/comodatoartesano.php';
 require_once 'model/talleristacapacitacion.php';
 require_once 'model/productoartesano.php';
+require_once 'model/corredor.php';
 
 class ArtesanoController{
     private $model;
@@ -24,14 +25,16 @@ class ArtesanoController{
             header('Location: index.php');
         }
         $artesano = new Artesano();
+        $Corredor = new Corredor();
+        $Rama = new RamaArtesanal();
         if(isset($_REQUEST['curp-artesano-actualizar'])){
             $artesano = $this->model->ObtenerPorCURP($_REQUEST['curp-artesano-actualizar']);
             $registrar_actualizar = $_REQUEST['registrar-actualizar'];
         }else{
             $registrar_actualizar = '0';
         }
-        $Rama = new RamaArtesanal();
         $ramas = $Rama->Listar();
+        $corredores = $Corredor->Listar();
         require_once 'view/header.php';
         require_once 'view/artesano/artesano-editar.php';
         require_once 'view/footer.php';
@@ -57,6 +60,7 @@ class ArtesanoController{
         $artesano->twitter = $_REQUEST['twitter-artesano'];
         $artesano->instagram = $_REQUEST['instagram-artesano'];
         $artesano->idRamaArtesanal = $_REQUEST['rama-artesanal-artesano'];
+        $artesano->idCorredor = $_REQUEST['corredor-artesano'];
         $artesano->anioInicioOficio = $_REQUEST['inicio-oficio'];
         $artesano->tipoActividad = $_REQUEST['tipo-actividad'];
         $artesano->actividadPrincipal = $_REQUEST['actividad-primaria'];

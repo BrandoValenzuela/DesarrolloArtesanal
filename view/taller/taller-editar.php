@@ -44,7 +44,7 @@
       <div class="col-md-3" id="sueldo">
         <div class="form-group">
           <label>Sueldo mensual</label>
-          <input type="text" id="sueldo-mensual" name="sueldo-mensual" class="form-control" placeholder="Ejemplo: 2000"  data-validacion-tipo ="numero">
+          <input type="text" id="sueldo-mensual" name="sueldo-mensual" class="form-control" placeholder="Ejemplo: 2000"  data-validacion-tipo ="requerido|numero">
         </div>
       </div>
     </fieldset>

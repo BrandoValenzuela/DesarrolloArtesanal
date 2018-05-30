@@ -30,7 +30,7 @@ class Corredor{
 	public function Listar(){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT * FROM producto");
+			$stm = $this->pdo->prepare("SELECT * FROM corredor");
 			$stm->execute();
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {

@@ -19,7 +19,7 @@ class EmpleadoColaborador{
 	public function Registrar(EmpleadoColaborador $data){
 		try {
 			$artesano = new Artesano();
-			$resultado = $artesano->Obtener($data->curp);
+			$resultado = $artesano->ObtenerPorCURP($data->curp);
 			if (!empty($resultado)) {
 				$sql = "INSERT INTO empleadocolaborador (idTaller,curp,sueldoMensual,tipoParticipacion) 
 			        VALUES (?, ?, ?, ?)";

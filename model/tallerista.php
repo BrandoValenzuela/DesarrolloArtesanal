@@ -46,7 +46,8 @@ class Tallerista{
 			if (strpos($mensaje, 'SQLSTATE[23000]') !== false) {
 				return 'curp_exitente';
 			}else{
-				header('Location: index.php?c=Principal&a=ErrorConexion');
+				die($e->getMessage());
+				// header('Location: index.php?c=Principal&a=ErrorConexion');
 			}
 		}
 	}

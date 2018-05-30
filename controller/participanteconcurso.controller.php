@@ -61,7 +61,11 @@ class ParticipanteconcursoController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        $redireccion = 'index.php?c=Concurso&a=BuscarPorId';
+        if ($_SESSION['busqueda'] != 'ConcursoPorNombre') {
+            $redireccion = 'index.php?c=Concurso&a=BuscarPorId';
+        }else{
+            $redireccion = 'index.php?c=Concurso&a=BuscarPorNombre&nombre-concurso='.$_SESSION['nombre-concurso'];
+        }
         require_once 'view/header.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';

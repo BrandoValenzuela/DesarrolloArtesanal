@@ -56,6 +56,17 @@ class Concurso{
 		}
 	}
 
+	public function ObtenerPorNombre($nombre){
+		try {
+			$result = array();
+			$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE nombre = ?");
+			$stm->execute(array($nombre));
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+
 	public function ObtenerPorConcepto($concepto){
 		try {
 			$palabras = explode(" ",$concepto); 

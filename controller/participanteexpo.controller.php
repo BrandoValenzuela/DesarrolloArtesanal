@@ -61,7 +61,11 @@ class ParticipanteexpoController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        $redireccion = 'index.php?c=Exposicion&a=BuscarPorId';
+        if ($_SESSION['busqueda'] != 'ExpoPorNombre') {
+            $redireccion = 'index.php?c=Exposicion&a=BuscarPorId';
+        }else{
+            $redireccion = 'index.php?c=Exposicion&a=BuscarPorNombre&nombre-expo='.$_SESSION['nombre-expo'];
+        }
         require_once 'view/header.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';

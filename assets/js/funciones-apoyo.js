@@ -164,6 +164,11 @@ $(document).ready(function(){
          $("#empleos-hr").val('0');
          $("#empleos-imss").val('0');
          $("#empleos-totales").val('0');
+         if ($("#sueldo-mensual").val() == '') {
+            $("#sueldo-mensual").val('0');
+         }else{
+            $("#sueldo-mensual").val() = this.val();
+         }
       }
    });
 });
@@ -458,8 +463,7 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-inicio-capacitacion").datepicker({
         changeMonth: true,
-        changeYear: true,
-        maxDate:"0M"
+        changeYear: true
     });
     $("#fecha-inicio-capacitacion").datepicker( "option", "dateFormat", formato );
 })
@@ -468,8 +472,7 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-fin-capacitacion").datepicker({
         changeMonth: true,
-        changeYear: true,
-        maxDate:"0M"
+        changeYear: true
     });
     $("#fecha-fin-capacitacion").datepicker( "option", "dateFormat", formato );
 })
@@ -491,12 +494,18 @@ $(document).ready(function(){
   });
 });
 
+$(document).ready(function(){
+    $("#curp-tallerista-capacitacion").blur(function(){
+        text = $(this).val();
+        $(this).val(text.toUpperCase());
+    });
+});
+
 $(function() {
     formato = "yy-mm-dd";
     $("#fecha-inicio-periodo-capacitacion").datepicker({
         changeMonth: true,
-        changeYear: true,
-        maxDate:"0M"
+        changeYear: true
     });
     $("#fecha-inicio-periodo-capacitacion").datepicker( "option", "dateFormat", formato );
 })
@@ -505,8 +514,7 @@ $(function() {
     formato = "yy-mm-dd";
     $("#fecha-fin-periodo-capacitacion").datepicker({
         changeMonth: true,
-        changeYear: true,
-        maxDate:"0M"
+        changeYear: true
     });
     $("#fecha-fin-periodo-capacitacion").datepicker( "option", "dateFormat", formato );
 })
@@ -526,7 +534,7 @@ $(document).ready(function(){
 
 $(function(){
   $("#agregar-participante").click(function(){
-    var renglon = '<div class="form-group"><label class="col-xs-4 control-label"><span class="obligatorio">* </span>CURP del artesano:</label><div class="col-xs-4"><input type="text" name="curp-artesano-capacitacion[]" class="form-control clon" placeholder="Ingrese la CURP" data-validacion-tipo="requerido|curp" /></div><div class="col-xs-4" id="btn-quitar-prducto"><input type="button" class="btn btn-primary quitar-participante" value="Quitar"></div></div>'
+    var renglon = '<div class="form-group"><label class="col-xs-4 control-label"><span class="obligatorio">* </span>CURP del artesano:</label><div class="col-xs-4"><input type="text" name="curp-artesano-capacitacion[]" class="form-control clon" placeholder="Ingrese la CURP" data-validacion-tipo="requerido|curp"/></div><div class="col-xs-4" id="btn-quitar-prducto"><input type="button" class="btn btn-primary quitar-participante" value="Quitar"></div></div>'
     $("#participantes").append(renglon);
   })
 
@@ -538,6 +546,13 @@ $(function(){
 
 $(document).ready(function(){
    $(".lista").blur(function(){
+      text = $(this).val();
+      $(this).val(text.toUpperCase());
+   });
+});
+
+$(document).ready(function(){
+   $(".clon").blur(function(){
       text = $(this).val();
       $(this).val(text.toUpperCase());
    });

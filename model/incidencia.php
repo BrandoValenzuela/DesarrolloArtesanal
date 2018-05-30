@@ -57,8 +57,7 @@ class Incidencia{
 	
 	public function ObtenerPorPeriodo($fi,$ff){
 		try {
-			$result = array();
-			$stm = $this->pdo->prepare("SELECT incidencias.*,artesano.nombre,artesano.aPaterno,artesano.aMaterno FROM incidencias INNER JOIN artesano ON incidencias.curp = artesano.curp WHERE fechaRegistro BETWEEN ? AND ?");
+			$stm = $this->pdo->prepare("SELECT incidencias.observacion,incidencias.fechaRegistro,incidencias.informante,artesano.nombre,artesano.aPaterno,artesano.aMaterno FROM incidencias INNER JOIN artesano ON incidencias.curp = artesano.curp WHERE incidencias.fechaRegistro BETWEEN ? AND ?");
 			$stm->execute(array($fi,$ff));
   			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {

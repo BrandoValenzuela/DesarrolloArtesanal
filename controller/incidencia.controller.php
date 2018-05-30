@@ -38,11 +38,11 @@ class IncidenciaController{
         }
         if (!empty($_REQUEST['buscar-incidencia-curp'])) {
             $_SESSION['buscar-incidencia-curp'] = $_REQUEST['buscar-incidencia-curp'];
-            $incidencias = $this->model->ObtenerPorCURP($_REQUEST['buscar-incidencia-curp']);
             $curp = $_REQUEST['buscar-incidencia-curp'];
+            $incidencias = $this->model->ObtenerPorCURP($_REQUEST['buscar-incidencia-curp']);
         }else{
-            $incidencias = $this->model->ObtenerPorCURP($_SESSION['buscar-incidencia-curp']);
             $curp = $_SESSION['buscar-incidencia-curp'];
+            $incidencias = $this->model->ObtenerPorCURP($_SESSION['buscar-incidencia-curp']);
         }
         if (!empty($incidencias)) {
             if ($incidencias == 'registro_inexistente') {

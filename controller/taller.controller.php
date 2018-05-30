@@ -48,33 +48,35 @@ class TallerController{
             $taller->empTotales = $_REQUEST['empleos-totales'];
             $taller->ingresoMensual = $_REQUEST['ingreso-mensual-taller'];
             $taller->gastoMensual = $_REQUEST['gasto-mensual-taller'];
-            if ($_REQUEST['participacion-artesano'] == '3') {
-                $resultado = $this->model->Registrar($taller);
-            }else{
-                $resultado = $emp_col->Registrar($emp_col);
-            }
-            if ($resultado == 'exito') {
-                $mensaje = array(
-                    'titulo' => 'Éxito',
-                    'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
-                );
-                $this->mostrarMensaje($mensaje);
-            }else{
-                if ($resultado == 'taller_registrado') {
-                    $mensaje = array(
-                        'titulo' => 'Taller registrado',
-                        'cuerpo' => 'El nombre de taller que ingresaste ya se encuentra registrado.'
-                        );    
-                }else{
-                    $mensaje = array(
-                        'titulo' => 'CURP no encontrada',
-                        'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
-                    );
-                }
-                $this->mostrarMensaje($mensaje);
-            }
-        }else{
-            header('Location: index.php?c=Principal');
+            print_r($emp_col);
+        //     if ($_REQUEST['participacion-artesano'] == '3') {
+        //         $resultado = $this->model->Registrar($taller);
+        //     }else{
+        //         $resultado = $emp_col->Registrar($emp_col);
+        //     }
+        //     if ($resultado == 'exito') {
+        //         $mensaje = array(
+        //             'titulo' => 'Éxito',
+        //             'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
+        //         );
+        //         $this->mostrarMensaje($mensaje);
+        //     }else{
+        //         if ($resultado == 'taller_registrado') {
+        //             $mensaje = array(
+        //                 'titulo' => 'Taller registrado',
+        //                 'cuerpo' => 'El nombre de taller que ingresaste ya se encuentra registrado.'
+        //                 );    
+        //         }else{
+        //             $mensaje = array(
+        //                 'titulo' => 'CURP no encontrada',
+        //                 'cuerpo' => 'La CURP que ingresaste no se encuentró en el sistema.</br>Para guardar la información que ingresaste, el artesano debe estar registrado en el sistema.'
+        //             );
+        //         }
+        //         $this->mostrarMensaje($mensaje);
+        //     }
+        // }else{
+        //     header('Location: index.php?c=Principal');
+        // }
         }
     }
 

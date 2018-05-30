@@ -127,11 +127,21 @@
         </div>
         <div class="col-md-3">
           <div class="form-group">
+            <label>Corredor artesanal:</label>
+            <select id="corredor-artesano" name="corredor-artesano" class="form-control">
+              <?php foreach ($corredores as $opcion): ?>
+                <option <?php echo $artesano->idCorredor == $opcion->idCorredor ? 'selected' : ''; ?> value="<?php echo $opcion->idCorredor ?>"><?php echo $opcion->nombre; ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
             <span class="obligatorio">* </span><label>Año Inicio Oficio: </label>
             <input type="text" id="inicio-oficio" name="inicio-oficio" value="<?php echo $artesano->anioInicioOficio; ?>" class="form-control" placeholder="Ejemplo: 2000" data-validacion-tipo="requerido|numero|min:4:max:4" />
           </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <div class="form-group">
             <span class="obligatorio">* </span><label>Tipo de actividad:</label>
             <select id="tipo-actividad" name="tipo-actividad" id="tipo-actividad" class="form-control">
@@ -140,7 +150,7 @@
             </select>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="form-group">
             <label>¿Cuál es su actividad primaria?</label>
             <input type="text" id="actividad-primaria" name="actividad-primaria" value="<?php echo $artesano->actividadPrincipal; ?>" class="form-control" placeholder="Ingrese la actividad primaria" disabled="disabled" data-validacion-tipo="" />

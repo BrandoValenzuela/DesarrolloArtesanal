@@ -65,6 +65,17 @@ class Exposicion{
 		}
 	}
 
+	public function ObtenerPorNombre($nombre){
+		try {
+			$result = array();
+			$stm = $this->pdo->prepare("SELECT * FROM exposicion WHERE nombre = ?");
+			$stm->execute(array($nombre));
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}
+
 	public function ObtenerPorMunicipioEntidad($munent){
 		try {
 			$pattern = '%'.$munent.'%';

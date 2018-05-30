@@ -60,11 +60,7 @@ class BeneficiarioController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        if ($mensaje['titulo'] == 'CURP no encontrada') {
-            $redireccion = 'index.php?c=Principal&a=Index';
-        }else{
-            $redireccion = 'index.php?c=Apoyo&a=BuscarPorId';
-        }
+        $redireccion = 'index.php?c=Apoyo&a=BuscarPorId';
         require_once 'view/header.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';

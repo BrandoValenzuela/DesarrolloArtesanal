@@ -44,21 +44,22 @@ class CapacitacionController{
             $capacitacion->fechaFin = $_REQUEST['fecha-fin-capacitacion'];
             $capacitacion->material = $_REQUEST['material-capacitacion'];
             $capacitacion->montoMaterial = $_REQUEST['inversion-capacitacion'];
-            $capacitacion->observacion = $_REQUEST['observacion-capacitacion'];
+            $capacitacion->observaciones = $_REQUEST['observacion-capacitacion'];
             $resultado = $this->model->Registrar($capacitacion);
             if ($resultado == 'exito') {
+                $_SESSION['busqueda'] = 'CapacitacionPorNombre';
+                $_SESSION['nombre-capacitacion'] = $_REQUEST['nombre-capacitacion'];
                 $mensaje = array(
                     'titulo' => 'Exito',
                     'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
                 );
-                $this->mostrarMensaje($mensaje);
             }else{
                 $mensaje = array(
                     'titulo' => 'Capacitación existente',
                     'cuerpo' => 'Ya existe registrada una capacitación con el nombre: <br>"'.$_REQUEST['nombre-capacitacion'].'".'
                 );
-                $this->mostrarMensaje($mensaje);
             }
+            $this->mostrarMensaje($mensaje);
         }else{
             header('Location: index.php?c=Principal');
         }
@@ -89,12 +90,31 @@ class CapacitacionController{
             require_once 'view/header.php';
             require_once 'view/capacitaciones/capacitacion.php';
             require_once 'view/footer.php'; 
+        }
+    }
+
+        public function BuscarPorNombre(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['nombre-capacitacion'])) {
+            $capacitacion = $this->model->ObtenerPorNombre($_REQUEST['nombre-capacitacion']);
+            $nombre = $_REQUEST['nombre-capacitacion'];
         }else{
-            $mensaje = array(
-                'titulo' => 'No hay capacitaciones.',
-                'cuerpo' => 'No se encontraron capacitaciones con el nombre "'.$nombre.'"'
-            );
-            $this->mostrarMensaje($mensaje);
+            $capacitacion = $this->model->ObtenerPorNombre($_SESSION['nombre-capacitacion']);
+            $nombre = $_SESSION['nombre-capacitacion'];
+        }
+        if (!empty($capacitacion)) {
+            $RA = new RamaArtesanal();
+            $tallerista_capacitacion = new TalleristaCapacitacion();
+            $artesano_capacitacion = new ParticipanteCapacitacion();
+            $rama = $RA->Obtener($capacitacion->idRamaArtesanal);
+            $participantes = $artesano_capacitacion->ObtenerParticipantes($capacitacion->idCapacitacion);
+            $talleristasT = $tallerista_capacitacion->ObtenerTalleristas($capacitacion->idCapacitacion);
+            $talleristasA = $tallerista_capacitacion->ObtenerArtesanosTalleristas($capacitacion->idCapacitacion);
+            require_once 'view/header.php';
+            require_once 'view/capacitaciones/capacitacion.php';
+            require_once 'view/footer.php'; 
         }
     }
 
@@ -130,7 +150,11 @@ class CapacitacionController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        $redireccion = '?c=Principal&a=IndexCapacitaciones';
+        if ($_SESSION['busqueda'] == 'CapacitacionPorNombre') {
+            $redireccion = 'index.php?c=Capacitacion&a=BuscarPorNombre&nombre-capacitacion='.$_SESSION['nombre-capacitacion'];
+        }else{
+            $redireccion = 'index.php?c=Principal&a=IndexCapacitaciones';
+        }
         require_once 'view/header.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';

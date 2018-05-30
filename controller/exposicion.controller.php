@@ -33,6 +33,8 @@ class ExposicionController{
             $exposicion->InversionExpo = $_REQUEST['inversion-expo'];
             $resultado = $this->model->Registrar($exposicion);
             if ($resultado == 'exito') {
+                $_SESSION['busqueda'] = 'ExpoPorNombre';
+                $_SESSION['nombre-expo'] = $_REQUEST['nombre-expo'];
                 $mensaje = array(
                     'titulo' => 'Exito',
                     'cuerpo' => 'Los datos se guardaron satisfactoriamente.'
@@ -56,7 +58,7 @@ class ExposicionController{
         }
         if (!empty($_REQUEST['buscar-id-expo'])) {
             $_SESSION['buscar-id-expo'] = $_REQUEST['buscar-id-expo'];
-            $_SESSION['buscar-nombre-expo'] = $_REQUEST['buscar-id-expo'];
+            $_SESSION['buscar-nombre-expo'] = $_REQUEST['buscar-nombre-expo'];
             $expo = $this->model->ObtenerPorId($_REQUEST['buscar-id-expo']);
             $nombre = $_REQUEST['buscar-nombre-expo'];
         }else{
@@ -76,6 +78,27 @@ class ExposicionController{
                 'cuerpo' => 'No se encontraron exposiciones con el nombre "'.$nombre.'"'
             );
             $this->mostrarMensaje($mensaje);
+        }
+    }
+
+    public function BuscarPorNombre(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['nombre-expo'])) {
+            $_SESSION['nombre-expo'] = $_REQUEST['nombre-expo'];
+            $expo = $this->model->ObtenerPorNombre($_REQUEST['nombre-expo']);
+            $nombre = $_REQUEST['nombre-expo'];
+        }else{
+            $expo = $this->model->ObtenerPorNombre($_SESSION['nombre-expo']);
+            $nombre = $_SESSION['nombre-expo'];
+        }
+        if (!empty($expo)) {
+            $artesano_expo = new ParticipanteExpo();
+            $participantes = $artesano_expo->ObtenerParticipantes($expo->idExposicion);
+            require_once 'view/header.php';
+            require_once 'view/exposicion/exposicion.php';
+            require_once 'view/footer.php'; 
         }
     }
 
@@ -138,7 +161,11 @@ class ExposicionController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        $redireccion = 'index.php?c=Principal&a=IndexConcursosExposiciones';
+        if ($_SESSION['busqueda'] == 'ExpoPorNombre') {
+            $redireccion = 'index.php?c=Exposicion&a=BuscarPorNombre&nombre-expo='.$_SESSION['nombre-expo'];
+        }else{
+            $redireccion = 'index.php?c=Principal&a=IndexConcursosExposiciones';
+        }
         require_once 'view/header.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';
