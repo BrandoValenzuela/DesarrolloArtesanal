@@ -62,7 +62,11 @@ class TalleristacapacitacionController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        $redireccion = 'index.php?c=Capacitacion&a=BuscarPorId';
+        if ($_SESSION['busqueda'] != 'CapacitacionPorNombre') {
+            $redireccion = 'index.php?c=Capacitacion&a=BuscarPorId';
+        }else{
+            $redireccion = 'index.php?c=Capacitacion&a=BuscarPorNombre&nombre-concurso='.$_SESSION['nombre-capacitacion'];
+        }
         require_once 'view/header.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';

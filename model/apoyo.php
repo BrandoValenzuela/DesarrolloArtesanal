@@ -40,7 +40,7 @@ class Apoyo{
 	public function ObtenerPorFecha($mes,$año){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT * FROM otrosapoyos WHERE MONTH(fechaOtorgamiento) = ? AND YEAR(fechaOtorgamiento) = ?");
+			$stm = $this->pdo->prepare("SELECT * FROM otrosapoyos WHERE MONTH(fechaOtorgamiento) = ? AND YEAR(fechaOtorgamiento) = ? ORDER BY fechaOtorgamiento");
 			$stm->execute(array($mes,$año));
   			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {

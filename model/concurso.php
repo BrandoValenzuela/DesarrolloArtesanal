@@ -89,7 +89,7 @@ class Concurso{
 	public function ObtenerPorPeriodo($fi,$ff){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE fecha BETWEEN ? AND ?");
+			$stm = $this->pdo->prepare("SELECT * FROM Concurso WHERE fecha BETWEEN ? AND ? ORDER BY fecha");
 			$stm->execute(array($fi,$ff));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {

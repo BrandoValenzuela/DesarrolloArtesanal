@@ -60,7 +60,11 @@ class BeneficiarioController{
 
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        $redireccion = 'index.php?c=Apoyo&a=BuscarPorId';
+        if ($_SESSION['busqueda'] != 'ApoyoPorNombre') {
+            $redireccion = 'index.php?c=Apoyo&a=BuscarPorId';
+        }else{
+            $redireccion = 'index.php?c=Apoyo&a=BuscarPorNombre&nombre-apoyo='.$_SESSION['nombre-apoyo'];
+        }
         require_once 'view/header.php';
         require_once 'view/modal-mensajes.php';
         require_once 'view/footer.php';

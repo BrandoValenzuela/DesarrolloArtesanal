@@ -89,11 +89,11 @@
         <form id="frm-nuevo-secretario" name="frm-nuevo-secretario" action="?c=Secretario&a=Guardar" method="post" enctype="multipart/form-data">
           <input type="hidden" name="contraseña-secretario" id="contraseña-secretario" data-validacion-tipo="requerido"/>
           <div class="form-group">
-            <span class="obligatorio">* </span><label>Nombre del secretario:</label>
+            <span class="obligatorio">* </span><label>Nombre del usuario:</label>
             <input type="text" id="nombre-secretario-sistema" name="nombre-secretario-sistema" class="form-control" placeholder="Ejemplo: Luis Días" data-validacion-tipo="requerido" />
           </div>
           <div class="form-group">
-            <span class="obligatorio">* </span><label>ID de secretario:</label>
+            <span class="obligatorio">* </span><label>ID de usuario:</label>
             <input type="text" id="ID-secretario" name="ID-secretario" class="form-control" placeholder="Ejemplo: LuisDiaz" data-validacion-tipo="requerido" />
           </div>
           <div class="form-group">

@@ -125,6 +125,7 @@ class ArtesanoController{
         $Comodato = new ComodatoArtesano();
         $Capacitaciones = new TalleristaCapacitacion();
         $Productos = new ProductoArtesano();
+        $Corredor = new Corredor();
         if (!empty($_REQUEST['buscar-artesano-curp'])) {
             $_SESSION['buscar-artesano-curp'] = $_REQUEST['buscar-artesano-curp'];
             $artesano = $this->model->ObtenerPorCURP($_REQUEST['buscar-artesano-curp']);
@@ -144,6 +145,7 @@ class ArtesanoController{
             $comodatos = $Comodato->ObtenerComodatos($artesano->curp);
             $capacitaciones_impartidas = $Capacitaciones->ObtenerCapacitacionesArtesano($artesano->curp);
             $productos = $Productos->ObtenerProductosArtesano($artesano->curp);
+            $corredor = $Corredor->Obtener($artesano->idCorredor);
             require_once 'view/header.php';
             require_once 'view/artesano/artesano.php';
             require_once 'view/footer.php'; 
@@ -198,9 +200,9 @@ class ArtesanoController{
             $nombre_rama = $_SESSION['nombre-rama'];
             $artesanos = $this->model->ObtenerPorRama($_SESSION['idRamaArtesanal']);
         }
+        $_SESSION['busqueda'] = 'ArtesanoPorRama';
+        $_SESSION['metodo-busqueda'] = 'BuscarPorRama';
         if (!empty($artesanos)) {
-            $_SESSION['busqueda'] = 'ArtesanoPorRama';
-            $_SESSION['metodo-busqueda'] = 'BuscarPorrama';
             require_once 'view/header.php';
             require_once 'view/artesano/artesano-lista.php';
             require_once 'view/footer.php'; 
@@ -228,9 +230,9 @@ class ArtesanoController{
             $nombre_producto = $_SESSION['nombre-producto'];
             $artesanos = $this->model->ObtenerPorProducto($_SESSION['idProducto']);
         }
+        $_SESSION['busqueda'] = 'ArtesanoPorProducto';
+        $_SESSION['metodo-busqueda'] = 'BuscarPorproducto';
         if (!empty($artesanos)) {
-            $_SESSION['busqueda'] = 'ArtesanoPorProducto';
-            $_SESSION['metodo-busqueda'] = 'BuscarPorproducto';
             require_once 'view/header.php';
             require_once 'view/artesano/artesano-lista.php';
             require_once 'view/footer.php'; 
@@ -244,7 +246,7 @@ class ArtesanoController{
     }
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        if ($_SESSION['busqueda']=='ArtesanoPorRama' || $_SESSION['busqueda']=='ArtesanoPorProducto') {
+        if ($_SESSION['busqueda'] == 'ArtesanoPorRama' || $_SESSION['busqueda'] == 'ArtesanoPorProducto') {
             $redireccion = 'index.php?c=Principal&Index';
         }else{
             $redireccion = 'index.php?c=Principal&a=IndexArtesanos';

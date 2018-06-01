@@ -53,7 +53,7 @@ class ComodatoExterno{
 	public function ObtenerPorPeriodo($fi,$ff){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT * FROM comodatoexterno WHERE fechaInicio BETWEEN ? AND ?");
+			$stm = $this->pdo->prepare("SELECT * FROM comodatoexterno WHERE fechaInicio BETWEEN ? AND ? ORDER BY fechaInicio");
 			$stm->execute(array($fi,$ff));
 			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {

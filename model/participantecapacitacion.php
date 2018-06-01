@@ -49,6 +49,7 @@ class ParticipanteCapacitacion{
 			return trim($registro_participante_exitoso,', ').'<br>'.trim($participantes_previamente_registrados,', ').'<br>'.trim($no_registrado_en_sistema,', ');
 		}catch (Exception $e) {
 			header('location: index.php?c=Principal&a=ErrorConexion');
+			// die($e->getMessage());
 		}
 	}
 

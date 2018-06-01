@@ -44,7 +44,7 @@ class Compra{
 	public function ObtenerPorMesAño($mes,$año){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT * FROM compras WHERE MONTH(fechaCompra) = ? AND YEAR(fechaCompra) = ?");
+			$stm = $this->pdo->prepare("SELECT * FROM compras WHERE MONTH(fechaCompra) = ? AND YEAR(fechaCompra) = ? ORDER BY fechaCompra");
 			$stm->execute(array($mes,$año));
   			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {
@@ -55,7 +55,7 @@ class Compra{
 	public function ObtenerPorPeriodo($fi,$ff){
 		try {
 			$result = array();
-			$stm = $this->pdo->prepare("SELECT * FROM compras WHERE fechaCompra BETWEEN ? AND ?");
+			$stm = $this->pdo->prepare("SELECT * FROM compras WHERE fechaCompra BETWEEN ? AND ? ORDER BY fechaCompra");
 			$stm->execute(array($fi,$ff));
   			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {

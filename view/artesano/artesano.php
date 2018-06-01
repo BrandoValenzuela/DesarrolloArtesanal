@@ -103,6 +103,10 @@
             <table class="table table-striped table-hover">
                 <tbody>
                     <tr>
+                        <td class="col-md-6 bold" >Corredor artesanal:</td>
+                        <td class="col-md-6"><?php echo $corredor->nombre; ?></td>
+                    </tr>
+                    <tr>
                         <td class="col-md-6 bold" >Rama artesanal:</td>
                         <td class="col-md-6"><?php echo $ram_art->nombre; ?></td>
                     </tr>
@@ -110,6 +114,7 @@
                         <td class="bold">Tipo de actividad:</td>
                         <td><?php echo $act = $artesano->tipoActividad == '1' ? 'Primaria' : 'Secundaria'; ?></td>
                     </tr>
+
                     <?php if ($artesano->tipoActividad == '2'): ?>
                         <tr>
                             <td class="bold">Actividad Primaria:</td>

@@ -152,26 +152,31 @@ $(document).ready(function(){
 // Rellena el formulario del taller con datos arbitarios para poder realizar el submit.
 $(document).ready(function(){
    $("#btn-submit-frm-taller").click(function(){
-      if ($("#participacion-artesano option:selected").val() != 3) {
-         $("#rama-artesanal-taller").val('0');
-         $("#nombre-taller").val('none');
-         $("#direccion-taller").val('none');
-         $("#localidad-taller").val('none');
-         $("#municipio-taller").val('none');
-         $("#ingreso-mensual-taller").val('0');
-         $("#gasto-mensual-taller").val('0');
-         $("#empleos-tc").val('0');
-         $("#empleos-hr").val('0');
-         $("#empleos-imss").val('0');
-         $("#empleos-totales").val('0');
-         if ($("#sueldo-mensual").val() == '') {
-            $("#sueldo-mensual").val('0');
-         }else{
-            $("#sueldo-mensual").val() = this.val();
-         }
+      var estado = $("#participacion-artesano option:selected").val();
+      if (estado == 1) {
+        rellenarCamposTaller();
+      }else if (estado == 2) {
+        rellenarCamposTaller();
+        $("#sueldo-mensual").val('0');
+      }else{
+        $("#sueldo-mensual").val('0');
       }
    });
 });
+
+function rellenarCamposTaller(){
+  $("#rama-artesanal-taller").val('0');
+  $("#nombre-taller").val('none');
+  $("#direccion-taller").val('none');
+  $("#localidad-taller").val('none');
+  $("#municipio-taller").val('none');
+  $("#ingreso-mensual-taller").val('0');
+  $("#gasto-mensual-taller").val('0');
+  $("#empleos-tc").val('0');
+  $("#empleos-hr").val('0');
+  $("#empleos-imss").val('0');
+  $("#empleos-totales").val('0');
+}
 
 $(document).ready(function(){
    $("#participacion-artesano").change(function(){

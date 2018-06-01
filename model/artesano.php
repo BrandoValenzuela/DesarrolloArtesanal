@@ -157,15 +157,13 @@ class Artesano{
 
 	public function GenerarFolioArtesano(){
 		try {
-			$stm = $this->pdo
-			          ->prepare("SELECT contador+1 AS cont, LPAD(contador+1,4,'0') AS semi_folio FROM folio WHERE idFolio = 0");
+			$stm = $this->pdo->prepare("SELECT max(folio) as folio FROM artesano");
 			$stm->execute();
-			$num_artesano = $stm->fetch(PDO::FETCH_OBJ);
-			$folio = $num_artesano->semi_folio.date('Y');
-			$stm = $this->pdo
-			          ->prepare("UPDATE folio SET contador = ? WHERE idFolio = 0");
-			$stm->execute(array($num_artesano->cont));
-			return $folio;
+			$numero = $stm->fetch(PDO::FETCH_OBJ);			
+			$semi_folio = substr($numero->folio,0,4);
+			$semi_folio = (int)$semi_folio + 1;
+			$folio = $semi_folio.date('Y');
+			return str_pad($folio, 8, "0", STR_PAD_LEFT);
 		} catch (Exception $e) {
 			header('Location: index.php?c=Principal&a=ErrorConexion');
 		}
