@@ -53,7 +53,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4 bold">Rama artesanal</td>
-                        <td>
+                        <td class="respuesta">
                             <?php echo $tema = $rama->nombre == 'Otra' ? $capacitacion->otraArea : $rama->nombre;?>    
                         </td>
                     </tr>
@@ -73,7 +73,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-2 bold">Observaciones:</td>
-                        <td>
+                        <td class="respuesta">
                             <?php echo $tema = $capacitacion->observaciones == '' ? 'NA' : $capacitacion->observaciones;?>    
                         </td>
                     </tr>

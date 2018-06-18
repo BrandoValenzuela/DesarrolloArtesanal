@@ -13,3 +13,4 @@ body{margin-top: 5em;}
 .oculto{display: none;}
 .registro{color: #333;text-decoration: none;}
 .registro:hover{color: #333;}
+.respuesta{text-transform: uppercase;}

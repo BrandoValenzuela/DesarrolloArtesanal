@@ -52,7 +52,7 @@
                 <caption class="text-center bold">Bienes comodatados</caption>
                 <tbody>
                     <tr>
-                        <td><?php echo $comodato->bienesComodatados; ?></td>
+                        <td class="respuesta"><?php echo $comodato->bienesComodatados; ?></td>
                     </tr>
                 </tbody>
         </table>

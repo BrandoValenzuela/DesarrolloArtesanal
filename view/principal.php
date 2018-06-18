@@ -38,6 +38,12 @@
               <li><a href="?c=Artesano&a=BuscarPorProducto&idProducto=<?php echo $producto->idProducto;?>&nombre-producto=<?php echo $producto->nombre;?>"><?php echo $producto->nombre; ?></a></li>
             <?php endforeach ?>
           </ol>
+          <h5 class="bold">Corredores</h5>
+          <ol>
+            <?php foreach ($corredores as $corredor): ?>
+              <li><?php echo $corredor->nombre; ?></li>
+            <?php endforeach ?>
+          </ol>
         </div>
       </div>
     </div>

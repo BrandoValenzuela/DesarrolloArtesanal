@@ -27,9 +27,9 @@
                 <tbody>
                     <tr>
                         <td class="text-center"><?php echo $artesano->domicilio; ?></td>
-                        <td class="text-center"><?php echo $artesano->localidad == '' ? '---' : $artesano->localidad; ?></td>
+                        <td class="text-center"><?php echo $artesano->localidad == '' ? 'NA' : $artesano->localidad; ?></td>
                         <td class="text-center"><?php echo $artesano->municipio; ?></td>
-                        <td class="text-center"><?php echo $artesano->grupoEtnico == '' ? '---' : $artesano->grupoEtnico; ?></td>
+                        <td class="text-center"><?php echo $artesano->grupoEtnico == '' ? 'NA' : $artesano->grupoEtnico; ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -56,7 +56,7 @@
                     </tr>
                     <tr>
                         <td class="col-md-6 bold">Sexo:</td>
-                        <td class="col-md-6"><?php echo $artesano->sexo == '1' ? 'Femenino' : 'Masculino'; ?></td>
+                        <td class="col-md-6 respuesta"><?php echo $artesano->sexo == '1' ? 'Femenino' : 'Masculino'; ?></td>
                     </tr>
                     <tr>
                         <td class="col-md-6 bold">Edad:</td>
@@ -71,27 +71,27 @@
                 <tbody>
                     <tr>
                         <td class="bold">Teléfono fijo:</td>
-                        <td><?php echo $artesano->telefonoFijo == '' ? '---' : $artesano->telefonoFijo; ?></td>
+                        <td><?php echo $artesano->telefonoFijo == '' ? 'NA' : $artesano->telefonoFijo; ?></td>
                     </tr>
                     <tr>
                         <td class="bold">Teléfono móvil:</td>
-                        <td><?php echo $artesano->telefonoCel == '' ? '---' : $artesano->telefonoCel; ?></td>
+                        <td><?php echo $artesano->telefonoCel == '' ? 'NA' : $artesano->telefonoCel; ?></td>
                     </tr>
                     <tr>
                         <td class="bold">Correo:</td>
-                        <td><?php echo $artesano->email == '' ? '---' : $artesano->email; ?></td>
+                        <td><?php echo $artesano->email == '' ? 'NA' : $artesano->email; ?></td>
                     </tr>
                     <tr>
                         <td class="bold">Facebook:</td>
-                        <td><span class="glyphicon glyphicon-facebook"></span><?php echo $artesano->facebook == '' ? '---' : $artesano->facebook; ?></td>
+                        <td><span class="glyphicon glyphicon-facebook"></span><?php echo $artesano->facebook == '' ? 'NA' : $artesano->facebook; ?></td>
                     </tr>
                     <tr>
                         <td class="bold">Twitter:</td>
-                        <td><?php echo $artesano->twitter == '' ? '---' : $artesano->twitter; ?></td>
+                        <td><?php echo $artesano->twitter == '' ? 'NA' : $artesano->twitter; ?></td>
                     </tr>
                     <tr>
                         <td class="bold">Instagram:</td>
-                        <td><?php echo $artesano->instagram == '' ? '---' : $artesano->instagram; ?></td>
+                        <td><?php echo $artesano->instagram == '' ? 'NA' : $artesano->instagram; ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -104,15 +104,15 @@
                 <tbody>
                     <tr>
                         <td class="col-md-6 bold" >Corredor artesanal:</td>
-                        <td class="col-md-6"><?php echo $corredor->nombre; ?></td>
+                        <td class="col-md-6 respuesta"><?php echo $corredor->nombre; ?></td>
                     </tr>
                     <tr>
                         <td class="col-md-6 bold" >Rama artesanal:</td>
-                        <td class="col-md-6"><?php echo $ram_art->nombre; ?></td>
+                        <td class="col-md-6 respuesta"><?php echo $ram_art->nombre; ?></td>
                     </tr>
                     <tr>
                         <td class="bold">Tipo de actividad:</td>
-                        <td><?php echo $act = $artesano->tipoActividad == '1' ? 'Primaria' : 'Secundaria'; ?></td>
+                        <td><?php echo $act = $artesano->tipoActividad == '1' ? 'PRIMARIA' : 'SECUNDARIA'; ?></td>
                     </tr>
 
                     <?php if ($artesano->tipoActividad == '2'): ?>
@@ -127,20 +127,20 @@
                     </tr>
                     <tr>
                         <td class="bold">Perioricidad:</td>
-                        <td><?php echo $act = $artesano->perioricidad == '1' ? 'Temporal' : 'Permanente'; ?></td>
+                        <td><?php echo $act = $artesano->perioricidad == '1' ? 'TEMPORAL' : 'PERMANENTE'; ?></td>
                     </tr>
                     <tr>
                         <td class="bold">Aprendizaje del oficio:</td>
                         <td>
                             <?php 
                             if($artesano->aprendizajeOficio == '1'){
-                                echo 'Autodidacta';
+                                echo 'AUTODIDACTA';
                             }elseif ($artesano->aprendizajeOficio == '2') {
-                                echo 'Cursos';
+                                echo 'CURSOS';
                             }elseif ($artesano->aprendizajeOficio == '3') {
-                                echo 'Talleres';
+                                echo 'TALLERES';
                             }else{
-                                echo 'Herencia familiar'; 
+                                echo 'HERENCIA FAMILIAR'; 
                             }
                             ?>
                         </td>
@@ -150,15 +150,15 @@
                         <td>
                             <?php 
                             if($artesano->fidelidadRamaArtesanal == '1'){
-                                echo 'Muy baja';
+                                echo 'MUY BAJA';
                             }elseif ($artesano->fidelidadRamaArtesanal == '2') {
-                                echo 'Baja';
+                                echo 'BAJA';
                             }elseif ($artesano->fidelidadRamaArtesanal == '3') {
-                                echo 'Normal';
+                                echo 'NORMAL';
                             }elseif ($artesano->fidelidadRamaArtesanal == '4') {
-                                echo 'Alta';
+                                echo 'ALTA';
                             }else{
-                                echo 'Muy alta'; 
+                                echo 'MUY ALTA'; 
                             }
                             ?>
                         </td>
@@ -168,15 +168,15 @@
                         <td>
                             <?php 
                             if($artesano->satisfaccion == '1'){
-                                echo 'Muy baja';
+                                echo 'MUY BAJA';
                             }elseif ($artesano->satisfaccion == '2') {
-                                echo 'Baja';
+                                echo 'BAJA';
                             }elseif ($artesano->satisfaccion == '3') {
-                                echo 'Normal';
+                                echo 'NORMAL';
                             }elseif ($artesano->satisfaccion == '4') {
-                                echo 'Alta';
+                                echo 'ALTA';
                             }else{
-                                echo 'Muy alta'; 
+                                echo 'MUY ALTA'; 
                             }
                             ?>
                         </td>
@@ -197,23 +197,23 @@
                     </tr>
                     <tr>
                         <td class="bold">Trabaja en taller:</td>
-                        <td><?php echo $act = $artesano->perteneceTaller == '1' ? 'No' : 'Si'; ?></td>
+                        <td><?php echo $act = $artesano->perteneceTaller == '1' ? 'NO' : 'SI'; ?></td>
                     </tr>
                     <?php if ($artesano->perteneceTaller == '1'): ?>
                         <tr>
                         <td class="bold">Trabaja en su domicilio:</td>
-                        <td><?php echo $lugar = $artesano->trabajoDomicilio == '1' ? 'No' : 'Si'; ?></td>
+                        <td><?php echo $lugar = $artesano->trabajoDomicilio == '1' ? 'NO' : 'SI'; ?></td>
                     </tr>
                     <tr>
                         <td class="bold">El lugar donde trabaja es:</td>
                         <td>
                             <?php 
                             if($artesano->propiedadLugarTrabajo == '1'){
-                                echo 'Propio';
+                                echo 'PROPIO';
                             }elseif ($artesano->propiedadLugarTrabajo == '2') {
-                                echo 'Prestado';
+                                echo 'PRESTADO';
                             }else{
-                                echo 'Rentado'; 
+                                echo 'RENTADO'; 
                             }
                             ?>
                         </td>
@@ -223,13 +223,13 @@
                         <td>
                             <?php 
                             if($artesano->tipoVenta == '1'){
-                                echo 'Consumidor final';
+                                echo 'CONSUMIDOR FINAL';
                             }elseif ($artesano->tipoVenta == '2') {
-                                echo 'Comercializadores';
+                                echo 'COMERCIALIZADORES';
                             }elseif ($artesano->tipoVenta == '3') {
-                                echo 'Casa de artesanías';
+                                echo 'CASA DE ARTESANÍAS';
                             }else{
-                                echo 'Paisanos (USA)'; 
+                                echo 'PAISANOS (USA)'; 
                             }
                             ?>
                         </td>
@@ -237,7 +237,7 @@
                     <?php endif ?>
                     <tr>
                         <td class="bold">Necesidades:</td>
-                        <td><?php echo $artesano->necesidadesPrioritarias; ?></td>
+                        <td class="respuesta"><?php echo $artesano->necesidadesPrioritarias; ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -255,15 +255,15 @@
                     </tr>
                     <tr>
                         <td class="bold">CUIS (SEDESOL):</td>
-                        <td class="text-center"><?php echo $cuis = $artesano->quiz == '' ? '---' : $artesano->quiz; ?></td>
+                        <td class="text-center"><?php echo $cuis = $artesano->quiz == '' ? 'NA' : $artesano->quiz; ?></td>
                     </tr>                           
                     <tr>
                         <td class="bold">RFC:</td>
-                        <td class="text-center"><?php echo $rfc = $artesano->rfc == '' ? '---' : $artesano->fechaAltaRFC; ?></td>
+                        <td class="text-center"><?php echo $rfc = $artesano->rfc == '' ? 'NA' : $artesano->fechaAltaRFC; ?></td>
                     </tr>
                     <tr>
                         <td class="bold">Fecha de la alta del RFC:</td>
-                        <td class="text-center"><?php echo $fecha = $artesano->fechaAltaRFC == '0000-00-00' ? '---' : $artesano->fechaAltaRFC; ?></td>
+                        <td class="text-center"><?php echo $fecha = $artesano->fechaAltaRFC == '0000-00-00' ? 'NA' : $artesano->fechaAltaRFC; ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -274,15 +274,15 @@
                 <tbody>
                     <tr>
                         <td class="bold col-md-6">Partcicipación en el pasaso en asociasiones:</td>
-                        <td class="col-md-6 text-center"><?php echo $part = $artesano->participacionAsocPasada == '1' ? 'No' : 'Si'; ?></td>
+                        <td class="col-md-6 text-center"><?php echo $part = $artesano->participacionAsocPasada == '1' ? 'NO' : 'SI'; ?></td>
                     </tr>
                     <tr>
                         <td class="bold">Participación actual en asociación:</td>
-                        <td class="text-center"><?php echo $part = $artesano->participacionAsocActual == '1' ? 'No' : 'Si'; ?></td>
+                        <td class="text-center"><?php echo $part = $artesano->participacionAsocActual == '1' ? 'NO' : 'SI'; ?></td>
                     </tr>
                     <tr>
                         <td class="bold">Nombre de la asociación donde milita actualmente:</td>
-                        <td class="text-center"><?php echo $nomb = $artesano->nombreAsocActual == '' ? '---' : $artesano->nombreAsocActual; ?></td>
+                        <td class="text-center respuesta"><?php echo $nomb = $artesano->nombreAsocActual == '' ? '' : $artesano->nombreAsocActual; ?></td>
                     </tr>                               
                 </tbody>
             </table>
@@ -310,7 +310,7 @@
                 <?php foreach($productos as $producto): ?>
                     <tr>
                         <td class="text-center"><?php echo $i; $i++; ?></td>
-                        <td><?php echo $producto->nombre; ?></td>
+                        <td class="respuesta"><?php echo $producto->nombre; ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -473,11 +473,11 @@
                             <td class="text-center">
                                 <?php
                                     if ($participacion_concurso->posicion == '1') {
-                                        echo 'Participante';
+                                        echo 'PARTICIPANTE';
                                     }elseif ($participacion_concurso->posicion == '2') {
-                                        echo 'Galardon';
+                                        echo 'GALARDON';
                                     }elseif ($participacion_concurso->posicion == '3') {
-                                        echo 'Mención honorífica';
+                                        echo 'MENCIÓN HONORÍFICA';
                                     }elseif ($participacion_concurso->posicion == '4') {
                                         echo '3er';
                                     }elseif ($participacion_concurso->posicion == '5') {
@@ -693,8 +693,8 @@
                         <tr>
                             <td class="text-center bold"><?php echo $i; $i++; ?></td>
                             <td class="text-center"><?php echo '$ '.number_format($compra->monto,2); ?></td>
-                            <td class="text-center"><?php echo $alcance = $compra->alcance == 1 ? 'Estatal' : 'Federal'; ?></td>
-                            <td class="text-center"><?php echo $pago = $compra->tipoPago == 1 ? 'Factura' : 'Apoyo'; ?></td>
+                            <td class="text-center"><?php echo $alcance = $compra->alcance == 1 ? 'ESTATAL' : 'FEDERAL'; ?></td>
+                            <td class="text-center"><?php echo $pago = $compra->tipoPago == 1 ? 'FACTURA' : 'APOYO'; ?></td>
                             <td class="text-center"><?php echo $compra->fechaCompra; ?></td>
                         </tr>
                     <?php endforeach; ?>
@@ -725,7 +725,7 @@
                             <td class="text-center bold"><?php echo $i; $i++; ?></td>
                             <td class="text-center"><?php echo $comodato->folio; ?></td>
                             <td class="text-center"><?php echo $comodato->fechaInicio; ?></td>
-                            <td class="text-center"><?php echo $comodato->bienesComodatados; ?></td>
+                            <td class="text-center respuesta"><?php echo $comodato->bienesComodatados; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

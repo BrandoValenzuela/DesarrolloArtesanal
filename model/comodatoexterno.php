@@ -35,7 +35,8 @@ class ComodatoExterno{
 			);
 			return 'exito';
 		}catch (Exception $e) {
-			header('location: index.php?c=Principal&a=ErrorConexion');
+			// header('location: index.php?c=Principal&a=ErrorConexion');
+			die($e->getMessage());
 		}
 	}
 

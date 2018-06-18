@@ -8,6 +8,7 @@ include_once 'model/exposicion.php';
 include_once 'model/tallerista.php';
 include_once 'model/capacitacion.php';
 include_once 'model/secretario.php';
+include_once 'model/corredor.php';
 
 class PrincipalController{
 
@@ -20,12 +21,14 @@ class PrincipalController{
         $Rama = new RamaArtesanal();
         $Taller = new Taller();
         $Concurso = new Concurso();
+        $Corredor = new Corredor();
         $Exposicion = new Exposicion();
         $Tallerista = new Tallerista();
         $Capacitacion = new Capacitacion();
         $artesanos = $Artesano->ObtenerTotalArtesanos();
         $talleres = $Taller->ObtenerTotalTalleres();
         $ramas = $Rama->Listar();
+        $corredores = $Corredor->Listar();
         $productos = $Producto->Listar();
         $concursos = $Concurso->ObtenerConcursosTotales();
         $expos = $Exposicion->ObtenerExposTotales();
