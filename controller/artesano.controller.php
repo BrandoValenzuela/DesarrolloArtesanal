@@ -231,7 +231,7 @@ class ArtesanoController{
             $artesanos = $this->model->ObtenerPorProducto($_SESSION['idProducto']);
         }
         $_SESSION['busqueda'] = 'ArtesanoPorProducto';
-        $_SESSION['metodo-busqueda'] = 'BuscarPorproducto';
+        $_SESSION['metodo-busqueda'] = 'BuscarPorProducto';
         if (!empty($artesanos)) {
             require_once 'view/header.php';
             require_once 'view/artesano/artesano-lista.php';
@@ -244,9 +244,40 @@ class ArtesanoController{
             $this->mostrarMensaje($mensaje);
         }
     }
+
+    public function BuscarPorCorredor(){
+        if (empty($_SESSION)) {
+            header('Location: index.php');
+        }
+        if (!empty($_REQUEST['idCorredor'])) {
+            $_SESSION['idCorredor'] = $_REQUEST['idCorredor'];
+            $_SESSION['nombre-corredor'] = $_REQUEST['nombre-corredor'];
+            $corredor = $_REQUEST['idCorredor'];
+            $nombre_corredor = $_REQUEST['nombre-corredor'];
+            $artesanos = $this->model->ObtenerPorCorredor($_REQUEST['idCorredor']);
+        }else{
+            $corredor = $_SESSION['idCorredor'];
+            $nombre_corredor = $_SESSION['nombre-corredor'];
+            $artesanos = $this->model->ObtenerPorCorredor($_SESSION['idCorredor']);
+        }
+        $_SESSION['busqueda'] = 'ArtesanoPorCorredor';
+        $_SESSION['metodo-busqueda'] = 'BuscarPorCorredor';
+        if (!empty($artesanos)) {
+            require_once 'view/header.php';
+            require_once 'view/artesano/artesano-lista.php';
+            require_once 'view/footer.php'; 
+        }else{
+            $mensaje = array(
+                'titulo' => 'Sin registros',
+                'cuerpo' => 'No hay artesanos registardos que confeccionen el producto artesanal:<br>'.$nombre_corredor.'.'
+            );
+            $this->mostrarMensaje($mensaje);
+        }
+    }
+
     public function mostrarMensaje($msj){
         $mensaje = $msj;
-        if ($_SESSION['busqueda'] == 'ArtesanoPorRama' || $_SESSION['busqueda'] == 'ArtesanoPorProducto') {
+        if ($_SESSION['busqueda'] == 'ArtesanoPorRama' || $_SESSION['busqueda'] == 'ArtesanoPorProducto' || $_SESSION['busqueda'] == 'ArtesanoPorCorredor') {
             $redireccion = 'index.php?c=Principal&Index';
         }else{
             $redireccion = 'index.php?c=Principal&a=IndexArtesanos';

@@ -155,6 +155,17 @@ class Artesano{
 		}
 	}
 
+	public function ObtenerPorCorredor($idCorredor){
+		try {
+			$stm = $this->pdo
+			          ->prepare("SELECT * FROM artesano WHERE idCorredor = ?");
+			$stm->execute(array($idCorredor));
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		} catch (Exception $e) {
+			header('Location: index.php?c=Principal&a=ErrorConexion');
+		}
+	}
+
 	public function GenerarFolioArtesano(){
 		try {
 			$stm = $this->pdo->prepare("SELECT max(folio) as folio FROM artesano");

@@ -24,6 +24,7 @@ class CompraController{
             $compra->alcance = $_REQUEST['alcance-venta'];
             $compra->monto = $_REQUEST['monto-compra'];
             $compra->tipoPago = $_REQUEST['tipo-pago'];
+            $compra->fechaCompra = $_REQUEST['fecha-realizacion-compra'];
             $resultado = $this->model->Registrar($compra);
             if ($resultado == 'exito') {
                 $mensaje = array(

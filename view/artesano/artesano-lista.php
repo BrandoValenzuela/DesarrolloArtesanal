@@ -11,10 +11,16 @@
         <h1 class="page-header text-center">Artesanos con apellido: <?php echo $apellido;?></h1>
     <?php else: ?>
         <?php if (isset($nombre_rama)): ?>
-        <h1 class="page-header text-center">Artesanos de la rama: <?php echo $nombre_rama;?></h1>
+            <h1 class="page-header text-center">Artesanos de la rama: <?php echo $nombre_rama;?></h1>
         <?php else: ?>
-        <h1 class="page-header text-center">Artesanos de la rama: <?php echo $nombre_producto;?></h1>
+            <?php if (isset($nombre_corredor)): ?>
+            <h1 class="page-header text-center">Artesanos del corredor: <?php echo $nombre_corredor;?></h1>
+            <?php else: ?>
+            <h1 class="page-header text-center">Artesanos dedicados a: <?php echo $nombre_producto;?></h1>
+            <?php endif ?>
         <?php endif ?>
+
+
     <?php endif ?>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -32,10 +38,10 @@
             <?php foreach($artesanos as $artesano): ?>
                 <tr>
                     <td class="text-center"><?php echo $i; $i++; ?></td>
-                    <td><?php echo $artesano->aPaterno; ?></td>
-                    <td><?php echo $artesano->aMaterno; ?></td>
-                    <td><?php echo $artesano->nombre; ?></td>
-                    <td><?php echo $artesano->curp; ?></td>
+                    <td class="respuesta"><?php echo $artesano->aPaterno; ?></td>
+                    <td class="respuesta"><?php echo $artesano->aMaterno; ?></td>
+                    <td class="respuesta"><?php echo $artesano->nombre; ?></td>
+                    <td class="respuesta"><?php echo $artesano->curp; ?></td>
                     <td>
                         <form action="?c=Artesano&a=BuscarPorCurp" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="buscar-artesano-curp" value="<?php echo $artesano->curp; ?>" />

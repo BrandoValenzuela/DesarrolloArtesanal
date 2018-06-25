@@ -31,6 +31,7 @@ class ProductoartesanoController{
         if (!empty($_REQUEST['curp-artesano'])) {
             $productos->curp = $_REQUEST['curp-artesano'];
             $productos->idProducto = $_REQUEST['producto-artesano'];
+            $productos->detalleProducto = $_REQUEST['descripcion-producto-artesano'];
             $resultado = $this->model->Registrar($productos);
             if ($resultado == 'exito') {
                 $mensaje = array(

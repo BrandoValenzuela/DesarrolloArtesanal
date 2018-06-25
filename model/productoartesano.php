@@ -3,6 +3,7 @@ class ProductoArtesano{
 	private $pdo;
     public $curp;
     public $idProducto;
+    public $detalleProducto;
    
 	public function __CONSTRUCT(){
 		try{
@@ -17,19 +18,22 @@ class ProductoArtesano{
 			$productos_previamente_registrados = 0;			
 			while (true) {
 				$producto = current($data->idProducto);
+				$detalle = current($data->detalleProducto);
 				$registro = $this->verificarProductoArtesano($data->curp,$producto);
 				if (empty($registro)) {
-					$sql = "INSERT INTO produccionartesano (curp,idProducto) VALUES (?, ?)";
+					$sql = "INSERT INTO produccionartesano (curp,idProducto,detalleProducto) VALUES (?,?,?)";
 					$this->pdo->prepare($sql)->execute(
 						array(
 		                    $data->curp,
-		                    $producto
+		                    $producto,
+		                    $detalle
 		                )
 					);
 				}else{
 					$productos_previamente_registrados++;
 				}
 				$producto = next($data->idProducto);
+				$detalle = next($data->detalleProducto);
 				if ($producto === false) {
 					break;
 				}
@@ -40,7 +44,8 @@ class ProductoArtesano{
 				return 'exito';
 			}
 		}catch (Exception $e) {
-			header('location: index.php?c=Principal&a=ErrorConexion');
+			// header('location: index.php?c=Principal&a=ErrorConexion');
+			die($e->getMessage());
 		}
 	}
 
@@ -56,7 +61,7 @@ class ProductoArtesano{
 
 	public function ObtenerProductosArtesano($curp){
 		try {			
-			$stm = $this->pdo->prepare("SELECT producto.nombre FROM produccionartesano INNER JOIN producto ON produccionartesano.idProducto = producto.idProducto WHERE produccionartesano.curp = ?");
+			$stm = $this->pdo->prepare("SELECT producto.nombre,produccionartesano.detalleProducto FROM produccionartesano INNER JOIN producto ON produccionartesano.idProducto = producto.idProducto WHERE produccionartesano.curp = ?");
 			$stm->execute(array($curp));
   			return $stm->fetchAll(PDO::FETCH_OBJ);
 		} catch (Exception $e) {

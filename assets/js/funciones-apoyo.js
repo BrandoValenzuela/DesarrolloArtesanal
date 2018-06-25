@@ -767,3 +767,12 @@ $(function() {
    });
    $("#fecha-fin-periodo-incidencias").datepicker( "option", "dateFormat", formato );
 });
+
+$(function() {
+   formato = "yy-mm-dd";
+   $("#fecha-realizacion-compra").datepicker({
+      changeMonth: true,
+      changeYear: true
+   });
+   $("#fecha-realizacion-compra").datepicker( "option", "dateFormat", formato );
+});

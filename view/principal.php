@@ -41,7 +41,7 @@
           <h5 class="bold">Corredores</h5>
           <ol>
             <?php foreach ($corredores as $corredor): ?>
-              <li><?php echo $corredor->nombre; ?></li>
+              <li><a href="?c=Artesano&a=BuscarPorCorredor&idCorredor=<?php echo $corredor->idCorredor;?>&nombre-corredor=<?php echo $corredor->nombre;?>"><?php echo $corredor->nombre; ?></a></li>
             <?php endforeach ?>
           </ol>
         </div>

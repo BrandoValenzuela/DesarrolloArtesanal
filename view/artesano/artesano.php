@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
       <li><a href="?c=Principal">Página principal</a></li>
       <li><a href="?c=Principal&a=IndexArtesanos">Artesanos</a></li>
-      <?php if ($_SESSION['busqueda'] == 'ArtesanoPorApellido' || $_SESSION['busqueda'] == 'ArtesanoPorRama'): ?>
+      <?php if ($_SESSION['busqueda'] == 'ArtesanoPorApellido' || $_SESSION['busqueda'] == 'ArtesanoPorRama' || $_SESSION['busqueda'] == 'ArtesanoPorProducto' || $_SESSION['busqueda'] == 'ArtesanoPorCorredor'): ?>
         <li><a href="?c=Artesano&a=<?php echo $_SESSION['metodo-busqueda']; ?>">Lista de artesanos</a></li>          
       <?php endif ?>
       <li class="active">Hoja de datos</li>
@@ -303,7 +303,8 @@
                 <thead>
                     <tr>
                         <th class="text-center">#</th>
-                        <th class="col-md-12">Nombre del producto</th>
+                        <th class="col-md-4">Tipo de productos</th>
+                        <th class="col-md-8">Productos confeccionados</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -311,6 +312,7 @@
                     <tr>
                         <td class="text-center"><?php echo $i; $i++; ?></td>
                         <td class="respuesta"><?php echo $producto->nombre; ?></td>
+                        <td class="respuesta"><?php echo $producto->detalleProducto; ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

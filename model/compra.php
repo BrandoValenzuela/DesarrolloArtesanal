@@ -7,6 +7,7 @@ class Compra{
     public $alcance;
     public $monto;
     public $tipoPago;
+    public $fechaCompra;
 
 	public function __CONSTRUCT(){
 		try{
@@ -29,7 +30,7 @@ class Compra{
 	                    $data->alcance,
 	                    $data->monto, 
 	  					$data->tipoPago,
-	  					date('Y-m-d')
+	  					$data->fechaCompra
 	                )
 				);
 				return 'exito';

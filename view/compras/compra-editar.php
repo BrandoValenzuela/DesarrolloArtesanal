@@ -43,7 +43,14 @@
             </select>
           </div>
         </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <span class="obligatorio">* </span><label>Fecha de la compra:</label>
+            <input type="text" readonly id="fecha-realizacion-compra" name="fecha-realizacion-compra" class="form-control" placeholder="Selecciona la fecha de la compra" data-validacion-tipo="requerido" />
+          </div>
+        </div>
       </fieldset>
+      <br>
       <div class="text-right">
         <button id="btn-submit" class="btn btn-success" onclick="javascript:return confirm('¿Quieres guardar los datos capturados?');">Guardar</button>
       </div>
